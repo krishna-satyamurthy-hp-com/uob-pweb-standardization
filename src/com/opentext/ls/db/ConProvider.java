@@ -1,5 +1,7 @@
 package com.opentext.ls.db;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -22,13 +24,14 @@ public class ConProvider {
 		public static Connection getConnection(){
 			Connection con = null;
 			try{
-				System.out.println(driverClass + " " + url + " " + username + " " + password );
-				LOGGER.error(driverClass + " " + url + " " + username + " " + password );
+				System.out.println("Hi"+ driverClass + " " + url + " " + username + " " + password );
+				//LOGGER.error(driverClass + " " + url + " " + username + " " + password );
 				Class.forName(driverClass);
-				con=DriverManager.getConnection(url, username, password);
+				con=DriverManager.getConnection(url, username, password);				
 				}
 			catch(Exception e){
 				LOGGER.error(e);
+				e.printStackTrace();
 				}
 			
 			if (con != null) {
@@ -43,19 +46,15 @@ public class ConProvider {
 		}
 		
 		public static Properties getDBdetails (){
-			InputStream inputStream;
-			String propFileName = "jdbc.properties";
-			inputStream = ConProvider.class.getClassLoader().getResourceAsStream(propFileName);
+			InputStream inputStream = null;
+			String propFileName = "jdbc.properties";						
 			Properties prop = new Properties();
 			try 
-				{				
+				{
+				inputStream = ConProvider.class.getClassLoader().getResourceAsStream(propFileName);
 				if (inputStream != null)
 					{
 						prop.load(inputStream);
-					} 
-				else 
-					{
-						throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 					}
 				}
 			catch (Exception e) 
