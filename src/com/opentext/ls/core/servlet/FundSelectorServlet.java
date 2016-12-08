@@ -14,17 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.opentext.ls.db.ConProvider;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Servlet implementation class FundSelectorServlet
  */
-@WebServlet("/FundSelectorServlet")
+@WebServlet("/fund-selector.do")
 public class FundSelectorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final transient Log LOGGER = LogFactory.getLog(FundSelectorServlet.class);  
@@ -33,7 +33,6 @@ public class FundSelectorServlet extends HttpServlet {
      */
     public FundSelectorServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -46,19 +45,19 @@ public class FundSelectorServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet fetches the fund selector price information from DB and sends a json response of fund selector data
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @author OpenText CEM PS APJ
+	 * @
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		LOGGER.debug("Inside FundSelectorServlet : doPost");
-		// TODO Auto-generated method stub
 		Connection con = null;
 		JSONArray jArray = new JSONArray();
 		JSONObject fundDataJSON = new JSONObject();
 		
 		try{
 			con = ConProvider.getConnection();
-			System.out.println("Connection established successfully "+!con.isClosed());
 			LOGGER.debug("Connection established successfully "+!con.isClosed());
 			//Fetch Fund Selector data
 			PreparedStatement ps=con.prepareStatement("select * from WSMSG_FUNDSELECTOR");
@@ -66,8 +65,6 @@ public class FundSelectorServlet extends HttpServlet {
 			
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnCount = rsmd.getColumnCount();
-			
-			System.out.println("Total column count "+columnCount);
 			LOGGER.debug("Total column count "+columnCount);
 			JSONObject jObj = null;
 			String columnName;
@@ -80,22 +77,18 @@ public class FundSelectorServlet extends HttpServlet {
 				jArray.put(jObj);				
 			}
 			fundDataJSON.put("funds",jArray );
-			//LOGGER.error("\nJSON Object: " + fundDataJSON);
-			System.out.println("Json object "+fundDataJSON);
 			LOGGER.debug("Json object "+fundDataJSON);
 			response.setContentType("application/json");
-			// Get the printwriter object from response to write the required json object to the output stream      
 			PrintWriter out = response.getWriter();
-			// Assuming your json object is **jsonObject**, perform the following, it will return your json object  
 			out.print(fundDataJSON);
 			out.flush();
 			
 		}catch (SQLException s){
-			System.out.println("SQL Exception occured :: "+s);
 			s.printStackTrace();
+			LOGGER.error("SQL Exception caught in  FundSelectorServlet class "+s.getMessage());
 		}
 		catch(Exception ex){
-			System.out.println(ex);
+			LOGGER.error("Exception caught in  FundSelectorServlet class "+ex.getMessage());
 			ex.printStackTrace();
 		}finally{
 			try {	
@@ -105,11 +98,11 @@ public class FundSelectorServlet extends HttpServlet {
 					con.close();
 					System.out.println("Is connection closed successfully "+con.isClosed());
 				} 
-			}catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}catch (SQLException s) {
+				LOGGER.error("SQL Exception caught in finally block of FundSelectorServlet class "+s.getMessage());
+				s.printStackTrace();
 			}catch(Exception ex){
-				System.out.println(ex);
+				LOGGER.error("Exception caught in finally block of FundSelectorServlet class "+ex.getMessage());
 				ex.printStackTrace();
 			}
 		}		
