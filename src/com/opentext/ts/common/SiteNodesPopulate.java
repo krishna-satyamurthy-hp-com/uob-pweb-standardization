@@ -32,7 +32,7 @@ public class SiteNodesPopulate {
 	        }
 		}
 		option.append("</substitution>");
-        System.out.println(option);
+        //System.out.println(option);
 			
 	}
 		

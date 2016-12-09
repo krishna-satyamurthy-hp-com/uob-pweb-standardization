@@ -11,5 +11,262 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tomcat-lib"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/activation.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/activemq-all-5.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/antlr.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/applicationutils.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/archivaliface.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/archivalmodule.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/archivalxmlbeans23.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/asm.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/AutonomyACIAPI-4.9.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/autonomy-aci-client-api-4.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/autonomy-nonaci-client-api-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/AvailableModels.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/AvailableModels1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/axis.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/base.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/bcprov-jdk16-143.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/BPMNModel.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/bsf.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cc_foundation.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/ccpro.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/ccstd.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cglib.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/common100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-cli.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-cli-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-dbcp-1.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-exec-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-fileupload.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-jxpath-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-pool-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/commons-validator.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/concurrent.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/configiface.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cssdk_sci.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cssdkiface.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cssdkjava.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/customer.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cxf-2.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/cxf-manifest.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/datacapture.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/Datacapture6.0Schema.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/datasource.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/datasourcedoc.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/DataSourceFrameworkSchema.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/dctwidgetlib.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/digitalsafe.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/dom4j-1.6.1_junit.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/dtdparser120.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/ecmconnector.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/edk.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/ezmorph-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/formspub.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/foundation.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/freemarker.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/geronimo-activation_1.1_spec-1.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/geronimo-annotation_1.0_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/geronimo-jaxws_2.1_spec-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/geronimo-ws-metadata_2.0_spec-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/hibernate3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/hopi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/httpcore-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iw_mdss.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iw-install-dev.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iw-install-util.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iwjbossapi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iwmt-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/iw-opendeploy-web-client-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jakarta-oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jakarta-regexp-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jasypt-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxb-impl-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxb-xjc-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxen.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxme2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxme2-rt.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxmeapi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxmejs.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxmepm.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxmexs.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jboss-vfs.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/JConfig.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jdbm-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jdom.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/js.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/json-java-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/json-lib-2.2-jdk15.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jsoup-1.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jsr173_1.0_api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/jta.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/KeyView.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/launchpad_interface.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/livesite.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/livesite_customer.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/livesite-runtime.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/log100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/lscsclient.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/mail.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/MediaBinServer.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/message100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/metadata.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/modelerCommon.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/modelerworkflowapi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/modelerworkflowapidoc.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/mtdialog.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/odapi_cl100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/optimost-client-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.aop-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.asm-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.beans-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.context.support-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.context-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.core-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.expression-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.jdbc-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.orm-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.test-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.transaction-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.web.servlet-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.web.struts-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/org.springframework.web-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/oscache-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/ProcessModelConfiguration.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/regex.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/regexmap.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/rtserver.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/rulesengine.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/saaj-api-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/saxon9pe.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/sci_hopi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/search.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/searchiface.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/serverutils100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/sharedutils100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/slf4j-simple-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/soap.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/spring-webmvc-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/standard.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/struts.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/taglibs-request.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/tagui.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/teamsite.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/teamsite_admin.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/TeamsiteJobSpec.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/transform.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/tst-dc100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/tst-ju100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/twitter4j-async-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/twitter4j-core-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/twitter4j-examples-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/twitter4j-media-support-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/twitter4j-stream-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/utild_hopi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/vannotate.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/vaopenxml-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/vpreview.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/wom.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/workflowModeler.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/wsdl4j-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/wstx-asl-3.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/wstx-asl-3.9.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xml100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xmlbeans.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xmlbeans.jar.zip"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xml-resolver-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/XmlSchema-1.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/iw-cc.war libs/xom-1.0d21.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/asm.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/bcprov-jdk16-143.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/catalina.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/cglib.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/ecj-4.4RC4.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/el-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/iw_mdss_clts.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/iw-installutils.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/iwjbossapi.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/iwwebapp.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jasper.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jasypt-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jaxen.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jayspt-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jdom.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite-mobile-util.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite-portal.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite-runtime.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite-runtime-tlds.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/livesite-tlds.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/lscsclient.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/mail.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/migrate_customtk.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/org.springframework.core-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/org.springframework.web.struts-3.1.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/serializer.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/serverutils100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/sharedutils100.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/SybDriver.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/teamsite-service.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/teamsite-service-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-juli.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-spdy.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/wom.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xalan.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
