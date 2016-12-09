@@ -19,12 +19,16 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.opentext.ls.db.ConProvider;
+import com.opentext.ls.db.utils.DataSourceConfig;
+
+
+
+//import com.opentext.ls.db.ConProvider;
 
 /**
  * Servlet implementation class FundSelectorServlet
  */
-@WebServlet("/fund-selector.do")
+@WebServlet("/wsm/fund-selector.do")
 public class FundSelectorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final transient Log LOGGER = LogFactory.getLog(FundSelectorServlet.class);  
@@ -57,7 +61,11 @@ public class FundSelectorServlet extends HttpServlet {
 		JSONObject fundDataJSON = new JSONObject();
 		
 		try{
-			con = ConProvider.getConnection();
+					DataSourceConfig _dataSourceConfig=new DataSourceConfig();
+		//	con = ConProvider.getConnection();
+			
+			con = _dataSourceConfig.dataSource().getConnection();
+			
 			LOGGER.debug("Connection established successfully "+!con.isClosed());
 			//Fetch Fund Selector data
 			PreparedStatement ps=con.prepareStatement("select * from WSMSG_FUNDSELECTOR");
