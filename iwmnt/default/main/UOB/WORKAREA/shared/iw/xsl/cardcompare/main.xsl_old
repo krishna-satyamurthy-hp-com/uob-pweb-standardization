@@ -1,0 +1,344 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+	
+	<xsl:include href="http://www.interwoven.com/custom/iw/xsl/cardcompare/cards-utility-links.xsl"/>
+
+	<xsl:template name="cardcompare">
+		<div class="container">
+			<div class="row sticky-wrapper">
+				<div class="sticky-nav cards-compare" id="cardfilter" data-uob-tg-mobile="hide">
+					<ul role="tablist" class="nav nav-tabs nav-justified">
+						<li class="active"><a title="Featured cards" href="#feature_cards" data-toggle="tab" role="tab" aria-selected="true" aria-controls="feature_cards">Featured cards</a></li>
+						<li><a href="#travel_cards" data-toggle="tab" role="tab" aria-selected="false" aria-controls="travel_cards">Travel cards</a></li>
+						<li><a href="#rewards_cards" data-toggle="tab" role="tab" aria-selected="false" aria-controls="rewards_cards">Rewards cards</a></li>
+						<li><a href="#rebate_cards" data-toggle="tab" role="tab" aria-selected="false" aria-controls="rebate_cards">Rebate cards</a></li>
+						<li class="button-compare-tab"><a id="compare-card-action" class="button-compare"><img src="../../../../iwov-resources/images/card-compare-landing/icon-button-compare.png" alt="icon compare"/><span>Compare Cards</span><span class="count">0/4</span></a></li>
+					</ul>
+				</div>
+				<div data-uob-tg-mobile="show" class="filter-cards filter-content-block pusher-t-30">
+					<div class="dropdown-filter-group">
+						<div class="dropdown">
+							<button id="cardFilter" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-uob-tab-card="#feature_cards" class="btn-dropdown btn-dropdown-select"><span class="text-bold">Featured cards</span><span class="caret"></span></button>
+							<div aria-labelledby="cardFilter" class="dropdown-menu dropdown-select">
+								<ul class="list-unstyled">
+									<li data-uob-tab-card="#feature_cards">Featured cards</li>
+									<li data-uob-tab-card="#travel_cards">Travel cards</li>
+									<li data-uob-tab-card="#rewards_cards">Rewards cards</li>
+									<li data-uob-tab-card="#rebate_cards">Rebate cards</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-content compare-cards">
+
+					<!-- *******************************Cards display ***************************-->	
+
+					<xsl:for-each select="/Properties/Data/Result/contentRoot/*">
+
+
+
+						<xsl:if test="name()='feature_cards' or name()='travel_cards' or name()='rewards_cards' or name()='rebate_cards'">
+
+							
+
+							<xsl:variable name="top" select="position()"/>
+							<div>
+								<xsl:attribute name="id">
+									<xsl:value-of select="name()"/>
+								</xsl:attribute>
+								<xsl:attribute name="role">
+									<xsl:text>tabpanel</xsl:text>
+								</xsl:attribute>
+								<xsl:attribute name="class">
+									<xsl:text>tab-pane </xsl:text>
+									<xsl:if test="position()=1">
+										<xsl:text>active</xsl:text>
+									</xsl:if>
+								</xsl:attribute>
+
+								
+								<div class="cards-list">
+									<div class="compare-cards-list">
+										<div class="sticky-nav tabs-card-type" data-uob-tg-mobile="show">
+											<ul role="tablist" class="nav-heading list-unstyled">
+												<li class="active">
+													<a title="Credit cards" data-toggle="tab" role="tab" aria-selected="true" >
+														<xsl:attribute name="href">
+															<xsl:text>#CreditCards</xsl:text><xsl:value-of select="$top"/>
+														</xsl:attribute>
+														<xsl:attribute name="aria-controls">
+															<xsl:text>#CreditCards</xsl:text><xsl:value-of select="$top"/>
+														</xsl:attribute>
+													Credit cards
+													</a>
+												</li>
+												<li>
+													<a title="Debit cards" href="#DebitCards-0" data-toggle="tab" role="tab" aria-selected="false" aria-controls="DebitCards-0">
+														<xsl:attribute name="id">
+															<xsl:text>#DebitCards</xsl:text><xsl:value-of select="$top"/>
+														</xsl:attribute>
+														<xsl:attribute name="aria-controls">
+															<xsl:text>#DebitCards</xsl:text><xsl:value-of select="$top"/>
+														</xsl:attribute>
+													Debit cards
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="tab-content">
+											<!-- Credit cards display -->
+
+
+											<xsl:if test="./feature_credit_card or ./travel_credit_card or ./rewards_credit_card or ./rebate_credit_card">
+												<div >
+													<xsl:attribute name="id">
+														<xsl:text>CreditCards-</xsl:text><xsl:value-of select="$top"/>
+													</xsl:attribute>
+													<xsl:attribute name="role">
+														<xsl:text>tabpanel</xsl:text>
+													</xsl:attribute>
+													<xsl:attribute name="class">
+														<xsl:text>tab-pane fade in active</xsl:text>
+													</xsl:attribute>
+
+													<h2 class="heading2">Credit cards-<xsl:value-of select="$top"/></h2>																								
+													<div class="row card-row">
+
+
+														<!-- Credit cards display starts here -->
+														<xsl:choose>
+															<xsl:when test="./feature_credit_card">
+																<xsl:variable name="value" select="feature_credit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'1')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./travel_credit_card">
+																<xsl:variable name="value" select="travel_credit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'1')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./rewards_credit_card">
+																<xsl:variable name="value" select="rewards_credit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'1')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./rebate_credit_card">
+																<xsl:variable name="value" select="rebate_credit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'1')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:otherwise></xsl:otherwise>
+														</xsl:choose>
+
+
+													</div>
+
+													<div data-uob-tg-mobile="show" class="view-more-cards text-center"><a href="javascript:void(0);" title="View More Cards" class="btn-1 view-more-cards-btn">View More Cards</a></div>
+												</div>
+											</xsl:if>
+
+											<xsl:if test="./feature_debit_card or ./travel_debit_card or ./rewards_debit_card or ./rebate_debit_card">
+												<div >
+													<xsl:attribute name="id">
+														<xsl:text>DebitCards-</xsl:text><xsl:value-of select="$top"/>
+													</xsl:attribute>
+													<xsl:attribute name="role">
+														<xsl:text>tabpanel</xsl:text>
+													</xsl:attribute>
+													<xsl:attribute name="class">
+														<xsl:text>tab-pane fade </xsl:text>
+													</xsl:attribute>
+
+													<h2 class="heading2">Debit cards-<xsl:value-of select="$top"/></h2>																								
+													<div class="row card-row">
+
+
+														<!-- Debit cards display starts here -->
+														<xsl:choose>
+															<xsl:when test="./feature_debit_card">
+																<xsl:variable name="value" select="feature_debit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'2')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./travel_debit_card">
+																<xsl:variable name="value" select="travel_debit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'2')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./rewards_debit_card">
+																<xsl:variable name="value" select="rewards_debit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'2')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:when test="./rebate_debit_card">
+																<xsl:variable name="value" select="rebate_debit_card" />
+																<xsl:call-template name="cardsload">
+																	<xsl:with-param name="nodeName" select="$value"/>
+																	<xsl:with-param name="position" select="concat($top,'2')"/>
+																</xsl:call-template>
+															</xsl:when>
+															<xsl:otherwise></xsl:otherwise>
+														</xsl:choose>
+
+
+													</div>
+
+													<div data-uob-tg-mobile="show" class="view-more-cards text-center"><a href="javascript:void(0);" title="View More Cards" class="btn-1 view-more-cards-btn">View More Cards</a></div>
+												</div>
+											</xsl:if>
+
+
+
+											<!-- Debit cards display ends here -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</xsl:if>
+					</xsl:for-each>
+					<!-- ****************************************Cards display ends ***************************-->	
+
+				</div>
+				<div data-uob-tg-mobile="show" class="button-compare-tab compare-button-mobile">
+					<ul class="list-unstyled list-compare-card">
+						<li><span class="card-name empty"></span><span class="icon-X"></span></li>
+						<li><span class="card-name empty"></span><span class="icon-X"></span></li>
+					</ul><a id="compare-card-action-mobile" class="button-compare"><img src="../../../../iwov-resources/images/card-compare-landing/icon-button-compare.png" alt="icon compare"/><span>Compare Cards</span><span class="count">0/2</span></a><a id="compare-card-arrow" class="button-double-arrow"><span class="icon-button-double-arrow"></span></a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row sticky-wrapper">
+				<div class="card-compare-display-continer">
+					<div class="cards-list">
+						<div class="compare-cards-result">
+							<h2 class="heading2">Compare cards</h2>
+							<div data-uob-tg-desktop="show" class="button-compare-tab compare-button-mobile clear-all"><a id="compare-card-clear-all" class="button-compare"><span>Clear all cards</span><span class="count">X</span></a></div>
+							<div class="row card-row">
+								<div class="col-md-3 col-sm-6 col-xs-6">
+									<div class="card-item card-add-plus"><strong><span class="card-name text-white">Credit cards</span></strong>
+										<div class="thumb-img"><a href="javascript:void(0);" title="add credit card" class="add-credit-card"><img src="../../../../iwov-resources/images/card-compare-landing/add-card.jpg" alt="add credit card"/>
+												<div class="add-btn"><span>Add card</span><img src="../../../../iwov-resources/images/card-compare-landing/add-card-plus.png" alt="add credit card"/></div></a></div>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-6 col-xs-6">
+									<div class="card-item card-add-plus"><strong><span class="card-name text-white">Credit cards</span></strong>
+										<div class="thumb-img"><a href="javascript:void(0);" title="add credit card" class="add-credit-card"><img src="../../../../iwov-resources/images/card-compare-landing/add-card.jpg" alt="add credit card"/>
+												<div class="add-btn"><span>Add card</span><img src="../../../../iwov-resources/images/card-compare-landing/add-card-plus.png" alt="add credit card"/></div></a></div>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-6 col-xs-6">
+									<div class="card-item card-add-plus"><strong><span class="card-name text-white">Credit cards</span></strong>
+										<div class="thumb-img"><a href="javascript:void(0);" title="add credit card" class="add-credit-card"><img src="../../../../iwov-resources/images/card-compare-landing/add-card.jpg" alt="add credit card"/>
+												<div class="add-btn"><span>Add card</span><img src="../../../../iwov-resources/images/card-compare-landing/add-card-plus.png" alt="add credit card"/></div></a></div>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-6 col-xs-6">
+									<div class="card-item card-add-plus"><strong><span class="card-name text-white">Credit cards</span></strong>
+										<div class="thumb-img"><a href="javascript:void(0);" title="add credit card" class="add-credit-card"><img src="../../../../iwov-resources/images/card-compare-landing/add-card.jpg" alt="add credit card"/>
+												<div class="add-btn"><span>Add card</span><img src="../../../../iwov-resources/images/card-compare-landing/add-card-plus.png" alt="add credit card"/></div></a></div>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-6 hidden">
+									<div class="card-item card-add-plus hidden"><strong><span class="card-name text-white">Credit cards</span></strong>
+										<div class="thumb-img"><a href="javascript:void(0);" title="add credit card" class="add-credit-card"><img src="../../../../iwov-resources/images/card-compare-landing/add-card.jpg" alt="add credit card"/>
+												<div class="add-btn"><span>Add card</span><img src="../../../../iwov-resources/images/card-compare-landing/add-card-plus.png" alt="add credit card"/></div></a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- below tabs -->
+		
+	</xsl:template>
+
+	<!--- Cards display row template -->
+	<xsl:template name="cardsload">
+
+		<xsl:param name="nodeName"/>
+		<xsl:param name="position"/>
+		<!-- Credit cards display starts here -->
+
+		
+
+		<xsl:for-each select="$nodeName/card_highlights">
+
+			<div class="col-md-3 col-sm-6">
+
+				<div class="card-item"><strong><span class="card-name">
+							<xsl:value-of select="card_title"/>
+						</span></strong>
+					<div class="thumb-img">
+						<a>
+							<xsl:attribute name="href">
+								<xsl:value-of select="tile_image_link"/>
+							</xsl:attribute>
+							<xsl:attribute name="title">
+								<xsl:value-of select="card_subhead"/>
+							</xsl:attribute>
+							<img>
+								<xsl:attribute name="src">
+									<xsl:value-of select="tile_image"/>
+								</xsl:attribute>
+								<xsl:attribute name="alt">
+									<xsl:value-of select="card_image_alt"/>
+								</xsl:attribute>
+							</img>
+						</a>
+					</div>
+					<div class="onoffswitch">
+						<input type="checkbox" name="onoffswitch" >
+							<xsl:attribute name="id">
+								<xsl:text>myonoffswitch-</xsl:text><xsl:value-of select="concat($position,position())"/>
+							</xsl:attribute>
+							<xsl:attribute name="class">
+								<xsl:text>onoffswitch-checkbox</xsl:text>
+							</xsl:attribute>
+						</input>
+						<label>
+							<xsl:attribute name="for">
+								<xsl:text>myonoffswitch-</xsl:text><xsl:value-of select="concat($position,position())"/>
+							</xsl:attribute>
+							<xsl:attribute name="class">
+								<xsl:text>onoffswitch-label</xsl:text>
+							</xsl:attribute>
+							<span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span>
+						</label>
+						<span class="text">Compare</span>
+					</div>
+					<strong>
+						<span class="card-desc">
+							<xsl:value-of select="card_subhead"/>
+						</span>
+					</strong>
+					<xsl:value-of select="tile_summary" disable-output-escaping="yes" />
+					<div class="card-detail"><a href="cards/card-details/featured-card/credit-cards/abc.page" title="View details">View details</a></div>
+					<div class="center-block"><a href="javascript:void(0);" title="Apply now" class="btn-1 apply-btn">Apply</a></div>
+				</div>
+			</div>
+
+		</xsl:for-each>
+
+		<!-- Credit cards display ends here -->
+
+
+	</xsl:template>
+</xsl:stylesheet>
