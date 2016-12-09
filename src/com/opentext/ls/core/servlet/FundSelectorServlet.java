@@ -9,7 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ import com.opentext.ls.db.utils.DataSourceConfig;
 /**
  * Servlet implementation class FundSelectorServlet
  */
-@WebServlet("/wsm/fund-selector.do")
+//@WebServlet("/wsm/fund-selector.do")
 public class FundSelectorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final transient Log LOGGER = LogFactory.getLog(FundSelectorServlet.class);  
