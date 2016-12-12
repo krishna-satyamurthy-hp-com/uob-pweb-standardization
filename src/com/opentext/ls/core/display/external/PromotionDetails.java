@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dom4j.Document;
+import org.dom4j.Element;
 
 import com.interwoven.livesite.runtime.RequestContext;
 import com.opentext.ls.core.common.UOBBaseConstants;
@@ -28,11 +29,16 @@ public class PromotionDetails {
 	private static final transient Log LOGGER = LogFactory.getLog(PromotionDetails.class);
 	String prevURL = "";
 	String nextURL = "";
+	String currentPromoCategory = "";
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
 		Document promotionListingDoc = loadDCR(context);
 		//Fetch offer listing links
-		fetchPromoPrevNextURLs(context);
+		
+		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();
+		
+		if(this.currentPromoCategory != null && !this.currentPromoCategory.isEmpty())
+			fetchPromoPrevNextURLs(context);
 		
 		promotionListingDoc.getRootElement().addElement("PrevPromo").setText(prevURL);
 		promotionListingDoc.getRootElement().addElement("NextPromo").setText(nextURL);
@@ -86,6 +92,7 @@ public class PromotionDetails {
 				LOGGER.debug("current promo page is "+currentPromoPage);
 				LinkedHashMap<String, String> promoLHM = null;
 				String promoPage = "";
+				String promoCategory = "";
 				
 				if(promoAL != null && !promoAL.isEmpty()){
 					final int totalActivePromotions = promoAL.size();
@@ -96,8 +103,9 @@ public class PromotionDetails {
 					for(int i=0; i<totalActivePromotions; i++){
 						promoLHM = promoAL.get(i);
 						promoPage = promoLHM.get("promo_page");
+						promoCategory = promoLHM.get("product_category");
 						LOGGER.debug("promo page from json is "+promoPage);						
-						if(promoPage.contains(currentPromoPage)){
+						if(promoPage.contains(currentPromoPage) && promoCategory.equalsIgnoreCase(promoCategory)){
 							LOGGER.debug("Current page matches an entry in promo json. Fetching the prev and next urls...");							
 							//Define prev and next urls				
 							prevURL = i!=0?(String) (promoAL.get(i-1).get("promo_page")):(String) (promoAL.get(totalActivePromotions-1).get("promo_page"));							
