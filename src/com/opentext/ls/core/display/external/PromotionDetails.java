@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dom4j.Document;
+import org.dom4j.Element;
 
 import com.interwoven.livesite.runtime.RequestContext;
 import com.opentext.ls.core.common.UOBBaseConstants;
@@ -28,10 +29,13 @@ public class PromotionDetails {
 	private static final transient Log LOGGER = LogFactory.getLog(PromotionDetails.class);
 	String prevURL = "";
 	String nextURL = "";
+	String currentPromoCategory = "";
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
 		Document promotionListingDoc = loadDCR(context);
 		//Fetch offer listing links
+		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();		
+		LOGGER.debug("currentPromoCategory is "+currentPromoCategory);
 		fetchPromoPrevNextURLs(context);
 		
 		promotionListingDoc.getRootElement().addElement("PrevPromo").setText(prevURL);
