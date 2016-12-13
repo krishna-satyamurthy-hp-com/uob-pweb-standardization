@@ -1,6 +1,25 @@
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:template name="promotiondetails">
+	
+		<div class="container">
+		 <div class="row sticky-wrapper">
+			<div class="offer-listing pusher-b-30">
+				<img src="/iwov-resources/images/promotion-detail/icon-offer.png" alt="Offer listing"></img><span>Offer listing</span>
+				  <div class="offer-nav">
+					<a title="Previous offer" class="pre-offer-arrow">
+					<xsl:attribute name="href">$PAGE_LINK[<xsl:value-of select="Properties/Data/Result/root/PrevPromo"/>]</xsl:attribute>
+						<img src="/iwov-resources/images/promotion-detail/left-arrow.png" alt="Previous offer"></img>
+					</a>
+					<a title="Next offer" class="next-offer-arrow">
+					<xsl:attribute name="href">$PAGE_LINK[<xsl:value-of select="Properties/Data/Result/root/NextPromo"/>]</xsl:attribute>
+						<img src="/iwov-resources/images/promotion-detail/right-arrow.png" alt="Next offer"></img>
+					</a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	
 		<xsl:variable name="expDate">
 			<xsl:value-of select="Properties/Data/Result/root/promo_details/Expiry_Date"/>
 		</xsl:variable>
@@ -9,9 +28,13 @@
 		</xsl:variable>
 		<xsl:variable name="curDate">
 			<xsl:value-of select="current-date()" />
-		</xsl:variable>	
+		</xsl:variable>
+		<xsl:variable name="promoId">
+			<xsl:value-of select="Properties/Data/Result/root/promo_details/promoId" />
+		</xsl:variable>
 		<xsl:choose>
-			<xsl:when test="format-date($curDate, '[M01]-[D01]-[Y0001]') &lt; $expDate and format-date($curDate, '[M]-[D]-[Y]') &gt; $actDate">
+			<!--<xsl:when test="format-date($curDate, '[M01]-[D01]-[Y0001]') &lt; $expDate and format-date($curDate, '[M]-[D]-[Y]') &gt; $actDate">-->
+			<xsl:when test="$promoId != ''">
 				<div class="container">
 					<div class="row sticky-wrapper">
 						<div class="offer-content">
