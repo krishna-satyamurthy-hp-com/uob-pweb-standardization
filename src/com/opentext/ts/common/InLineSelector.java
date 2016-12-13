@@ -21,7 +21,7 @@ public class InLineSelector {
 		 option.append("<option value=").append("\"").append(n.getText()).append("\"").append(" ").append("label=\"").append(n.getText()).append("\"/>").append("\n");
         }
 		option.append("</substitution>");
-        System.out.println(option);
+       // System.out.println(option);
 			
 	}
 

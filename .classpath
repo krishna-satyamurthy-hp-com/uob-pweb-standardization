@@ -268,5 +268,6 @@
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xalan.jar"/>
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/uob-custom-lib/jackson-all-1.9.0.jar/jackson-all-1.9.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -53,13 +53,13 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 			LOGGER.debug("execute begins.");
 		}
 		String areavpath = task.getArea().getVPath().toString();
-		System.out.println("Files WA path : "+areavpath);
+		//System.out.println("Files WA path : "+areavpath);
 		LOGGER.error("Files WA path : "+areavpath);
 		
 		String jsonOutputFilePath = areavpath.concat(seperator).concat(UOBBaseConstants.PROMOTION_JSON_FILE_PATH);
 		jsonOutputFilePath = jsonOutputFilePath.substring(jsonOutputFilePath.indexOf(seperator+seperator)+2,(jsonOutputFilePath.length()));	
 		jsonOutputFilePath = jsonOutputFilePath.replaceFirst(jsonOutputFilePath.substring(0, jsonOutputFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
-		System.out.println("Output JSON File path : "+jsonOutputFilePath);
+		//System.out.println("Output JSON File path : "+jsonOutputFilePath);
 		LOGGER.error("Output JSON File path : "+jsonOutputFilePath);
 		File jsonOutputFile = new File(jsonOutputFilePath);
 		
@@ -72,7 +72,7 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 					String fileFullPath = areavpath.concat(seperator).concat(file.toString());
 					fileFullPath = fileFullPath.substring(fileFullPath.indexOf(seperator+seperator)+2,(fileFullPath.length()));	
 					fileFullPath = fileFullPath.replaceFirst(fileFullPath.substring(0, fileFullPath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
-					System.out.println("fileFullPath: "+fileFullPath);
+					//System.out.println("fileFullPath: "+fileFullPath);
 					LOGGER.error("fileFullPath: "+fileFullPath);
 				       
 				        try {
@@ -88,8 +88,8 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 					        {
 					        	if(nl.item(x).getNodeType() == Node.ELEMENT_NODE){
 					        	 element =  (Element) nl.item(x);
-					             System.out.println("Node: " + element.getNodeName());
-					             System.out.println("Node Val: " + element.getTextContent());
+					             //System.out.println("Node: " + element.getNodeName());
+					            // System.out.println("Node Val: " + element.getTextContent());
 					             LOGGER.error("Node: " + element.getNodeName());
 					             LOGGER.error("Node Val: " + element.getTextContent());
 					             promoDeatilsJSON.put(element.getNodeName(), element.getTextContent());
@@ -97,10 +97,12 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 					        }
 						    
 						    if (promoDeatilsJSON.length()>0){
-					        	System.out.println("promoDeatilsJSON: "+promoDeatilsJSON.toString());
+					        	//System.out.println("promoDeatilsJSON: "+promoDeatilsJSON.toString());
+					        	 LOGGER.error("promoDeatilsJSON: "+promoDeatilsJSON.toString());
 							}else{
 								promoDeatilsJSON = null;
-								System.out.println("promoDeatilsJSON is empty");
+								//System.out.println("promoDeatilsJSON is empty");
+								 LOGGER.error("promoDeatilsJSON is empty");
 							}
 						    
 						    writeToFile(jsonOutputFile,promoDeatilsJSON);
@@ -144,17 +146,19 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 		JSONObject updatedObject = new JSONObject();
 		
 		String emailFromUserInputForm = (String) promoDeatilsJSON.get("promoId");
-		System.out.println("email From User InputForm : " + emailFromUserInputForm);
-		
+		//System.out.println("email From User InputForm : " + emailFromUserInputForm);
+		LOGGER.error("email From User InputForm : " + emailFromUserInputForm);
 		boolean userExistsInJSON = false;
 		
 		if (!jsonOutputFile.exists() || jsonOutputFile.length()==0) {
 			jsonOutputFile.createNewFile();
 				firstUserDataArray.put(promoDeatilsJSON);
 				userDataJSON.put("promo_details",firstUserDataArray );
-				System.out.println("\nFirst user's JSON Object: " + userDataJSON);
+				//System.out.println("\nFirst user's JSON Object: " + userDataJSON);
+				 LOGGER.error("\nFirst user's JSON Object: " + userDataJSON);
 		} else{
-			System.out.println("File already exists; creating JSON object from JSON file.");
+			//System.out.println("File already exists; creating JSON object from JSON file.");
+			 LOGGER.error("File already exists; creating JSON object from JSON file.");
 			StringBuilder userDatajsonBuilder = new StringBuilder();
 			try {
 				BufferedReader in = new BufferedReader(new FileReader(jsonOutputFile.getAbsoluteFile()));
@@ -163,7 +167,8 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 					userDatajsonBuilder.append(line);
 				}
 			} catch (Exception e) {
-				System.out.println("Error Parsing: - ");
+				//System.out.println("Error Parsing: - ");
+				 LOGGER.error("Error Parsing: - ");
 			}
 			
 			String userDataJSONString = userDatajsonBuilder.toString();
@@ -173,37 +178,44 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 			JSONArray userdataArray = userDataJSONObj.optJSONArray("promo_details");
 			 if(userdataArray != null) {
 				
-				    System.out.println("userdata JSON array length : " +userdataArray.length());
+				    //System.out.println("userdata JSON array length : " +userdataArray.length());
+				    LOGGER.error("userdata JSON array length : " +userdataArray.length());
 					for(int n = 0; n < userdataArray.length(); n++)
 					{
 					    object = userdataArray.getJSONObject(n);
 					    String emailFromJSON = (String) object.get("promoId");
 					    if (emailFromJSON.equals(emailFromUserInputForm)){
 					    	System.out.println("User already exists in JSON file; so first remove its entries from JSON file"); 
+					    	 LOGGER.error("User already exists in JSON file; so first remove its entries from JSON file");
 					    	userExistsInJSON = true;
 					    	JSONArray updatedUserDataArray = removeUserData(n, userdataArray);
-					    	System.out.println("Entry for user with email " +emailFromUserInputForm+ "has been removed from JSON file");
-					    	//System.out.println("Updated user data JSON array retured is : " + updatedUserDataArray.toString());
+					    	//System.out.println("Entry for user with email " +emailFromUserInputForm+ "has been removed from JSON file");
+					    	 LOGGER.error("Entry for user with email " +emailFromUserInputForm+ "has been removed from JSON file");
 					    	for(int m = 0; m < updatedUserDataArray.length(); m++){
 					    		updatedObject = updatedUserDataArray.getJSONObject(m);
-					    		System.out.println("User details from JSON file for index : "+ m + " for existing user scenario " +object);
+					    		//System.out.println("User details from JSON file for index : "+ m + " for existing user scenario " +object);
+					    		 LOGGER.error("User details from JSON file for index : "+ m + " for existing user scenario " +object);
 					    		existingUserDataArray.put(updatedObject);
 					    	}
 					    	break;
 					    }
-					    System.out.println("User details from JSON file for index : "+ n + " for new user scenario " +object);
+					  //  System.out.println("User details from JSON file for index : "+ n + " for new user scenario " +object);
+					    LOGGER.error("User details from JSON file for index : "+ n + " for new user scenario " +object);
 					    newUserDataArray.put(object);
 					}
 					if (userExistsInJSON){
 						existingUserDataArray.put(promoDeatilsJSON);
-						System.out.println("\nAll user's Array JSON Object - existingUserDataArray : " + existingUserDataArray);
+						//System.out.println("\nAll user's Array JSON Object - existingUserDataArray : " + existingUserDataArray);
+						 LOGGER.error("\nAll user's Array JSON Object - existingUserDataArray : " + existingUserDataArray);
 						userDataJSON.put("promo_details",existingUserDataArray );
 					}else{
 						 newUserDataArray.put(promoDeatilsJSON);
-						 System.out.println("\nAll user's Array JSON Object - newUserDataArray : " + newUserDataArray);
+						// System.out.println("\nAll user's Array JSON Object - newUserDataArray : " + newUserDataArray);
+						 LOGGER.error("\nAll user's Array JSON Object - newUserDataArray : " + newUserDataArray);
 						 userDataJSON.put("promo_details",newUserDataArray );
 					}					
 					System.out.println("\nFinal JSON Object - userDataJSON : " + userDataJSON);
+					 LOGGER.error("\nFinal JSON Object - userDataJSON : " + userDataJSON);
 				}
 		}
 		FileWriter fw = new FileWriter(jsonOutputFile.getAbsoluteFile());
@@ -211,14 +223,17 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 		bw.write(userDataJSON.toString());
 		bw.close();
 
-		System.out.println("Successfully Copied JSON Object to File...");
-		System.out.println("\nJSON Object: " + userDataJSON);
+		//System.out.println("Successfully Copied JSON Object to File...");
+		//System.out.println("\nJSON Object: " + userDataJSON);
+		 LOGGER.error("Successfully Copied JSON Object to File...");
+		 LOGGER.error("\nJSON Object: " + userDataJSON);
 	}
 
 	public static JSONArray removeUserData(final int idx, final JSONArray userdataArray) {
 	    final List<JSONObject> objs = asList(userdataArray);
-	    System.out.println("idx : "+ idx);
-	    System.out.println("idx value to be removed : "+ objs.get(idx));
+	    //System.out.println("idx : "+ idx);
+	    //System.out.println("idx value to be removed : "+ objs.get(idx));
+	    LOGGER.error("idx value to be removed : "+ objs.get(idx));
 	    objs.remove(idx);
 	   // System.out.println("Removed Exsiting User JSON Object : "+ objs.get(idx));
 	    final JSONArray ja = new JSONArray();
@@ -230,7 +245,8 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 	}
 	public static List<JSONObject> asList(final JSONArray userdataArray) {
 	    final int len = userdataArray.length();
-	    System.out.println("JSONArray userdata array length : "+ len);
+	   // System.out.println("JSONArray userdata array length : "+ len);
+	    LOGGER.error("JSONArray userdata array length : "+ len);
 	    final ArrayList<JSONObject> result = new ArrayList<JSONObject>();
 	    for (int i = 0; i < len; i++) {
 	        final JSONObject obj = userdataArray.optJSONObject(i);
@@ -238,8 +254,10 @@ public static void writeToFile(File jsonOutputFile, JSONObject promoDeatilsJSON)
 	            result.add(obj);
 	        }
 	    }
-	    System.out.println("ArrayList size: "+ result.size());
-	    System.out.println("userdata JSONArray converted to ArrayList : "+ result.toString());
+	   // System.out.println("ArrayList size: "+ result.size());
+	    //System.out.println("userdata JSONArray converted to ArrayList : "+ result.toString());
+	    LOGGER.error("ArrayList size: "+ result.size());
+	    LOGGER.error("userdata JSONArray converted to ArrayList : "+ result.toString());
 	    return result;
 	}
 }
