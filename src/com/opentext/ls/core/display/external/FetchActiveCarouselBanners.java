@@ -20,7 +20,7 @@ public class FetchActiveCarouselBanners {
 	private static final Log LOGGER = LogFactory.getLog(FetchActiveCarouselBanners.class);
 	
 	public Document execute(RequestContext context) throws ParseException{
-		LOGGER.error("entering FetchActiveCarouselBanners::execute");		
+		LOGGER.debug("entering FetchActiveCarouselBanners::execute");		
 		final Document allBannersDoc = loadDCR(context);
 		//Document allBannersDoc = Dom4jUtils.newDocument(new File("commonbanner.xml"));
 		Document activeBannersDoc = null;	
@@ -35,25 +35,22 @@ public class FetchActiveCarouselBanners {
 		Date expiryDate;
 		Date currentDate = new Date();
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-		
-		System.out.println("currentDate :: "+currentDate);
-		
+		LOGGER.debug("currentDate :: "+currentDate);
 		for(int i=0;i<allBannersList.size();i++){
 			bannerActivationDate = allBannersList.get(i).selectSingleNode("Activation_Date").getText();
-			System.out.println("bannerActivationDate is "+bannerActivationDate);
+			LOGGER.debug("bannerActivationDate is "+bannerActivationDate);
 			bannerExpiryDate = allBannersList.get(i).selectSingleNode("Expiry_Date").getText();
-			System.out.println("bannerExpiryDate is "+bannerExpiryDate);
+			LOGGER.debug("bannerExpiryDate is "+bannerExpiryDate);
 			try {
 				activationDate = df.parse(bannerActivationDate);
 				expiryDate = df.parse(bannerExpiryDate);
 				if(!(activationDate.after(currentDate)) && !(expiryDate.before(currentDate))){
-					System.out.println("Banner is active");
 					activeBannerList.add(allBannersList.get(i));
 				}else{
 					if(activationDate.after(currentDate))
-						System.out.println("Banner is not active yet");
+						LOGGER.debug("Banner is not active yet :: "+allBannersList.get(i).selectSingleNode("heading").getText());
 					else if(expiryDate.before(currentDate))
-						System.out.println("Banner is expired");
+						LOGGER.debug("Banner is expired :: "+allBannersList.get(i).selectSingleNode("heading").getText()););
 				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -70,27 +67,27 @@ public class FetchActiveCarouselBanners {
 			}
 						
 			activeBannersDoc = Dom4jUtils.newDocument(activeBannerSB.toString());
-			System.out.println("Final Active banner list "+activeBannersDoc.asXML());
+			LOGGER.debug("Final Active banner list "+activeBannersDoc.asXML());
 		}	
 		activeBannerSB.append("</root>");
-		LOGGER.error("Final Document : "+activeBannersDoc.asXML());
+		LOGGER.debug("Final Document : "+activeBannersDoc.asXML());
 		return activeBannersDoc;
 	}
 	
 	
 	
 	private Document loadDCR(RequestContext context) {
-		LOGGER.error("entering loadDCR");
+		LOGGER.debug("entering loadDCR");
 		Document document = null;
 		String rootLocation = DCRUtils.getRootLocation(context);
 		try {
 			@SuppressWarnings("deprecation")
 			String filerelativePath = context.getParameterString("carouselbanners");
 			document = DCRUtils.loadFile(rootLocation, filerelativePath);
+			LOGGER.debug("exiting loadDCR");
 		} catch (Throwable ex) {
 			LOGGER.error("Under Catch Error from loadDCR function : ", ex);
-		}
-		LOGGER.error("exiting loadDCR");
+		}		
 		return document;
 	}
 }
