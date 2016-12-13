@@ -108,11 +108,11 @@ public class PromotionDetails {
 							nextURL = i!=totalActivePromotions-1?(String) (promoAL.get(i+1).get("promo_page")):(String) (promoAL.get(0).get("promo_page"));
 							if(prevURL.indexOf("/sites/") != -1){
 								prevURL = prevURL.split("/sites/")[1];
-								this.prevURL = prevURL.substring(prevURL.indexOf("/")+1,prevURL.length());
+								this.prevURL = prevURL.substring(prevURL.indexOf("/")+1,prevURL.indexOf(".page"));
 							}
 							if(nextURL.indexOf("/sites/") != -1){
 								nextURL = nextURL.split("/sites/")[1];
-								this.nextURL = nextURL.substring(nextURL.indexOf("/")+1,nextURL.length());
+								this.nextURL = nextURL.substring(nextURL.indexOf("/")+1,nextURL.indexOf(".page"));
 							}
 							//prevURL = prevURL.indexOf("/sites") != -1?prevURL.substring("/sites/")
 							LOGGER.debug("Prev URL "+this.prevURL);
