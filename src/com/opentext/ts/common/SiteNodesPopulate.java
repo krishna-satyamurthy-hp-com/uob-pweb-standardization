@@ -1,6 +1,5 @@
 package com.opentext.ts.common;
 
-
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
@@ -11,14 +10,12 @@ import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-
-
 public class SiteNodesPopulate {
-	private static final Log LOGGER = LogFactory.getLog(SiteNodePopulate.class);
+	private static final Log LOGGER = LogFactory.getLog(SiteNodesPopulate.class);
 
 	public static void main(String path[])throws Exception
 	{
-		LOGGER.debug("Entering SiteNodePopulate::execute");	
+		LOGGER.debug("Entering SiteNodesPopulate::execute");	
 		try{
 		
 		String filename=path[0];
