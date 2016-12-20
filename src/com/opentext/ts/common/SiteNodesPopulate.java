@@ -1,9 +1,12 @@
 package com.opentext.ts.common;
 
 
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -11,14 +14,17 @@ import org.dom4j.io.SAXReader;
 
 
 public class SiteNodesPopulate {
+	private static final Log LOGGER = LogFactory.getLog(SiteNodePopulate.class);
 
 	public static void main(String path[])throws Exception
 	{
+		LOGGER.debug("Entering SiteNodePopulate::execute");	
+		try{
 		
 		String filename=path[0];
 		SAXReader reader=new SAXReader();
 		Document doc=reader.read(filename);
-		//System.out.println(doc);
+		LOGGER.debug("DCR Path :: "+ filename);
 		StringBuilder option=new StringBuilder("<substitution>");
 		
 		@SuppressWarnings("unchecked")
@@ -31,9 +37,19 @@ public class SiteNodesPopulate {
 			 option.append("<option value=").append("\"").append(n.getText()).append("\"").append(" ").append("label=\"").append(n.getText()).append("\"/>").append("\n");
 	        }
 		}
+		
 		option.append("</substitution>");
+		LOGGER.info("XML Output :: "+ option);
         //System.out.println(option);
-			
+		PrintWriter out= new PrintWriter(System.out);
+		out.print(option);
+		out.flush();	
+	}catch(Exception ex){
+		
+		LOGGER.debug("Error Occured :: "+ ex.getMessage());
+		ex.printStackTrace();
+	}
+		
 	}
 		
 }
