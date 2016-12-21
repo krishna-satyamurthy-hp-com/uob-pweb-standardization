@@ -211,7 +211,7 @@ public static Element generateCardsElement(RequestContext context, Document newD
 	Iterator creditCardsItr = creditCards.keySet().iterator();
 	 while(creditCardsItr.hasNext()) {
 		 String key = (String) creditCardsItr.next();
-		 if (key != null && !key.isEmpty()){
+		 if (creditCards.get(key) != null && !creditCards.get(key).isEmpty()){
     	 Element creditElement = newDoc.createElement("credit_card");
     	 categoryElement.appendChild(creditElement);
     	 creditElement.setAttribute("url", key );
@@ -225,7 +225,7 @@ public static Element generateCardsElement(RequestContext context, Document newD
 	 Iterator debitCardsItr = debitCard.keySet().iterator();
 	 while(debitCardsItr.hasNext()) { 
 		 String key = (String) debitCardsItr.next();
-		 if (key != null && !key.isEmpty()){
+		 if (debitCard.get(key) != null && !debitCard.get(key).isEmpty()){
     	 Element debitElement = newDoc.createElement("debit_card");
     	 categoryElement.appendChild(debitElement);
     	 debitElement.setAttribute("url", key );
