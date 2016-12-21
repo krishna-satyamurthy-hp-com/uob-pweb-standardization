@@ -69,12 +69,12 @@ private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
 		        		LOGGER.error("Category one Section Title: " + feature_section_title);
 		        	}
 		        	if (fcnl.item(x).getNodeName() == "credit_card"){
-		        		LOGGER.error("Category one Credit Card details: " + fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		featureCreditCard.put(fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category one Credit Card details: " + fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		featureCreditCard.put(fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}
 		        	if (fcnl.item(x).getNodeName() == "debit_card"){
-		        		LOGGER.error("Category one Debit Card details" + fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		featureDebitCard.put(fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category one Debit Card details" + fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		featureDebitCard.put(fcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), fcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}		
 		        	}
 		        }
@@ -91,12 +91,12 @@ private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
 		        		LOGGER.error("Category two Section Title: " + travel_section_title);
 		        	}
 		        	if (tcnl.item(x).getNodeName() == "credit_card"){
-		        		LOGGER.error("Category two Credit Card details: " + tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		travelCreditCard.put(tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category two Credit Card details: " + tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		travelCreditCard.put(tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}
 		        	if (tcnl.item(x).getNodeName() == "debit_card"){
-		        		LOGGER.error("Category two Debit Card details: " + tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		travelDebitCard.put(tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category two Debit Card details: " + tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		travelDebitCard.put(tcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), tcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}	
 		        	}
 		        }
@@ -114,12 +114,12 @@ private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
 		        		LOGGER.error("Category three Section Title: " + rewards_section_title);
 		        	}
 		        	if (rwcnl.item(x).getNodeName() == "credit_card"){
-		        		LOGGER.error("Category three Credit Card details: " + rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		rewardsCreditCard.put(rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category three Credit Card details: " + rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		rewardsCreditCard.put(rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}
 		        	if (rwcnl.item(x).getNodeName() == "debit_card"){
-		        		LOGGER.error("Category three Debit Card details: " + rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		rewardsDebitCard.put(rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category three Debit Card details: " + rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		rewardsDebitCard.put(rwcnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), rwcnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}		
 		        	}
 		        }
@@ -137,12 +137,12 @@ private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
 		        		LOGGER.error("Category four Section Title: " + rebate_section_title);
 		        	}
 		        	if (recnl.item(x).getNodeName() == "credit_card"){
-		        		LOGGER.error("Category four Credit Card details: " + recnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		rebateCreditCard.put(recnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category four Credit Card details: " + recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +recnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		rebateCreditCard.put(recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), recnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}
 		        	if (recnl.item(x).getNodeName() == "debit_card"){
-		        		LOGGER.error("Category four Debit Card details: " + recnl.item(x).getAttributes().getNamedItem("url").getNodeValue() + "" +recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue());
-		        		rebateDebitCard.put(recnl.item(x).getAttributes().getNamedItem("url").getNodeValue(), recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue()) ;
+		        		LOGGER.error("Category four Debit Card details: " + recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue() + "" +recnl.item(x).getAttributes().getNamedItem("url").getNodeValue());
+		        		rebateDebitCard.put(recnl.item(x).getAttributes().getNamedItem("filepath").getNodeValue(), recnl.item(x).getAttributes().getNamedItem("url").getNodeValue()) ;
 		        	}
 		        	}
 		        }
@@ -211,12 +211,13 @@ public static Element generateCardsElement(RequestContext context, Document newD
 	Iterator creditCardsItr = creditCards.keySet().iterator();
 	 while(creditCardsItr.hasNext()) {
 		 String key = (String) creditCardsItr.next();
-		 if (creditCards.get(key) != null && !creditCards.get(key).isEmpty()){
+		 if (key != null && !key.isEmpty()){
     	 Element creditElement = newDoc.createElement("credit_card");
     	 categoryElement.appendChild(creditElement);
-    	 creditElement.setAttribute("url", key );
-    	 creditElement.setAttribute("filepath", creditCards.get(key));
-    	 xmlNodes =  (Element)  getNodeList(generatepath(context, creditCards.get(key)), "/root/card_highlights" );
+    	 creditElement.setAttribute("filepath", key);
+    	 creditElement.setAttribute("url", creditCards.get(key) );
+    	 
+    	 xmlNodes =  (Element)  getNodeList(generatepath(context, key), "/root/card_highlights" );
     	 Node newNode= (Node) newDoc.importNode(xmlNodes, true);  
     	 System.out.println(newNode.getNodeValue());
     	 creditElement.appendChild(newNode);
@@ -225,12 +226,13 @@ public static Element generateCardsElement(RequestContext context, Document newD
 	 Iterator debitCardsItr = debitCard.keySet().iterator();
 	 while(debitCardsItr.hasNext()) { 
 		 String key = (String) debitCardsItr.next();
-		 if (debitCard.get(key) != null && !debitCard.get(key).isEmpty()){
+		 if (key != null && !key.isEmpty()){
     	 Element debitElement = newDoc.createElement("debit_card");
     	 categoryElement.appendChild(debitElement);
-    	 debitElement.setAttribute("url", key );
-    	 debitElement.setAttribute("filepath", debitCard.get(key));
-    	 xmlNodes =  (Element)  getNodeList(generatepath(context, debitCard.get(key)), "/root/card_highlights" );
+    	 debitElement.setAttribute("filepath", key);
+    	 debitElement.setAttribute("url", debitCard.get(key) );
+    	
+    	 xmlNodes =  (Element)  getNodeList(generatepath(context, key), "/root/card_highlights" );
     	 Node newNode= (Node) newDoc.importNode(xmlNodes, true);
     	 debitElement.appendChild(newNode);
 		 }
