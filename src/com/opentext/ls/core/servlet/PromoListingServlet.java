@@ -80,7 +80,7 @@ public class PromoListingServlet extends HttpServlet {
 			String todayStr = df.format(today);
 			PreparedStatement ps = con
 					.prepareStatement("select * from promotionlist where (ActivationDate <= '"+todayStr+"' and ExpiryDate > '"
-							+todayStr+"') OR PromoLife='Expirying' ORDER BY PromoTitle");
+							+todayStr+"') OR PromoLife='Evergreen' ORDER BY PromoTitle");
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();
