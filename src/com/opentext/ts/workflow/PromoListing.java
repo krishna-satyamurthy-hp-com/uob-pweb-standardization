@@ -156,6 +156,7 @@ public class PromoListing implements CSURLExternalTask {
 		Connection con = null;
 		try{			
 			//Connection in local server
+			Class.forName("com.mysql.jdbc.Driver");
 			con=DriverManager.getConnection("jdbc:mysql://ip-172-31-56-138.ec2.internal:3306/wcm", "teamsite", "1nterw0ven");
 			//Connection in uob sit
 			//DataSourceConfig _dataSourceConfig=new DataSourceConfig();
@@ -230,7 +231,7 @@ public class PromoListing implements CSURLExternalTask {
 		LOGGER.debug("Inside deletePromoList "+deletePromoAL.size());
 		Connection con = null;
 		try{
-			
+			Class.forName("com.mysql.jdbc.Driver");
 			//Connection in local server
 			con=DriverManager.getConnection("jdbc:mysql://ip-172-31-56-138.ec2.internal:3306/wcm", "teamsite", "1nterw0ven");
 			//Connection in uob sit
@@ -300,11 +301,13 @@ public class PromoListing implements CSURLExternalTask {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void updateRuntimePromoListing(String jobIDStr){		
+	public void updateRuntimePromoListing(String jobIDStr, String lsds_runtime_path){		
 		LOGGER.debug("Enter updateRuntimePromoListing");
+		System.out.println("Enter updateRuntimePromoListing");
 		//Step 1 : Read the json file and update create and delete ArrayLists
 		String promoJsonRTFilePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(jobIDStr).concat(".json");
-		promoJsonRTFilePath = "/iwmnt/default/main/UOB/WORKAREA/shared/"+promoJsonRTFilePath; //Need to change this later to fetch RT path dynamically
+		//promoJsonRTFilePath = "/iwmnt/default/main/UOB/WORKAREA/shared/"+promoJsonRTFilePath; //Need to change this later to fetch RT path dynamically
+		promoJsonRTFilePath = lsds_runtime_path.concat("/").concat(promoJsonRTFilePath); //Need to change this later to fetch RT path dynamically
 		LOGGER.debug("promoJsonRTFilePath "+promoJsonRTFilePath);
 		File promoJsonRTFile = new File(promoJsonRTFilePath);
 		if(promoJsonRTFile.exists() && promoJsonRTFile.canRead()){
@@ -354,6 +357,7 @@ public class PromoListing implements CSURLExternalTask {
 				e.printStackTrace();
 			}
 		}else{
+			System.out.println("PromoJson runtime file does not exist "+promoJsonRTFilePath);
 			LOGGER.error("PromoJson runtime file does not exist "+promoJsonRTFilePath);
 		}
 		
