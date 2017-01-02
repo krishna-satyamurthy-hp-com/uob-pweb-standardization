@@ -3,7 +3,6 @@ package com.opentext.ts.workflow;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,6 +27,7 @@ import com.interwoven.cssdk.workflow.CSExternalTask;
 import com.interwoven.cssdk.workflow.CSURLExternalTask;
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.DBConnectionManager;
 
 
 public class PromoListing implements CSURLExternalTask {
@@ -41,8 +41,8 @@ public class PromoListing implements CSURLExternalTask {
 	int jobID;
 	
 	@SuppressWarnings("rawtypes")	
-	public void execute(CSClient paramCSClient, CSExternalTask task, Hashtable paramHashtable) throws CSException {		
-			LOGGER.debug("PromoListingForPreview starts");		
+	public void execute(CSClient paramCSClient, CSExternalTask task, Hashtable paramHashtable) throws CSException {
+			LOGGER.debug("PromoListing starts");		
 			this.areaVpath = task.getArea().getVPath().toString();
 			this.jobID = task.getWorkflowId();
 			LOGGER.debug("Workflow ID is "+this.jobID);
@@ -52,7 +52,7 @@ public class PromoListing implements CSURLExternalTask {
 			String fileVPathStr;
 			for(CSAreaRelativePath fileVPath : waFiles){
 				fileVPathStr = fileVPath.toString();				
-				if(fileVPathStr.contains("templatedata/promotion/details/data/")){
+				if(fileVPathStr.contains(UOBBaseConstants.PROMOTION_TEMPLATEDATA_PATH)){
 					promotionDCRList.add(fileVPathStr);
 				}				
 			}
@@ -89,12 +89,14 @@ public class PromoListing implements CSURLExternalTask {
 				//Step 3 : Identify the task type and process accordingly
 				final String promoTaskType = task.getVariable("promoTaskType"); //preview | promoJsonCreator | runtime
 				LOGGER.info("promoTaskType is "+promoTaskType);
-				if(promoTaskType != null && !promoTaskType.isEmpty()){
-					if(promoTaskType.equalsIgnoreCase("preview")){						
+				if(promoTaskType != null && !promoTaskType.isEmpty()){					
+					if(promoTaskType.equalsIgnoreCase("preview")){
+						DBConnectionManager dbConMan = new DBConnectionManager();
+						Connection con = dbConMan.getAuthDBConnection();
 						if(this.createPromoAL != null && !this.createPromoAL.isEmpty() && this.createPromoAL.size()>0){
-							updatePromoList();
+							updatePromoList(con);
 						}if(this.deletePromoAL != null && !this.deletePromoAL.isEmpty() && this.deletePromoAL.size()>0){
-							deletePromoList();
+							deletePromoList(con);
 						}
 					}else if(promoTaskType.equalsIgnoreCase("promoJsonCreator")){
 						final String promoJsonRelativePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(String.valueOf(jobID)).concat(".json");
@@ -130,8 +132,8 @@ public class PromoListing implements CSURLExternalTask {
 		LOGGER.debug("DCR Path is "+dcrPath);	
 		
 		final Document promoDCR = Dom4jUtils.newDocument(new File(dcrPath));
-		final Node promoDCRDetailsNode = promoDCR.selectSingleNode("/root/promo_details");
-		
+		final Node promoDCRDetailsNode = promoDCR.selectSingleNode(UOBBaseConstants.PROMOTION_DCR_ROOT_NODE);
+		LOGGER.debug("Promo DCR root node is "+promoDCRDetailsNode);	
 		if(promoRequest.equalsIgnoreCase("create")){
 			LOGGER.info("Request type is create or update promotion");
 			promoDetailsMap = new HashMap<String,String>();
@@ -152,16 +154,9 @@ public class PromoListing implements CSURLExternalTask {
 		}
 	}
 	
-	public void updatePromoList(){
-		LOGGER.debug("Inside updatePromoList "+createPromoAL.size());	
-		Connection con = null;
+	public void updatePromoList(Connection con){
+		LOGGER.debug("Inside updatePromoList "+createPromoAL.size());		
 		try{			
-			//Connection in local server
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://ip-172-31-56-138.ec2.internal:3306/wcm", "teamsite", "1nterw0ven");
-			//Connection in uob sit
-			//DataSourceConfig _dataSourceConfig=new DataSourceConfig();
-			//con = _dataSourceConfig.dataSource().getConnection();
 			if(con!=null && !con.isClosed()){				
 				for(HashMap<String,String> promoMap : createPromoAL){
 					int promoID = Integer.parseInt(promoMap.get("promo-id"));
@@ -185,6 +180,7 @@ public class PromoListing implements CSURLExternalTask {
 					String updatePromoQuery = "INSERT INTO PromotionList(PromoID,ExpiryDate,ActivationDate,ProductCategory,PromoImage,"
 							+ "PromoTitle,PromoAltText,PromoLife,PromoPage) values(?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE "
 							+ "ExpiryDate=?,ActivationDate=?,ProductCategory=?,PromoImage=?,PromoTitle=?,PromoAltText=?,PromoLife=?,PromoPage=?";
+					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
 					updatePromoPS.setDate(2, expiryDateDB);
@@ -202,10 +198,7 @@ public class PromoListing implements CSURLExternalTask {
 					updatePromoPS.setString(8, promoLife);
 					updatePromoPS.setString(16, promoLife);
 					updatePromoPS.setString(9, promoPage);
-					updatePromoPS.setString(17, promoPage);
-					
-					//int rowCount = statement.executeUpdate(insertStatement);
-					LOGGER.info("insert statemnt "+updatePromoQuery);
+					updatePromoPS.setString(17, promoPage);	
 					int rowCount = updatePromoPS.executeUpdate();					
 					LOGGER.debug("Inserted " + rowCount + " rows successfully");
 				}
@@ -214,33 +207,29 @@ public class PromoListing implements CSURLExternalTask {
 			}
 		}catch(SQLException sqlex){
 			sqlex.printStackTrace();
+			LOGGER.error(sqlex.getMessage());
 			LOGGER.error(sqlex.getLocalizedMessage());
 		}catch(Exception ex){
 			ex.printStackTrace();
+			LOGGER.error(ex.getMessage());
 			LOGGER.error(ex.getLocalizedMessage());
 		}finally{
 			try {
 				con.close();
 			} catch (SQLException sqlex) {				
 				sqlex.printStackTrace();
-				LOGGER.error(sqlex.getLocalizedMessage());
+				LOGGER.error(sqlex.getMessage());
 			} catch (Exception ex) {				
 				ex.printStackTrace();
-				LOGGER.error(ex.getLocalizedMessage());
+				LOGGER.error(ex.getMessage());
 			}
 		}
 	}
 	
-	public void deletePromoList(){
+	public void deletePromoList(Connection con){
 		LOGGER.debug("Inside deletePromoList "+deletePromoAL.size());
-		Connection con = null;
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			//Connection in local server
-			con=DriverManager.getConnection("jdbc:mysql://ip-172-31-56-138.ec2.internal:3306/wcm", "teamsite", "1nterw0ven");
-			//Connection in uob sit
-			//DataSourceConfig _dataSourceConfig=new DataSourceConfig();
-			//con = _dataSourceConfig.dataSource().getConnection();
+		
+		try{			
 			if(con!=null && !con.isClosed()){
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
@@ -337,33 +326,35 @@ public class PromoListing implements CSURLExternalTask {
 							deletePromoAL.add(deletePromoDetailsID);
 						}
 					}
-					//Step 2 : Process the request accordingly
+					DBConnectionManager dbConMan = new DBConnectionManager();
+					//Connection con = dbConMan.getRTDBConnection();
+					Connection con = dbConMan.getAuthDBConnection();
+					//Step 2 : Process the runtime request accordingly
 					if (createPromoAL != null && !createPromoAL.isEmpty()
 							&& createPromoAL.size() > 0) {					
-							updatePromoList();
+							updatePromoList(con);
 					}
 					if (deletePromoAL != null && !deletePromoAL.isEmpty()
 							&& deletePromoAL.size() > 0) {
-						deletePromoList();
+						deletePromoList(con);
 					}
 				}else{
 					LOGGER.error("PromoJson runtime exists but is empty or invalid "+promoJsonMap);
 				}
 				
-			} catch (JsonParseException e) {
-				// TODO Auto-generated catch block
+			} catch (JsonParseException e) {				
+				LOGGER.error(e.getCause().getMessage());
 				e.printStackTrace();
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
+				LOGGER.error(e.getCause().getMessage());
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				LOGGER.error(e.getCause().getMessage());
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("PromoJson  runtime file does not exist "+promoJsonRTFilePath);
 			LOGGER.error("PromoJson runtime file does not exist "+promoJsonRTFilePath);
-		}
-		
+		}		
 	}
 }
