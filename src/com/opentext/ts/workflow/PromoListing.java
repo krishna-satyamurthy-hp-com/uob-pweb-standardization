@@ -361,7 +361,7 @@ public class PromoListing implements CSURLExternalTask {
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println("PromoJson runtime file does not exist "+promoJsonRTFilePath);
+			System.out.println("PromoJson  runtime file does not exist "+promoJsonRTFilePath);
 			LOGGER.error("PromoJson runtime file does not exist "+promoJsonRTFilePath);
 		}
 		

@@ -87,7 +87,6 @@ public class PromotionDetails {
 		if(promoJSON.exists() && promoJSON.canRead()){
 			promodataMap = mapper.readValue(new File(promoJsonFilePath), HashMap.class);*/
 		String line;
-		
 		String scheme = context.getRequest().getScheme();
 		String hostname = context.getRequest().getLocalAddr();
 		int port = context.getRequest().getLocalPort();
