@@ -1,7 +1,12 @@
 package com.opentext.ls.core.display.external;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,16 +76,36 @@ public class PromotionDetails {
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String, ArrayList<LinkedHashMap>> promodataMap;
 		try {			
-			String promoJsonFilePath = "";
-				if(context.isRuntime())
-					promoJsonFilePath = context.getFileDal().getRoot()+File.separator+UOBBaseConstants.PROMOTION_JSON_FILE_PATH;
-				else
-					promoJsonFilePath = DCRUtils.getRootLocation(context)+File.separator+UOBBaseConstants.PROMOTION_JSON_FILE_PATH;
-				
-			LOGGER.debug("Promo json file path is "+promoJsonFilePath);
-			final File promoJSON = new File(promoJsonFilePath);
-			if(promoJSON.exists() && promoJSON.canRead()){
-				promodataMap = mapper.readValue(new File(promoJsonFilePath), HashMap.class);			
+			/*String promoJsonFilePath = "";
+			if(context.isRuntime())
+				promoJsonFilePath = context.getFileDal().getRoot()+File.separator+UOBBaseConstants.PROMOTION_JSON_FILE_PATH;
+			else
+				promoJsonFilePath = DCRUtils.getRootLocation(context)+File.separator+UOBBaseConstants.PROMOTION_JSON_FILE_PATH;
+			
+		LOGGER.debug("Promo json file path is "+promoJsonFilePath);
+		final File promoJSON = new File(promoJsonFilePath);
+		if(promoJSON.exists() && promoJSON.canRead()){
+			promodataMap = mapper.readValue(new File(promoJsonFilePath), HashMap.class);*/
+		String line;
+		
+		String scheme = context.getRequest().getScheme();
+		String hostname = context.getRequest().getLocalAddr();
+		int port = context.getRequest().getLocalPort();
+		String path = "/wsm/getpromotions.do";
+		URI uri = null;
+		try {
+			uri = new URI(scheme, null, hostname, port, path, null, null);
+			LOGGER.debug("URI:" + uri.toString());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		BufferedReader in = new BufferedReader(new InputStreamReader(uri.toURL().openStream())); 
+		line = in.readLine(); 
+		LOGGER.debug("JSON output from servlet:"+line);
+		if(!line.isEmpty()){
+			promodataMap = mapper.readValue(line, HashMap.class);			
 				final ArrayList<LinkedHashMap> promoAL = promodataMap.get("promo_details");
 				
 				//Define next set of variables
@@ -99,13 +124,13 @@ public class PromotionDetails {
 					
 					for(int i=0; i<totalActivePromotions; i++){
 						promoLHM = promoAL.get(i);
-						promoPage = promoLHM.get("promo_page");
+						promoPage = promoLHM.get("PromoPage");
 						LOGGER.debug("promo page from json is "+promoPage);						
 						if(promoPage.contains(currentPromoPage)){
 							LOGGER.debug("Current page matches an entry in promo json. Fetching the prev and next urls...");							
 							//Define prev and next urls				
-							prevURL = i!=0?(String) (promoAL.get(i-1).get("promo_page")):(String) (promoAL.get(totalActivePromotions-1).get("promo_page"));							
-							nextURL = i!=totalActivePromotions-1?(String) (promoAL.get(i+1).get("promo_page")):(String) (promoAL.get(0).get("promo_page"));
+							prevURL = i!=0?(String) (promoAL.get(i-1).get("PromoPage")):(String) (promoAL.get(totalActivePromotions-1).get("PromoPage"));							
+							nextURL = i!=totalActivePromotions-1?(String) (promoAL.get(i+1).get("PromoPage")):(String) (promoAL.get(0).get("PromoPage"));
 							if(prevURL.indexOf("/sites/") != -1){
 								prevURL = prevURL.split("/sites/")[1];
 								this.prevURL = prevURL.substring(prevURL.indexOf("/")+1,prevURL.indexOf(".page"));
@@ -124,7 +149,7 @@ public class PromotionDetails {
 				
 			}//End of if(promoJSON.exists() && promoJSON.canRead())
 			else{
-				LOGGER.error("Promo json file is not accessible at "+promoJsonFilePath);
+				LOGGER.error("Promo json file is empty "+line);
 			}
 		} catch (IOException e) {			
 			e.printStackTrace();

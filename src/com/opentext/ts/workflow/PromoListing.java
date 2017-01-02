@@ -144,6 +144,7 @@ public class PromoListing implements CSURLExternalTask {
 			promoDetailsMap.put("promo-title", promoDCRDetailsNode.selectSingleNode("promo_title").getStringValue());			
 			promoDetailsMap.put("promo-alt-text", promoDCRDetailsNode.selectSingleNode("promo_alt_text").getStringValue());
 			promoDetailsMap.put("promo-life", promoDCRDetailsNode.selectSingleNode("promo_life").getStringValue());
+			promoDetailsMap.put("promo-page", promoDCRDetailsNode.selectSingleNode("promo_page").getStringValue());
 			createPromoAL.add(promoDetailsMap);
 		}else if(promoRequest.equalsIgnoreCase("delete")){
 			LOGGER.debug("Request type is delete promotion");
@@ -171,6 +172,7 @@ public class PromoListing implements CSURLExternalTask {
 					String promoTitle = promoMap.get("promo-title");
 					String promoAltText = promoMap.get("promo-alt-text");
 					String promoLife = promoMap.get("promo-life");	
+					String promoPage = promoMap.get("promo-page");	
 					
 					SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 					
@@ -181,24 +183,26 @@ public class PromoListing implements CSURLExternalTask {
 					java.sql.Date activationDateDB = new java.sql.Date(activationDate.getTime());
 					
 					String updatePromoQuery = "INSERT INTO PromotionList(PromoID,ExpiryDate,ActivationDate,ProductCategory,PromoImage,"
-							+ "PromoTitle,PromoAltText,PromoLife) values(?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE "
-							+ "ExpiryDate=?,ActivationDate=?,ProductCategory=?,PromoImage=?,PromoTitle=?,PromoAltText=?,PromoLife=?";
+							+ "PromoTitle,PromoAltText,PromoLife,PromoPage) values(?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE "
+							+ "ExpiryDate=?,ActivationDate=?,ProductCategory=?,PromoImage=?,PromoTitle=?,PromoAltText=?,PromoLife=?,PromoPage=?";
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
 					updatePromoPS.setDate(2, expiryDateDB);
-					updatePromoPS.setDate(9, expiryDateDB);
+					updatePromoPS.setDate(10, expiryDateDB);
 					updatePromoPS.setDate(3, activationDateDB);
-					updatePromoPS.setDate(10, activationDateDB);
+					updatePromoPS.setDate(11, activationDateDB);
 					updatePromoPS.setString(4, productCategory);
-					updatePromoPS.setString(11, productCategory);
+					updatePromoPS.setString(12, productCategory);
 					updatePromoPS.setString(5, promoImage);
-					updatePromoPS.setString(12, promoImage);
+					updatePromoPS.setString(13, promoImage);
 					updatePromoPS.setString(6, promoTitle);
-					updatePromoPS.setString(13, promoTitle);
+					updatePromoPS.setString(14, promoTitle);
 					updatePromoPS.setString(7, promoAltText);
-					updatePromoPS.setString(14, promoAltText);
+					updatePromoPS.setString(15, promoAltText);
 					updatePromoPS.setString(8, promoLife);
-					updatePromoPS.setString(15, promoLife);
+					updatePromoPS.setString(16, promoLife);
+					updatePromoPS.setString(9, promoPage);
+					updatePromoPS.setString(17, promoPage);
 					
 					//int rowCount = statement.executeUpdate(insertStatement);
 					LOGGER.info("insert statemnt "+updatePromoQuery);
