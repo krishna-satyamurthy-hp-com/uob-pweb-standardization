@@ -3,7 +3,6 @@ package com.opentext.ls.core.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -22,6 +21,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.opentext.ls.db.utils.DBConnectionManager;
 
 //import com.opentext.ls.db.utils.DataSourceConfig;
 
@@ -55,8 +56,8 @@ public class PromoListingServlet extends HttpServlet {
 	}
 
 	/**
-	 * This servlet fetches the non-api promotions from DB and
-	 * sends a json response
+	 * This servlet fetches the non-api promotions from DB and sends a json
+	 * response
 	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -70,17 +71,21 @@ public class PromoListingServlet extends HttpServlet {
 		JSONObject promoListJSON = new JSONObject();
 
 		try {
-			// DataSourceConfig _dataSourceConfig = new DataSourceConfig();
-			// con = _dataSourceConfig.dataSource().getConnection();
-			con=DriverManager.getConnection("jdbc:mysql://ip-172-31-56-138.ec2.internal:3306/wcm", "teamsite", "1nterw0ven");
+			DBConnectionManager dbConMan = new DBConnectionManager();
+			con = dbConMan.getAuthDBConnection();
+			// Get runtime DB connection in UOB environment
+			// con = dbConMan.getRTDBConnection();
 			LOGGER.debug("Connection established successfully "
-					+ !con.isClosed());			
+					+ !con.isClosed());
 			Date today = new Date();
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String todayStr = df.format(today);
 			PreparedStatement ps = con
-					.prepareStatement("select * from promotionlist where (ActivationDate <= '"+todayStr+"' and ExpiryDate > '"
-							+todayStr+"') OR PromoLife='Evergreen' ORDER BY PromoTitle");
+					.prepareStatement("SELECT * from PROMOTIONLIST WHERE (ACTIVATIONDATE <= '"
+							+ todayStr
+							+ "' AND EXPIRYDATE > '"
+							+ todayStr
+							+ "') OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE");
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -127,7 +132,7 @@ public class PromoListingServlet extends HttpServlet {
 			} catch (Exception ex) {
 				LOGGER.error("Exception caught in finally block of PromoListingServlet class "
 						+ ex.getMessage());
-				ex.printStackTrace(); 
+				ex.printStackTrace();
 			}
 		}
 	}

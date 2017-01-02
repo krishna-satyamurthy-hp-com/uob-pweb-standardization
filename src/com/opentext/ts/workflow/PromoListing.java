@@ -169,7 +169,7 @@ public class PromoListing implements CSURLExternalTask {
 					String promoLife = promoMap.get("promo-life");	
 					String promoPage = promoMap.get("promo-page");	
 					
-					SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+					SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
 					
 					Date expiryDate = df.parse(promoExpDate);
 					java.sql.Date expiryDateDB = new java.sql.Date(expiryDate.getTime());
@@ -177,9 +177,7 @@ public class PromoListing implements CSURLExternalTask {
 					Date activationDate = df.parse(promoActDate);
 					java.sql.Date activationDateDB = new java.sql.Date(activationDate.getTime());
 					
-					String updatePromoQuery = "INSERT INTO PromotionList(PromoID,ExpiryDate,ActivationDate,ProductCategory,PromoImage,"
-							+ "PromoTitle,PromoAltText,PromoLife,PromoPage) values(?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE "
-							+ "ExpiryDate=?,ActivationDate=?,ProductCategory=?,PromoImage=?,PromoTitle=?,PromoAltText=?,PromoLife=?,PromoPage=?";
+					String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
@@ -233,7 +231,7 @@ public class PromoListing implements CSURLExternalTask {
 			if(con!=null && !con.isClosed()){
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
-					String deletePromoQuery = "DELETE FROM PromotionList WHERE PromoID="+promoID;
+					String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
 					Statement deleteStatement = con.createStatement();
 					int rowCount = deleteStatement.executeUpdate(deletePromoQuery);
 					LOGGER.debug("Deleted " + rowCount + " rows successfully");

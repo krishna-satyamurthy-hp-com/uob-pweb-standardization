@@ -10,6 +10,8 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.opentext.ls.core.common.UOBBaseConstants;
+
 public class DBConnectionManager {
 	private static final transient Log LOGGER = LogFactory
 			.getLog(DBConnectionManager.class);
@@ -29,7 +31,7 @@ public class DBConnectionManager {
 	}
 
 	public Connection getAuthDBConnection() {
-		final String livesiteCustomer = "/usr/Interwoven/TeamSite/local/config/lib/content_center/livesite_customer_src/etc/conf/livesite_customer/";
+		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		//final String databaseProperties = "database.properties";
@@ -60,7 +62,7 @@ public class DBConnectionManager {
 				System.out.println("DB URL " + jdbcURL);
 				System.out.println("DB User name " + dbUser);
 				System.out.println("DB Pwd enc " + dbPwdEnc);
-				System.out.println("DB pwd " + dbPwdDec);
+				//System.out.println("DB pwd " + dbPwdDec);
 
 				Class.forName(driverName);
 				con = DriverManager.getConnection(jdbcURL, dbUser, dbPwdDec);
@@ -73,7 +75,7 @@ public class DBConnectionManager {
 	}
 
 	public Connection getLocalRTDBConnection() {
-		final String livesiteCustomer = "/usr/Interwoven/TeamSite/local/config/lib/content_center/livesite_customer_src/etc/conf/livesite_customer/";
+		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		//final String databaseProperties = "database.properties";

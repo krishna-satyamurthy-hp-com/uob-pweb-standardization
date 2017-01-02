@@ -1,12 +1,10 @@
 package com.opentext.ls.core.display.external;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +17,6 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 
 import com.interwoven.livesite.runtime.RequestContext;
-import com.opentext.ls.core.common.UOBBaseConstants;
 import com.opentext.ls.core.util.DCRUtils;
 
 /**
