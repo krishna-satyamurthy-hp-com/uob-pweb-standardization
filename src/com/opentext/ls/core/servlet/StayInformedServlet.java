@@ -22,25 +22,18 @@ import org.json.JSONObject;
 
 
 /**
- * Servlet implementation class PromoListingServlet
+ * Servlet implementation class StayInformedServlet
  */
-// @WebServlet("/wsm/getpromotions.do")
+// @WebServlet("/stm/stayinformed.do")
 public class StayInformedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final transient Log LOGGER = LogFactory
 			.getLog(StayInformedServlet.class);
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public StayInformedServlet() {
 		super();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -59,39 +52,75 @@ public class StayInformedServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		LOGGER.debug("Inside StayInformedServlet : doPost");
 		
-		//JSONArray jArray = new JSONArray();
-		//JSONObject promoListJSON = new JSONObject();
-		
 		BufferedReader readCSVbuffer = null;
 
 		try {
+			//If to check PATH or DCRPATH parameter has been passed
+			if(request.getParameter("path")!=null && !request.getParameter("path").isEmpty()){
+			//If CSV Path is passed
+			String outputCSV = "";
 			
+			LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr());
 			
-			LOGGER.debug("Connection established successfully./n Server name:: " + request.getServerName() +"::Context path::"+ request.getContextPath()+"::Local name::"+request.getLocalAddr());	
+			LOGGER.debug("Reading CSV Path"+ request.getParameter("path"));
 			
-			String readCSV;
-			String outputCSV = null;
+			String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("path");
+			LOGGER.debug("Fullpath created"+ fullpath);
 			
-			readCSVbuffer= new BufferedReader(new FileReader(request.getParameter("path")));
+			readCSVbuffer= new BufferedReader(new FileReader(fullpath));
+
+			//outputCSV = outputCSV.concat(readCSVbuffer.readLine());
+			//LOGGER.debug("Display::" + outputCSV);
 			
+			for (String line = readCSVbuffer.readLine(); line != null; line = readCSVbuffer.readLine()) {
+
+				//LOGGER.debug("Inside loop");
+				outputCSV= outputCSV.concat(line);
+				//LOGGER.debug("Display line::" + line);
+				
+			    }
+		
+			LOGGER.debug("Display String Whole::" + outputCSV);
+
 			response.setContentType("text/csv");
-			while( (readCSV = readCSVbuffer.readLine())!= null){
-				
-				LOGGER.debug("Inside while");
-				outputCSV= outputCSV.concat(readCSV);
-				
-			}
-			OutputStream outputStream = response.getOutputStream();
-			outputStream.write(outputCSV.getBytes());
-			LOGGER.debug("Output Stream" + outputStream);
-			outputStream.flush();
-	        outputStream.close();
-	        readCSVbuffer.close();
+			OutputStream out = response.getOutputStream();
+			out.write(outputCSV.getBytes());
+	        //PrintWriter out = response.getWriter();
+			//out.print(outputCSV);
+			out.flush();
 			
-			LOGGER.debug("Total column count");
+			LOGGER.debug("Printing CSV done");
+			
+			}else if(request.getParameter("dcrpath")!=null && !request.getParameter("dcrpath").isEmpty()){
+				//If DCR Path is passed
+				String outputCSV = "";
+				
+				LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr());
+				
+				LOGGER.debug("Reading CSV Path"+ request.getParameter("dcrpath"));
+				
+				String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("dcrpath");
+				LOGGER.debug("Fullpath created"+ fullpath);
+				
+				readCSVbuffer= new BufferedReader(new FileReader(fullpath));
+
+				
+
+				response.setContentType("text/csv");
+		        PrintWriter out = response.getWriter();
+				out.print(outputCSV);
+				out.flush();
+				
+				LOGGER.debug("Printing CSV done");
+				
+			} else{
+				
+				LOGGER.debug("No valid parameters has been passed");
+			}
+			
 					
 		} catch (Exception ex) {
-			LOGGER.error("Exception caught in  PromoListingServlet class "
+			LOGGER.error("Exception caught in StayInformedServlet class "
 					+ ex.getMessage());
 			ex.printStackTrace();
 		} 
