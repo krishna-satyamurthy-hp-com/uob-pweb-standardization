@@ -66,7 +66,8 @@ public class StayInformedServlet extends HttpServlet {
 
 		try {
 			
-			LOGGER.debug("Connection established successfully ");	
+			
+			LOGGER.debug("Connection established successfully./n Server name:: " + request.getServerName() +"::Context path::"+ request.getContextPath()+"::Local name::"+request.getLocalAddr());	
 			
 			String readCSV;
 			String outputCSV = null;
@@ -76,15 +77,18 @@ public class StayInformedServlet extends HttpServlet {
 			response.setContentType("text/csv");
 			while( (readCSV = readCSVbuffer.readLine())!= null){
 				
+				LOGGER.debug("Inside while");
 				outputCSV= outputCSV.concat(readCSV);
 				
 			}
 			OutputStream outputStream = response.getOutputStream();
 			outputStream.write(outputCSV.getBytes());
+			LOGGER.debug("Output Stream" + outputStream);
 			outputStream.flush();
 	        outputStream.close();
+	        readCSVbuffer.close();
 			
-			LOGGER.debug("Total column count ");
+			LOGGER.debug("Total column count");
 					
 		} catch (Exception ex) {
 			LOGGER.error("Exception caught in  PromoListingServlet class "
