@@ -3,11 +3,7 @@ package com.opentext.ls.core.servlet;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
@@ -17,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 
 
 /**
@@ -76,6 +71,7 @@ public class StayInformedServlet extends HttpServlet {
 
 				//LOGGER.debug("Inside loop");
 				outputCSV= outputCSV.concat(line);
+				outputCSV= outputCSV.concat("\n");
 				//LOGGER.debug("Display line::" + line);
 				
 			    }
@@ -84,7 +80,7 @@ public class StayInformedServlet extends HttpServlet {
 
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.print(outputCSV.getBytes());
+			out.print(outputCSV);
 			out.flush();
 			LOGGER.debug("Printing CSV done");
 			
