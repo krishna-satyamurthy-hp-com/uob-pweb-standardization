@@ -82,13 +82,10 @@ public class StayInformedServlet extends HttpServlet {
 		
 			LOGGER.debug("Display String Whole::" + outputCSV);
 
-			response.setContentType("text/csv");
-			OutputStream out = response.getOutputStream();
-			out.write(outputCSV.getBytes());
-	        //PrintWriter out = response.getWriter();
-			//out.print(outputCSV);
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.print(outputCSV.getBytes());
 			out.flush();
-			
 			LOGGER.debug("Printing CSV done");
 			
 			}else if(request.getParameter("dcrpath")!=null && !request.getParameter("dcrpath").isEmpty()){
