@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import com.opentext.ls.core.util.DCRUtils;
 
 
 
@@ -55,11 +56,11 @@ public class StayInformedServlet extends HttpServlet {
 			//If CSV Path is passed
 			String outputCSV = "";
 			
-			LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr());
-			
+			LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr()+":: Remote Host:"+request.getPathInfo());			
 			LOGGER.debug("Reading CSV Path"+ request.getParameter("path"));
 			
-			String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("path");
+			//String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("path");
+			String fullpath= DCRUtils.getRuntimeHome()+request.getParameter("path");
 			LOGGER.debug("Fullpath created"+ fullpath);
 			
 			readCSVbuffer= new BufferedReader(new FileReader(fullpath));
@@ -68,12 +69,10 @@ public class StayInformedServlet extends HttpServlet {
 			//LOGGER.debug("Display::" + outputCSV);
 			
 			for (String line = readCSVbuffer.readLine(); line != null; line = readCSVbuffer.readLine()) {
-
 				//LOGGER.debug("Inside loop");
 				outputCSV= outputCSV.concat(line);
 				outputCSV= outputCSV.concat("\n");
 				//LOGGER.debug("Display line::" + line);
-				
 			    }
 		
 			LOGGER.debug("Display String Whole::" + outputCSV);
@@ -84,36 +83,43 @@ public class StayInformedServlet extends HttpServlet {
 			out.flush();
 			LOGGER.debug("Printing CSV done");
 			
-			}else if(request.getParameter("dcrpath")!=null && !request.getParameter("dcrpath").isEmpty()){
-				//If DCR Path is passed
+			}
+			//If DCR Path is passed
+			else if(request.getParameter("dcrpath")!=null && !request.getParameter("dcrpath").isEmpty()){
+			
 				String outputCSV = "";
 				
 				LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr());
 				
 				LOGGER.debug("Reading CSV Path"+ request.getParameter("dcrpath"));
 				
-				String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("dcrpath");
+				//String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("dcrpath");
+				String fullpath= DCRUtils.getRuntimeHome()+request.getParameter("path");
 				LOGGER.debug("Fullpath created"+ fullpath);
 				
 				readCSVbuffer= new BufferedReader(new FileReader(fullpath));
 
-				
+				for (String line = readCSVbuffer.readLine(); line != null; line = readCSVbuffer.readLine()) {
+					//LOGGER.debug("Inside loop");
+					outputCSV= outputCSV.concat(line);
+					outputCSV= outputCSV.concat("\n");
+					//LOGGER.debug("Display line::" + line);					
+				    }
 
-				response.setContentType("text/csv");
+				response.setContentType("text/xml");
 		        PrintWriter out = response.getWriter();
 				out.print(outputCSV);
 				out.flush();
-				
-				LOGGER.debug("Printing CSV done");
+				LOGGER.debug(outputCSV);
+				LOGGER.debug("Printing DCR done");
 				
 			} else{
 				
 				LOGGER.debug("No valid parameters has been passed");
 			}
-			
-					
+								
 		} catch (Exception ex) {
-			LOGGER.error("Exception caught in StayInformedServlet class "
+			LOGGER.error("Exception caught in StayInformedServlet class"
 					+ ex.getMessage());
 			ex.printStackTrace();
 		} 

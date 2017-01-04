@@ -1,6 +1,9 @@
 package com.opentext.ls.core.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,5 +103,26 @@ public static String getRootLocation(PropertyContext context) {
 	rootLocation = rootLocation.replaceFirst(rootLocation.substring(0, rootLocation.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
 
 	return rootLocation;
+}
+
+//Get Runtime web location
+
+public static String getRuntimeHome() {
+	final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+	final String odProperties = livesiteCustomer.concat("opendeploy.properties");
+	String location="";
+	
+	try {
+		
+			Properties props = new Properties();
+			FileInputStream fis = new FileInputStream(odProperties);
+			props.load(fis);
+			fis.close();
+			location = props.getProperty("opendeploy.runtimeHome");
+		}
+catch (Exception ex) {
+	ex.printStackTrace();
+}
+return location;
 }
 }
