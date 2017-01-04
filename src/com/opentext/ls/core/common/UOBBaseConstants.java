@@ -20,7 +20,7 @@ public class UOBBaseConstants {
 	public static final String PROMOTION_JSON_FILE_PATH = "iwov-resources/json/promodata.json";
 	public static final String PROMO_JSON_RELATIVE_PATH = "iwov-resources/json/promolisting/promoJson_";
 	//public static final String IW_HOME = "/usr/Interwoven/TeamSite";
-	public static final String IW_HOME = "/app/teamsite/iw-home/TeamSite";
+	public static final String IW_HOME = "/apps/teamsite/iw-home/TeamSite";
 	public static final String LIVESITE_CUSTOMER_AUTH = IW_HOME
 			+ "/local/config/lib/content_center/livesite_customer_src/etc/conf/livesite_customer/";
 	public static final String PROMOTION_TEMPLATEDATA_PATH = "templatedata/promotion/details/data/";
