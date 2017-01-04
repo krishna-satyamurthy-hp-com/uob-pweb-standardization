@@ -44,8 +44,8 @@ public class DBConnectionManager {
 				fis.close();
 				final String driverName = props
 						.getProperty("development.driverClassName");
-				//final String jdbcURL = props.getProperty("development.url");
-				final String jdbcURL = props.getProperty("development.custom.url");
+				final String jdbcURL = props.getProperty("development.url");
+				//final String jdbcURL = props.getProperty("development.custom.url");
 				final String dbUser = props.getProperty("development.username");
 				String dbPwdEnc = props.getProperty("development.password");
 				System.out.println("encrypted db password " + dbPwdEnc);

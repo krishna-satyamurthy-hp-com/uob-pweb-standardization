@@ -81,7 +81,7 @@ public class PromoListingServlet extends HttpServlet {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String todayStr = df.format(today);
 			PreparedStatement ps = con
-					.prepareStatement("SELECT * from PROMOTIONLIST WHERE (ACTIVATIONDATE <= '"
+					.prepareStatement("SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= '"
 							+ todayStr
 							+ "' AND EXPIRYDATE > '"
 							+ todayStr
