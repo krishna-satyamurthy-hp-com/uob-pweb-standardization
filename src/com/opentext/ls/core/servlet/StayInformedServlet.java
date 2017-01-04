@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.opentext.ls.core.util.DCRUtils;
+
 
 
 
@@ -44,6 +44,7 @@ public class StayInformedServlet extends HttpServlet {
 	 *      response)
 	 * @author OpenText CEM PS APJ @
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		LOGGER.debug("Inside StayInformedServlet : doPost");
@@ -56,11 +57,12 @@ public class StayInformedServlet extends HttpServlet {
 			//If CSV Path is passed
 			String outputCSV = "";
 			
-			LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr()+":: Remote Host:"+request.getPathInfo());			
+			
+			LOGGER.debug("::Local Address:"+request.getRealPath("/"));			
 			LOGGER.debug("Reading CSV Path"+ request.getParameter("path"));
 			
-			//String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("path");
-			String fullpath= DCRUtils.getRuntimeHome()+request.getParameter("path");
+			
+			String fullpath= request.getRealPath("/")+request.getParameter("path");
 			LOGGER.debug("Fullpath created"+ fullpath);
 			
 			readCSVbuffer= new BufferedReader(new FileReader(fullpath));
@@ -89,12 +91,11 @@ public class StayInformedServlet extends HttpServlet {
 			
 				String outputCSV = "";
 				
-				LOGGER.debug("Path Infomration: COntext path "+request.getContextPath() +":: Local Address:"+request.getLocalAddr()+":: Remote Host:"+request.getRemoteAddr());
-				
+				LOGGER.debug("::Local Address:"+request.getRealPath("/"));			
 				LOGGER.debug("Reading CSV Path"+ request.getParameter("dcrpath"));
 				
-				//String fullpath= "/usr/Interwoven/LiveSiteDisplayServices/runtime/web"+request.getParameter("dcrpath");
-				String fullpath= DCRUtils.getRuntimeHome()+request.getParameter("path");
+				String fullpath= request.getRealPath("/")+request.getParameter("dcrpath");
+				
 				LOGGER.debug("Fullpath created"+ fullpath);
 				
 				readCSVbuffer= new BufferedReader(new FileReader(fullpath));
