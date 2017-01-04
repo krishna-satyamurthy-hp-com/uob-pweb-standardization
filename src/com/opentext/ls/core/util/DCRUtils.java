@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 
 import com.interwoven.livesite.dom4j.Dom4jUtils;
+import com.interwoven.livesite.external.PropertyContext;
 import com.interwoven.livesite.file.FileDal;
 import com.interwoven.livesite.runtime.RequestContext;
 import com.opentext.ls.core.common.UOBBaseConstants;
@@ -84,4 +85,20 @@ public static String getRootLocation(RequestContext context) {
 
 		return rootLocation;
 	}
+
+public static String getRootLocation(PropertyContext context) {
+	
+	String rootLocation = null;
+	String seperator;
+
+	/* To get the root location of the Application */
+	FileDal dal = context.getFileDAL();
+	rootLocation = dal.getRoot();
+	seperator = String.valueOf(dal.getSeparator());
+	
+	rootLocation = rootLocation.substring(rootLocation.indexOf(seperator+seperator)+2,(rootLocation.length()));	
+	rootLocation = rootLocation.replaceFirst(rootLocation.substring(0, rootLocation.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+
+	return rootLocation;
+}
 }
