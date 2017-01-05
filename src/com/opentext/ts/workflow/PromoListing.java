@@ -147,6 +147,7 @@ public class PromoListing implements CSURLExternalTask {
 			promoDetailsMap.put("promo-alt-text", promoDCRDetailsNode.selectSingleNode("promo_alt_text").getStringValue());
 			promoDetailsMap.put("promo-life", promoDCRDetailsNode.selectSingleNode("promo_life").getStringValue());
 			promoDetailsMap.put("promo-page", promoDCRDetailsNode.selectSingleNode("promo_page").getStringValue());
+			promoDetailsMap.put("promo-country", promoDCRDetailsNode.selectSingleNode("country").getStringValue());
 			createPromoAL.add(promoDetailsMap);
 		}else if(promoRequest.equalsIgnoreCase("delete")){
 			LOGGER.debug("Request type is delete promotion");
@@ -167,7 +168,8 @@ public class PromoListing implements CSURLExternalTask {
 					String promoTitle = promoMap.get("promo-title");
 					String promoAltText = promoMap.get("promo-alt-text");
 					String promoLife = promoMap.get("promo-life");	
-					String promoPage = promoMap.get("promo-page");	
+					String promoPage = promoMap.get("promo-page");
+					String promoCountry = promoMap.get("promo-country");
 					
 					SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
 					
@@ -181,23 +183,26 @@ public class PromoListing implements CSURLExternalTask {
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
-					updatePromoPS.setInt(10, promoID);
+					updatePromoPS.setInt(11, promoID);
 					updatePromoPS.setDate(2, expiryDateDB);					
-					updatePromoPS.setDate(11, expiryDateDB);
+					updatePromoPS.setDate(12, expiryDateDB);
 					updatePromoPS.setDate(3, activationDateDB);
-					updatePromoPS.setDate(12, activationDateDB);
+					updatePromoPS.setDate(13, activationDateDB);
 					updatePromoPS.setString(4, productCategory);
-					updatePromoPS.setString(13, productCategory);
+					updatePromoPS.setString(14, productCategory);
 					updatePromoPS.setString(5, promoImage);
-					updatePromoPS.setString(14, promoImage);
+					updatePromoPS.setString(15, promoImage);
 					updatePromoPS.setString(6, promoTitle);
-					updatePromoPS.setString(15, promoTitle);
+					updatePromoPS.setString(16, promoTitle);
 					updatePromoPS.setString(7, promoAltText);
-					updatePromoPS.setString(16, promoAltText);
+					updatePromoPS.setString(17, promoAltText);
 					updatePromoPS.setString(8, promoLife);
-					updatePromoPS.setString(17, promoLife);
+					updatePromoPS.setString(18, promoLife);
 					updatePromoPS.setString(9, promoPage);
-					updatePromoPS.setString(18, promoPage);	
+					updatePromoPS.setString(19, promoPage);
+					updatePromoPS.setString(10, promoCountry);
+					updatePromoPS.setString(20, promoCountry);
+					
 					int rowCount = updatePromoPS.executeUpdate();					
 					LOGGER.debug("Inserted " + rowCount + " rows successfully");
 				}

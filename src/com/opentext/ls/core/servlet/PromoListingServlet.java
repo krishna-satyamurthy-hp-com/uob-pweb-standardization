@@ -81,11 +81,11 @@ public class PromoListingServlet extends HttpServlet {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String todayStr = df.format(today);
 			PreparedStatement ps = con
-					.prepareStatement("SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= '"
+					.prepareStatement("SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= TO_DATE('"
 							+ todayStr
-							+ "' AND EXPIRYDATE > '"
+							+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
 							+ todayStr
-							+ "') OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE");
+							+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE");
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();
