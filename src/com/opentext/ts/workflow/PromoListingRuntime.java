@@ -73,7 +73,7 @@ public class PromoListingRuntime {
 					}
 					DBConnectionManager dbConMan = new DBConnectionManager();
 					//Connection con = dbConMan.getRTDBConnection();
-					Connection con = dbConMan.getAuthDBConnection();
+					Connection con = dbConMan.getConnectionUsingOracleWallet();
 					//Step 2 : Process the runtime request accordingly
 					PromoListingCommon plc = new PromoListingCommon();
 					if (createPromoAL != null && !createPromoAL.isEmpty()
