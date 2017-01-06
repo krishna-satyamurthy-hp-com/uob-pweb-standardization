@@ -29,6 +29,7 @@ public class FetchActiveCarouselBanners {
 		final List<Element> allBannersList = allBannersDoc.getRootElement().elements();
 		//Node abc = activeCarouselBanners.getPath("/root/banner_details");
 		List<Element> activeBannerList = new ArrayList<Element>();
+		String bannerLife = "";
 		String bannerActivationDate = "";
 		String bannerExpiryDate = "";
 		Date activationDate;
@@ -37,21 +38,31 @@ public class FetchActiveCarouselBanners {
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		LOGGER.debug("currentDate :: "+currentDate);
 		for(int i=0;i<allBannersList.size();i++){
+			bannerLife = allBannersList.get(i).selectSingleNode("banner_life").getText();
+			LOGGER.debug("bannerpromoLife is "+bannerLife);
 			bannerActivationDate = allBannersList.get(i).selectSingleNode("Activation_Date").getText();
 			LOGGER.debug("bannerActivationDate is "+bannerActivationDate);
 			bannerExpiryDate = allBannersList.get(i).selectSingleNode("Expiry_Date").getText();
 			LOGGER.debug("bannerExpiryDate is "+bannerExpiryDate);
 			try {
-				activationDate = df.parse(bannerActivationDate);
-				expiryDate = df.parse(bannerExpiryDate);
-				if(!(activationDate.after(currentDate)) && !(expiryDate.before(currentDate))){
+				if (bannerLife.equals("Expirying")){
+					LOGGER.debug("Inside Expiring banner.. checking the validity of this banner");
+					activationDate = df.parse(bannerActivationDate);
+					expiryDate = df.parse(bannerExpiryDate);
+					if(!(activationDate.after(currentDate)) && !(expiryDate.before(currentDate))){
+						LOGGER.debug("Banner is active.. add this banner to the list");
+						activeBannerList.add(allBannersList.get(i));
+					}else{
+						if(activationDate.after(currentDate))
+							LOGGER.debug("Banner is not active yet :: "+allBannersList.get(i).selectSingleNode("heading").getText());
+						else if(expiryDate.before(currentDate))
+							LOGGER.debug("Banner is expired :: "+allBannersList.get(i).selectSingleNode("heading").getText());
+					}
+				}if (bannerLife.equals("Evergreen")){
+					LOGGER.debug("Inside Evergreen banner.. add this banner to the list");
 					activeBannerList.add(allBannersList.get(i));
-				}else{
-					if(activationDate.after(currentDate))
-						LOGGER.debug("Banner is not active yet :: "+allBannersList.get(i).selectSingleNode("heading").getText());
-					else if(expiryDate.before(currentDate))
-						LOGGER.debug("Banner is expired :: "+allBannersList.get(i).selectSingleNode("heading").getText());
 				}
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
