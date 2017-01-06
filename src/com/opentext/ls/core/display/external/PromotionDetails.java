@@ -2,9 +2,14 @@ package com.opentext.ls.core.display.external;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +22,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 
 import com.interwoven.livesite.runtime.RequestContext;
+import com.opentext.ls.core.common.UOBBaseConstants;
 import com.opentext.ls.core.util.DCRUtils;
 
 /**
@@ -87,19 +93,34 @@ public class PromotionDetails {
 			promodataMap = mapper.readValue(new File(promoJsonFilePath), HashMap.class);*/
 		String line;
 		String scheme = context.getRequest().getScheme();
-		String hostname = context.getRequest().getLocalAddr();
-		int port = context.getRequest().getLocalPort();
-		String path = "/wsm/getpromotions.do?env='"+this.env+"'&promoCategory='"+this.currentPromoCategory+"'";
+		LOGGER.debug("Scheme is "+scheme);
+		String hostname = context.getRequest().getServerName();
+		LOGGER.debug("hostname is "+hostname);
+		String requestURI = context.getRequest().getRequestURI();
+		LOGGER.debug("requestURI is "+requestURI);
+		LOGGER.debug("Get context path is "+context.getRequest().getContextPath());
+		LOGGER.debug("Get getServerName "+context.getRequest().getServerName());
+		LOGGER.debug("Get getServletPath "+context.getRequest().getServletPath());
+		
+		//int port = context.getRequest().getLocalPort();
+		int port = context.getRequest().getServerPort();
+		LOGGER.debug("remote port is "+port);
+		String promoServletPath = UOBBaseConstants.PROMOTION_SERVLET_URL;
+		promoServletPath = !(env.equalsIgnoreCase("runtime"))?"/iw-cc"+promoServletPath:promoServletPath;
+		
+		final String charset = "UTF-8";
+		String query = String.format("env=%s&promoCategory=%s", 
+			     URLEncoder.encode(this.env, charset), 
+			     URLEncoder.encode(this.currentPromoCategory, charset));
 		URI uri = null;
-		try {
-			uri = new URI(scheme, null, hostname, port, path, null, null);
-			LOGGER.debug("URI:" + uri.toString());
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
-		BufferedReader in = new BufferedReader(new InputStreamReader(uri.toURL().openStream())); 
+		uri = new URI(scheme, null, hostname, port, promoServletPath, null, null);
+		LOGGER.debug("URI:" + uri.toString());
+		LOGGER.debug("URL:" + uri.toURL().toString());
+		
+		URLConnection connection = new URL(uri.toURL() + "?" + query).openConnection(); 
+		connection.setRequestProperty("Accept-Charset", charset);
+		InputStream response = connection.getInputStream();
+		BufferedReader in = new BufferedReader(new InputStreamReader(response,charset)); 
 		line = in.readLine(); 
 		LOGGER.debug("JSON output from servlet:"+line);
 		if(!line.isEmpty()){
@@ -122,25 +143,28 @@ public class PromotionDetails {
 					
 					for(int i=0; i<totalActivePromotions; i++){
 						promoLHM = promoAL.get(i);
-						promoPage = promoLHM.get("PromoPage");
-						LOGGER.debug("promo page from json is "+promoPage);						
-						if(promoPage.contains(currentPromoPage)){
-							LOGGER.debug("Current page matches an entry in promo json. Fetching the prev and next urls...");							
-							//Define prev and next urls				
-							prevURL = i!=0?(String) (promoAL.get(i-1).get("PromoPage")):(String) (promoAL.get(totalActivePromotions-1).get("PromoPage"));							
-							nextURL = i!=totalActivePromotions-1?(String) (promoAL.get(i+1).get("PromoPage")):(String) (promoAL.get(0).get("PromoPage"));
-							if(prevURL.indexOf("/sites/") != -1){
-								prevURL = prevURL.split("/sites/")[1];
-								this.prevURL = prevURL.substring(prevURL.indexOf("/")+1,prevURL.indexOf(".page"));
+						promoPage = promoLHM.get("PROMOPAGE");
+						LOGGER.debug("promo page from json is "+promoPage);	
+						if(promoPage != null && !promoPage.isEmpty()){
+							if(promoPage.contains(currentPromoPage)){
+								LOGGER.debug("Current page matches an entry in promo json. Fetching the prev and next urls...");							
+								//Define prev and next urls				
+								prevURL = i!=0?(String) (promoAL.get(i-1).get("PROMOPAGE")):(String) (promoAL.get(totalActivePromotions-1).get("PROMOPAGE"));							
+								nextURL = i!=totalActivePromotions-1?(String) (promoAL.get(i+1).get("PROMOPAGE")):(String) (promoAL.get(0).get("PROMOPAGE"));
+								if(prevURL.indexOf("/sites/") != -1){
+									prevURL = prevURL.split("/sites/")[1];
+									this.prevURL = prevURL.substring(prevURL.indexOf("/")+1,prevURL.indexOf(".page"));
+								}
+								if(nextURL.indexOf("/sites/") != -1){
+									nextURL = nextURL.split("/sites/")[1];
+									this.nextURL = nextURL.substring(nextURL.indexOf("/")+1,nextURL.indexOf(".page"));
+								}
+								//prevURL = prevURL.indexOf("/sites") != -1?prevURL.substring("/sites/")
+								LOGGER.debug("Prev URL "+this.prevURL);
+								LOGGER.debug("Next URL "+this.nextURL);
+								break;
 							}
-							if(nextURL.indexOf("/sites/") != -1){
-								nextURL = nextURL.split("/sites/")[1];
-								this.nextURL = nextURL.substring(nextURL.indexOf("/")+1,nextURL.indexOf(".page"));
-							}
-							//prevURL = prevURL.indexOf("/sites") != -1?prevURL.substring("/sites/")
-							LOGGER.debug("Prev URL "+this.prevURL);
-							LOGGER.debug("Next URL "+this.nextURL);
-							break;
+							LOGGER.error("Promo Page is empty for the promo id "+promoLHM.get("PROMOID"));
 						}
 					}
 				}
@@ -149,14 +173,34 @@ public class PromotionDetails {
 			else{
 				LOGGER.error("Promo json file is empty "+line);
 			}
-		} catch (IOException e) {			
+		}catch (URISyntaxException e) {
 			e.printStackTrace();
+			LOGGER.error(e.getReason());
+		}catch (IOException e) {			
+			e.printStackTrace();
+			LOGGER.error("IO exception occured in promo details external"+e.getCause());
+			LOGGER.error("IO exception occured in promo details external"+e.getLocalizedMessage());
 			LOGGER.error("IO exception occured in promo details external"+e.getMessage());
 		} catch (Exception ex) {			
 			ex.printStackTrace();
-			LOGGER.error("Exception occured in promo details external"+ex.getMessage());
+			LOGGER.error("Exception occured in promo details external"+ex.getCause());
 		}
 		LOGGER.debug("exiting fetchPromoPrevNextURLs method");
+	}
+	
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		String promoServletPath = UOBBaseConstants.PROMOTION_SERVLET_URL;
+		String env = "runtime";
+		String currentPromoCategory = "Deposits";
+		promoServletPath = !(env.equalsIgnoreCase("runtime"))?"/iw-cc"+promoServletPath:promoServletPath;
+		
+		final String charset = "UTF-8";
+		String query = String.format("env=%s&promoCategory=%s", 
+			     URLEncoder.encode(env, charset), 
+			     URLEncoder.encode(currentPromoCategory, charset));
+		String promoServletURL = promoServletPath.concat("?").concat(query);
+		promoServletURL = URLEncoder.encode(promoServletURL,charset);
+		System.out.println(promoServletURL);
 	}
 		
 }
