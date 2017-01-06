@@ -17,7 +17,8 @@ import com.opentext.ls.core.common.UOBBaseConstants;
 public class PromoListingCommon {
 	private static final transient Log LOGGER = LogFactory.getLog(PromoListingAuth.class);
 	public void updatePromoList(Connection con, ArrayList<HashMap<String,String>> createPromoAL){
-		LOGGER.debug("Inside updatePromoList "+createPromoAL.size());		
+		LOGGER.debug("Inside updatePromoList "+createPromoAL.size());
+		System.out.println("Inside updatePromoList "+createPromoAL.size());
 		try{			
 			if(con!=null && !con.isClosed()){				
 				for(HashMap<String,String> promoMap : createPromoAL){
@@ -42,6 +43,7 @@ public class PromoListingCommon {
 					
 					String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
 					LOGGER.info("insert statemnt "+updatePromoQuery);
+					System.out.println("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
 					updatePromoPS.setInt(11, promoID);
@@ -66,9 +68,11 @@ public class PromoListingCommon {
 					
 					int rowCount = updatePromoPS.executeUpdate();					
 					LOGGER.debug("Inserted " + rowCount + " rows successfully");
+					System.out.println("Inserted " + rowCount + " rows successfully");
 				}
 			}else{
 				LOGGER.debug("Connection is closed");
+				System.out.println("Connection is closed");
 			}
 		}catch(SQLException sqlex){
 			sqlex.printStackTrace();
@@ -80,7 +84,8 @@ public class PromoListingCommon {
 			LOGGER.error(ex.getLocalizedMessage());
 		}finally{
 			try {
-				con.close();
+				if(con != null && !con.isClosed())
+					con.close();
 			} catch (SQLException sqlex) {				
 				sqlex.printStackTrace();
 				LOGGER.error(sqlex.getMessage());

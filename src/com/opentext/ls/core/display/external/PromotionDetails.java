@@ -32,12 +32,14 @@ public class PromotionDetails {
 	String prevURL = "";
 	String nextURL = "";
 	String currentPromoCategory = "";
+	String env="";
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
 		Document promotionListingDoc = loadDCR(context);
 		//Fetch offer listing links
 		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();		
 		LOGGER.debug("currentPromoCategory is "+currentPromoCategory);
+		this.env = context.isRuntime()?"runtime":"authoring";
 		fetchPromoPrevNextURLs(context);
 		
 		promotionListingDoc.getRootElement().addElement("PrevPromo").setText(prevURL);
@@ -87,7 +89,7 @@ public class PromotionDetails {
 		String scheme = context.getRequest().getScheme();
 		String hostname = context.getRequest().getLocalAddr();
 		int port = context.getRequest().getLocalPort();
-		String path = "/wsm/getpromotions.do";
+		String path = "/wsm/getpromotions.do?env='"+this.env+"'&promoCategory='"+this.currentPromoCategory+"'";
 		URI uri = null;
 		try {
 			uri = new URI(scheme, null, hostname, port, path, null, null);

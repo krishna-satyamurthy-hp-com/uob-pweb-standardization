@@ -66,13 +66,24 @@ public class PromoListingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		LOGGER.debug("Inside PromoListingServlet : doPost");
+		final String env = request.getParameter("env");
+		LOGGER.debug("Env is "+env);
+		final String promoCategory = request.getParameter("promoCategory");
+		LOGGER.debug("Promo Category is "+promoCategory);
 		Connection con = null;
 		JSONArray jArray = new JSONArray();
 		JSONObject promoListJSON = new JSONObject();
 
 		try {
 			DBConnectionManager dbConMan = new DBConnectionManager();
-			con = dbConMan.getAuthDBConnection();
+			if(env != null && !env.isEmpty() && env.equalsIgnoreCase("runtime")){
+				LOGGER.debug("Servlet call for runtime ");
+				con = dbConMan.getRTDBConnection();
+			}
+			else{
+				LOGGER.debug("Servlet call for authoring");
+				con = dbConMan.getAuthDBConnection();
+			}
 			// Get runtime DB connection in UOB environment
 			// con = dbConMan.getRTDBConnection();
 			LOGGER.debug("Connection established successfully "
@@ -80,12 +91,22 @@ public class PromoListingServlet extends HttpServlet {
 			Date today = new Date();
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String todayStr = df.format(today);
-			PreparedStatement ps = con
-					.prepareStatement("SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= TO_DATE('"
-							+ todayStr
-							+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
-							+ todayStr
-							+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE");
+			PreparedStatement ps;
+			String selectPromoQuery = "SELECT * from WSMSG_PROMOTIONLIST WHERE PRODUCTCATEGORY = '"+promoCategory+"' AND ((ACTIVATIONDATE <= TO_DATE('"
+								+ todayStr
+								+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
+								+ todayStr
+								+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
+			
+			if(promoCategory == null || promoCategory.isEmpty()){
+				selectPromoQuery = "SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= TO_DATE('"
+						+ todayStr
+						+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
+						+ todayStr
+						+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE";
+			}
+			ps = con.prepareStatement(selectPromoQuery);
+			
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -113,7 +134,7 @@ public class PromoListingServlet extends HttpServlet {
 					+ s.getMessage());
 		} catch (Exception ex) {
 			LOGGER.error("Exception caught in  PromoListingServlet class "
-					+ ex.getMessage());
+					+ ex.getCause());
 			ex.printStackTrace();
 		} finally {
 			try {
