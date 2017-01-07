@@ -2,7 +2,6 @@ package com.opentext.ls.core.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.Connection;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -18,6 +17,9 @@ import com.opentext.ls.core.common.UOBBaseConstants;
 public class DCRUtils {
 
 	private static final Log LOGGER = LogFactory.getLog(DCRUtils.class);
+
+	
+	
 	/**
 	 * loadFile method is to open the DCR for parsing.
 	 * 
@@ -55,9 +57,8 @@ public class DCRUtils {
 		return document;
 	}
 
-	
-public static String getRootLocation(RequestContext context) {
-		
+	public static String getRootLocation(RequestContext context) {
+
 		String rootLocation = null;
 		String seperator;
 
@@ -65,23 +66,31 @@ public static String getRootLocation(RequestContext context) {
 		FileDal dal = context.getFileDal();
 		rootLocation = dal.getRoot();
 		seperator = String.valueOf(dal.getSeparator());
-		
+
 		try {
-			
-				LOGGER.error("Root Location is: "+rootLocation);
-				
-				LOGGER.error("value of isprteview is: "+context.isPreview());
-				LOGGER.error("value of isRuntime is: "+context.isRuntime());
-			
-			/*If File is in Teamsite Environment, Sever Name will be replaced by teamsite mount drive e.g. 'Y:'*/
-			if(!context.isRuntime()){
-				rootLocation = rootLocation.substring(rootLocation.indexOf(seperator+seperator)+2,(rootLocation.length()));	
-				rootLocation = rootLocation.replaceFirst(rootLocation.substring(0, rootLocation.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
-				
-					LOGGER.error("rootLocation now is: "+rootLocation);					
-				
+
+			LOGGER.error("Root Location is: " + rootLocation);
+
+			LOGGER.error("value of isprteview is: " + context.isPreview());
+			LOGGER.error("value of isRuntime is: " + context.isRuntime());
+
+			/*
+			 * If File is in Teamsite Environment, Sever Name will be replaced
+			 * by teamsite mount drive e.g. 'Y:'
+			 */
+			if (!context.isRuntime()) {
+				rootLocation = rootLocation.substring(
+						rootLocation.indexOf(seperator + seperator) + 2,
+						(rootLocation.length()));
+				rootLocation = rootLocation.replaceFirst(
+						rootLocation.substring(0,
+								rootLocation.indexOf(seperator)),
+						UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE);
+
+				LOGGER.error("rootLocation now is: " + rootLocation);
+
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error("Error is " + e);
 		}
@@ -89,40 +98,45 @@ public static String getRootLocation(RequestContext context) {
 		return rootLocation;
 	}
 
-public static String getRootLocation(PropertyContext context) {
-	
-	String rootLocation = null;
-	String seperator;
+	public static String getRootLocation(PropertyContext context) {
 
-	/* To get the root location of the Application */
-	FileDal dal = context.getFileDAL();
-	rootLocation = dal.getRoot();
-	seperator = String.valueOf(dal.getSeparator());
-	
-	rootLocation = rootLocation.substring(rootLocation.indexOf(seperator+seperator)+2,(rootLocation.length()));	
-	rootLocation = rootLocation.replaceFirst(rootLocation.substring(0, rootLocation.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+		String rootLocation = null;
+		String seperator;
 
-	return rootLocation;
-}
+		/* To get the root location of the Application */
+		FileDal dal = context.getFileDAL();
+		rootLocation = dal.getRoot();
+		seperator = String.valueOf(dal.getSeparator());
 
-//Get Runtime web location
+		rootLocation = rootLocation.substring(
+				rootLocation.indexOf(seperator + seperator) + 2,
+				(rootLocation.length()));
+		rootLocation = rootLocation.replaceFirst(
+				rootLocation.substring(0, rootLocation.indexOf(seperator)),
+				UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE);
 
-public static String getRuntimeHome() {
-	final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
-	final String odProperties = livesiteCustomer.concat("opendeploy.properties");
-	String location="";
-	
-	try {
-		
+		return rootLocation;
+	}
+
+	// Get Runtime web location
+
+	public static String getRuntimeHome() {
+		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		final String odProperties = livesiteCustomer
+				.concat("opendeploy.properties");
+		String location = "";
+
+		try {
+
 			Properties props = new Properties();
 			FileInputStream fis = new FileInputStream(odProperties);
 			props.load(fis);
 			fis.close();
 			location = props.getProperty("opendeploy.runtimeHome");
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-catch (Exception ex) {
-	ex.printStackTrace();
-}
-return location;
-}
+		return location;
+	}
+	
 }

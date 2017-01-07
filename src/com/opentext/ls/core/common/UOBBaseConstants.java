@@ -36,4 +36,6 @@ public class UOBBaseConstants {
 			+ "VALUES ( ?,?,?,?,?,?,?,?,?,?)";
 	public static final String PROMOTION_DELETE_QUERY = "DELETE FROM WSMSG_PROMOTIONLIST WHERE PROMOID=";
 	public static final String PROMOTION_SERVLET_URL = "/wsm/getpromotions.do";
+	
+	public static final String ANALYTICS_DCR_REL_PATH = "templatedata/commons/analytics/data/analytics.xml";
 }

@@ -23,7 +23,7 @@ import org.dom4j.Element;
 
 import com.interwoven.livesite.runtime.RequestContext;
 import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.core.util.LSUtils;
 
 /**
  * This class is for fetching Promo Details DCR and its offer listing items : prev and next promotion links
@@ -41,7 +41,7 @@ public class PromotionDetails {
 	String env="";
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
-		Document promotionListingDoc = loadDCR(context);
+		Document promotionListingDoc = LSUtils.loadDCRContent(context);
 		//Fetch offer listing links
 		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();		
 		LOGGER.debug("currentPromoCategory is "+currentPromoCategory);
@@ -54,25 +54,6 @@ public class PromotionDetails {
 		LOGGER.debug("promotionListing XML : "+ promotionListingDoc.asXML());
 		LOGGER.debug("exiting PromotionDetails");
 		return promotionListingDoc;
-	}
-	
-	@SuppressWarnings("deprecation")
-	private Document loadDCR(RequestContext context)
-	{
-		LOGGER.debug("entering loadDCR method");
-		Document document = null;
-		String rootLocation = DCRUtils.getRootLocation(context);
-		try
-		{
-			String filerelativePath = context.getParameterString("promotionlisting");
-			document = DCRUtils.loadFile(rootLocation, filerelativePath);
-		}
-		catch (Throwable ex)
-		{
-			LOGGER.error("Under Catch Error from loadDCR function : ", ex);	
-		}
-		LOGGER.debug("exiting loadDCR method");
-		return document;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
