@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Node;
 
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.runtime.RequestContext;
@@ -38,11 +39,17 @@ public class FetchActiveCarouselBanners {
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		LOGGER.debug("currentDate :: "+currentDate);
 		for(int i=0;i<allBannersList.size();i++){
-			bannerLife = allBannersList.get(i).selectSingleNode("banner_life").getText();
+			final Node bannerLifeNode = allBannersList.get(i).selectSingleNode("banner_life");
+			if(bannerLifeNode != null)
+				bannerLife = bannerLifeNode.getText();
 			LOGGER.debug("bannerpromoLife is "+bannerLife);
-			bannerActivationDate = allBannersList.get(i).selectSingleNode("Activation_Date").getText();
+			final Node bannerActivationDateNode = allBannersList.get(i).selectSingleNode("Activation_Date");
+			if(bannerActivationDateNode != null)
+				bannerActivationDate = bannerActivationDateNode.getText();
 			LOGGER.debug("bannerActivationDate is "+bannerActivationDate);
-			bannerExpiryDate = allBannersList.get(i).selectSingleNode("Expiry_Date").getText();
+			final Node bannerExpiryDateNode = allBannersList.get(i).selectSingleNode("Expiry_Date");
+			if(bannerExpiryDateNode != null)
+				bannerExpiryDate = bannerExpiryDateNode.getText();
 			LOGGER.debug("bannerExpiryDate is "+bannerExpiryDate);
 			try {
 				if (bannerLife.equals("Expirying")){
@@ -58,11 +65,12 @@ public class FetchActiveCarouselBanners {
 						else if(expiryDate.before(currentDate))
 							LOGGER.debug("Banner is expired :: "+allBannersList.get(i).selectSingleNode("heading").getText());
 					}
-				}if (bannerLife.equals("Evergreen")){
+				}else if (bannerLife.equals("Evergreen")){
 					LOGGER.debug("Inside Evergreen banner.. add this banner to the list");
 					activeBannerList.add(allBannersList.get(i));
-				}
-				
+				}else{
+					LOGGER.error("This banner does not have evergreen or expiry date selected. Please update DCR");
+				}				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

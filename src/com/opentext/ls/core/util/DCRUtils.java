@@ -25,7 +25,7 @@ public class DCRUtils {
 	 * 
 	 */
 	public static Document loadFile(String rootLocation, String filerelativePath) {
-		LOGGER.error("entering");
+		LOGGER.debug("entering");
 
 		Document document = null;
 		String fileLocation = null;
@@ -33,26 +33,27 @@ public class DCRUtils {
 
 		/* separator based on environment */
 		separator = File.separatorChar;
-		LOGGER.error("seperator is : " + separator);
+		LOGGER.debug("seperator is : " + separator);
 
 		if (rootLocation != null && filerelativePath != null) {
 			/* creating File absolute path */
 			fileLocation = rootLocation + separator + filerelativePath;
 			fileLocation = fileLocation.replace('/', separator);
-			LOGGER.error("fileLocation is : " + fileLocation);
+			LOGGER.debug("fileLocation is : " + fileLocation);
 
 			/* open the File at specified location. */
 			File file = new File(fileLocation);
-			if (!file.exists()) {
-				LOGGER.error("File Not found at location" + fileLocation);
+			if (file.exists()) {
+				document = Dom4jUtils.newDocument(file);				
+			}else{
+				LOGGER.debug("File Not found at location" + fileLocation);
 			}
-
-			document = Dom4jUtils.newDocument(file);
+			
 		} else {
 			LOGGER.error("Not able to construct File Path.");
 		}
 
-		LOGGER.error("exiting");
+		LOGGER.debug("exiting");
 
 		return document;
 	}
@@ -69,10 +70,10 @@ public class DCRUtils {
 
 		try {
 
-			LOGGER.error("Root Location is: " + rootLocation);
+			LOGGER.debug("Root Location is: " + rootLocation);
 
-			LOGGER.error("value of isprteview is: " + context.isPreview());
-			LOGGER.error("value of isRuntime is: " + context.isRuntime());
+			LOGGER.debug("value of isprteview is: " + context.isPreview());
+			LOGGER.debug("value of isRuntime is: " + context.isRuntime());
 
 			/*
 			 * If File is in Teamsite Environment, Sever Name will be replaced
@@ -87,7 +88,7 @@ public class DCRUtils {
 								rootLocation.indexOf(seperator)),
 						UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE);
 
-				LOGGER.error("rootLocation now is: " + rootLocation);
+				LOGGER.debug("rootLocation now is: " + rootLocation);
 
 			}
 

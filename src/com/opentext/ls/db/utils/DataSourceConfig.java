@@ -17,7 +17,8 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataSourceConfig {
 	private static final Log LOGGER = LogFactory.getLog(DataSourceConfig.class);
-    private String jndiName="wsmportal";
+    //private String jndiName="wsmportal";
+	private String jndiName="wsm";
     @Bean
     public JdbcTemplate jdbcTemplate() throws NamingException {
         return new JdbcTemplate(dataSource());
@@ -28,7 +29,7 @@ public class DataSourceConfig {
             JndiTemplate jndiTemplate = new JndiTemplate();
             return (DataSource) jndiTemplate.lookup(jndiName);
         } catch (NamingException e) {
-        	LOGGER.error("Unable to retrive the database connection from JNDI");
+        	LOGGER.error("Unable to retrive the database connection from JNDI"+e.getCause());
 			LOGGER.info("Unable to retrive the database connection from JNDI" + e.getExplanation());
 			return null;
         }

@@ -41,7 +41,7 @@ public class PromotionDetails {
 	String env="";
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
-		Document promotionListingDoc = LSUtils.loadDCRContent(context);
+		Document promotionListingDoc = LSUtils.loadDCRContent(context,"dcrPath");
 		//Fetch offer listing links
 		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();		
 		LOGGER.debug("currentPromoCategory is "+currentPromoCategory);

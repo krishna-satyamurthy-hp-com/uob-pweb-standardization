@@ -17,7 +17,7 @@ public class LSUtils {
 	 * @param metaName
 	 * @param metaValue
 	 */
-	public static void injectMetaIntoPageHead(RequestContext context, String metaName, String metaValue){
+	public static String createMetaString(String metaName, String metaValue){
 		LOGGER.debug("Enter injectMetaIntoPageHead");
 		LOGGER.debug("metaName "+metaName);
 		LOGGER.debug("metaValue "+metaValue);
@@ -28,19 +28,17 @@ public class LSUtils {
 		metaStringSB.append("content=\"");
 		metaStringSB.append(metaValue);
 		metaStringSB.append("\" />");
-		final String metaString = metaStringSB.toString();
-		context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, metaString);
-		LOGGER.debug("After injection metaString "+metaString);
-		LOGGER.debug("Exit injectMetaIntoPageHead");
+		final String metaString = metaStringSB.toString();		
+		return metaString;
 	}
 	
-	public static Document loadDCRContent(RequestContext context) {
+	public static Document loadDCRContent(RequestContext context, String dcrPathParamName) {
 		LOGGER.debug("entering loadDCR method");
 		Document document = null;
 		String rootLocation = DCRUtils.getRootLocation(context);
 		try {
 			@SuppressWarnings("deprecation")
-			final String filerelativePath = context.getParameterString("dcrPath");
+			final String filerelativePath = context.getParameterString(dcrPathParamName);
 			LOGGER.debug("filerelativePath is " + filerelativePath);
 			document = DCRUtils.loadFile(rootLocation, filerelativePath);
 		} catch (Throwable ex) {

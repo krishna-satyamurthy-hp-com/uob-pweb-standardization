@@ -18,7 +18,7 @@ public class UOBBaseConstants {
 	 * *CONSTANTS for PromoListing
 	 *****************************************************************/
 	public static final String PROMOTION_JSON_FILE_PATH = "iwov-resources/json/promodata.json";
-	public static final String PROMO_JSON_RELATIVE_PATH = "iwov-resources/json/promolisting/promoJson_";
+	public static final String PROMO_JSON_RELATIVE_PATH = "app-resources/json/promolisting/promoJson_";
 	//public static final String IW_HOME = "/usr/Interwoven/TeamSite";
 	public static final String IW_HOME = "/app/teamsite/iw-home/TeamSite";
 	public static final String LIVESITE_CUSTOMER_AUTH = IW_HOME

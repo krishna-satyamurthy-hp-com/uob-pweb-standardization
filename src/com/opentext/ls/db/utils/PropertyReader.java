@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class PropertyReader  {
 	private static Properties properties = new Properties();
-	private static String APP_CONF_PATH = "/prodlib/WSMSGDS2/batch/PWEB/config/env1.properties";
+	private static String APP_CONF_PATH = "/prodlib/WSMSGDS2/batch/PWEB/config/env.properties";
 	private static final Logger logger = LoggerFactory
 			.getLogger(PropertyReader.class);
 

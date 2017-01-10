@@ -85,12 +85,20 @@ public class DBConnectionManager {
 			try {
 				readOracleWalletConfig();
 				Class.forName(dbdriverclass);
-				if (dbPassword == null) {
-					// using oracle wallet
-					con = DriverManager.getConnection(dbURL, new Properties());
-				} else {
+				LOGGER.debug("dbPassword "+dbPassword);
+								
+				// using oracle wallet
+				LOGGER.debug("Using oracle wallet for connection ");
+				LOGGER.debug("dbURL "+dbURL);
+				LOGGER.debug("wallet location from system "+System.getProperty("oracle.net.wallet_location"));
+				LOGGER.debug("tns admin from system "+System.getProperty("oracle.net.tns_admin"));
+				con = DriverManager.getConnection(dbURL, new Properties());
+				
+				if(con == null){
 					// using JDBC DB connection URL
+					LOGGER.debug("Connection from wallet is null.. resorting to use jdbc url");
 					con = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
+					
 				}
 				con.setAutoCommit(false);
 			} catch (ClassNotFoundException e) {

@@ -27,8 +27,8 @@ public class AnalyticsController implements Serializable {
 				LOGGER.debug("Setting page analytics only for runtime pages");
 			}
 			try{
-				context.setParameterString("dcrPath", UOBBaseConstants.ANALYTICS_DCR_REL_PATH);
-				Document analyticsDoc = LSUtils.loadDCRContent(context);
+				context.setParameterString("analyticsDCRPath", UOBBaseConstants.ANALYTICS_DCR_REL_PATH);
+				Document analyticsDoc = LSUtils.loadDCRContent(context,"analyticsDCRPath");
 				LOGGER.debug("analyticsDoc is "+analyticsDoc.asXML());
 				
 				final Node analyticsHeadNode = analyticsDoc.selectSingleNode("//head_tag");
