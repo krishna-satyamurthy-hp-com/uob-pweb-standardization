@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import com.opentext.ls.core.common.UOBBaseConstants;
 
 public class PromoListingCommon {
-	private static final transient Log LOGGER = LogFactory.getLog(PromoListingAuth.class);
+	private static final transient Log LOGGER = LogFactory.getLog(PromoListingCommon.class);
 	public void updatePromoList(Connection con, ArrayList<HashMap<String,String>> createPromoAL){
 		LOGGER.debug("Inside updatePromoList "+createPromoAL.size());
 		System.out.println("Inside updatePromoList "+createPromoAL.size());

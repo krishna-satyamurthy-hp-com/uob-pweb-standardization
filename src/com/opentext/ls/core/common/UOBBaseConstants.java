@@ -7,6 +7,7 @@ package com.opentext.ls.core.common;
 public class UOBBaseConstants {
 
 	public static final String DATE_FORMAT = "MM-dd-yyyy";
+	public static final String TIMESTAMP_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
 
 	/*******************************************************************************
 	 * *CONSTANTS for DCR Utils
@@ -29,12 +30,14 @@ public class UOBBaseConstants {
 	//		+ "PROMOTITLE,PROMOALTTEXT,PROMOLIFE,PROMOPAGE) values(?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE "
 	//		+ "EXPIRYDATE=?,ACTIVATIONDATE=?,PRODUCTCATEGORY=?,PROMOIMAGE=?,PROMOTITLE=?,PROMOALTTEXT=?,PROMOLIFE=?,PROMOPAGE=?";
 	
-	public static final String PROMOTION_INSERT_UPDATE_QUERY = "MERGE INTO WSMSG_PROMOTIONLIST USING dual ON (PROMOID = ?) "
-			+ "WHEN MATCHED THEN UPDATE SET EXPIRYDATE=?,ACTIVATIONDATE=?,PRODUCTCATEGORY=?,PROMOIMAGE=?,PROMOTITLE=?,"
-			+ "PROMOALTTEXT=?,PROMOLIFE=?,PROMOPAGE=?,PROMOCOUNTRY=? WHEN NOT MATCHED THEN "
-			+ "INSERT (PROMOID,EXPIRYDATE,ACTIVATIONDATE,PRODUCTCATEGORY,PROMOIMAGE,PROMOTITLE,PROMOALTTEXT,PROMOLIFE,PROMOPAGE,PROMOCOUNTRY) "
-			+ "VALUES ( ?,?,?,?,?,?,?,?,?,?)";
-	public static final String PROMOTION_DELETE_QUERY = "DELETE FROM WSMSG_PROMOTIONLIST WHERE PROMOID=";
+	public static final String PROMOTION_INSERT_UPDATE_QUERY = "MERGE INTO twsm_pweb_promotionlist USING dual ON (promoid = ?) "
+			+ "WHEN MATCHED THEN UPDATE SET expirydate=?,activationdate=?,productcategory=?,promoimage=?,promotitle=?,"
+			+ "promoalttext=?,promolife=?,promopage=?,promocountry=?,createdby=?,createddt=?,maintainedby=?,maintaineddt=?"
+			+ " WHEN NOT MATCHED THEN "
+			+ "INSERT (promoid,expirydate,activationdate,productcategory,promoimage,promotitle,promoalttext,promolife,"
+			+ "promopage,promocountry,createdby,createddt,maintainedby,maintaineddt) "
+			+ "VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String PROMOTION_DELETE_QUERY = "DELETE FROM twsm_pweb_promotionlist WHERE promoimage=";
 	public static final String PROMOTION_SERVLET_URL = "/wsm/getpromotions.do";
 	
 	public static final String ANALYTICS_DCR_REL_PATH = "templatedata/commons/analytics/data/analytics.xml";
