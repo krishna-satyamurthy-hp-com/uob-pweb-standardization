@@ -1,6 +1,7 @@
 package com.opentext.ls.core.controller;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,21 +32,36 @@ public class AnalyticsController implements Serializable {
 				Document analyticsDoc = LSUtils.loadDCRContent(context,"analyticsDCRPath");
 				LOGGER.debug("analyticsDoc is "+analyticsDoc.asXML());
 				
+				//Cannonical rel link
+				LOGGER.debug("Analytics getScheme::: "+ context.getRequest().getScheme());
+				LOGGER.debug("Analytics getPageName::: "+ context.getPageName());
+				LOGGER.debug("Analytics getPath::: "+ context.getSite().getPath());
+			
+				String var = context.getSite().getPath();
+				var = var.substring(var.indexOf("sites/")+5);
+				
+				URI uri= null;
+				uri = new URI(
+						context.getRequest().getScheme().toString() ,
+						null, 
+						context.getSite().getHosts().get(0).getHostName().toString(), 
+						context.getRequest().getServerPort(), 
+						var+ "/" + context.getPageName()+".page" , 
+						null, 
+						null 
+						);
+				
+				LOGGER.debug("URI ::: "+ uri);
+				LOGGER.debug("Canonical Link URL ::: "+ uri.toURL().toString());
+				
 				final Node analyticsHeadNode = analyticsDoc.selectSingleNode("//head_tag");
-				if(analyticsHeadNode != null){
+				if(analyticsHeadNode != null && !analyticsHeadNode.getText().isEmpty()){
 					final String headSection = analyticsHeadNode.getText();
 					LOGGER.debug("Analytics head section "+headSection);
 					if(headSection != null && !headSection.isEmpty()){
-						
-						//Cannonical rel link
-						
-						String finalLink= context.getSite().getHosts().get(0).getHostName().toString(); 
-						StringBuilder cannonicalLink= new StringBuilder();
-						cannonicalLink.append(finalLink+context.getRequest().getRequestURI().toString());
-						
-						if(cannonicalLink != null){							
-							LOGGER.debug("Cannonical Link Final::: "+cannonicalLink);
-							String cannonicalLinkRel= "<link rel='canonical' href='http://" + cannonicalLink + "'  />";
+						if(uri != null){							
+							
+							String cannonicalLinkRel= "<link rel='canonical' href='" + uri.toURL().toString() + "'  />";
 							if(cannonicalLinkRel != null && !cannonicalLinkRel.isEmpty()){
 						// ends
 						String headSectionFinal= headSection + cannonicalLinkRel;
@@ -53,8 +69,16 @@ public class AnalyticsController implements Serializable {
 						LOGGER.debug("Analytics head section injected");
 							}
 						}
-				}
-				}
+				   }
+				}else{
+					if(uri != null && !uri.toString().isEmpty()){													
+						String cannonicalLinkRel= "<link rel='canonical' href='" + uri.toURL().toString() + "'  />";
+					String headSectionFinal= cannonicalLinkRel;
+					context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, headSectionFinal);
+					LOGGER.debug("Canonical Link in Head section injected");
+						}
+					}
+				
 				
 				final Node analyticsBodyStartNode = analyticsDoc.selectSingleNode("//opening_body_tag");
 				if(analyticsBodyStartNode != null){
@@ -83,6 +107,59 @@ public class AnalyticsController implements Serializable {
 			}
 		}
 		return fa;
+	}
+	
+	//*****************For non Analytics Sites Head Section script injection***************
+	
+	public ForwardAction injectNonAnalyticsScriptOnPage(RequestContext context){
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Inside injectNonAnalyticsScriptOnPage");
+		}
+		if(context.isRuntime()){
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Setting page for non-analytics Head section script injection (only for runtime pages)");
+			}
+			try{
+				LOGGER.debug("Analytics getScheme::: "+ context.getRequest().getScheme());
+				LOGGER.debug("Analytics getPageName::: "+ context.getPageName());
+				LOGGER.debug("Analytics getPath::: "+ context.getSite().getPath());
+			
+				String var = context.getSite().getPath();
+				var = var.substring(var.indexOf("sites/")+5);
+				
+				URI uri= null;
+				uri = new URI(
+						context.getRequest().getScheme().toString() ,
+						null, 
+						context.getSite().getHosts().get(0).getHostName().toString(), 
+						context.getRequest().getServerPort(), 
+						var+ "/" + context.getPageName()+".page" , 
+						null, 
+						null 
+						);
+				
+				LOGGER.debug("URI ::: "+ uri);
+				LOGGER.debug("Canonical Link URL ::: "+ uri.toURL().toString());
+				
+				if(uri != null){							
+					
+					String cannonicalLinkRel= "<link rel='canonical' href='" + uri.toURL().toString() + "'  />";
+					if(cannonicalLinkRel != null && !cannonicalLinkRel.isEmpty()){
+				// ends
+				String headSectionFinal= cannonicalLinkRel;
+				context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, headSectionFinal);
+				LOGGER.debug("Canonical Link in Head section injected");
+					}
+				}
+				
+			}catch(Exception analex){
+				if(LOGGER.isErrorEnabled()){
+					LOGGER.warn("Exception while injecting HeadSection script "+analex.getMessage());
+				}
+			}
+			}
+		
+	return fa;
 	}
 	
 	
