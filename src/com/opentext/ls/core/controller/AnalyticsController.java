@@ -36,9 +36,24 @@ public class AnalyticsController implements Serializable {
 					final String headSection = analyticsHeadNode.getText();
 					LOGGER.debug("Analytics head section "+headSection);
 					if(headSection != null && !headSection.isEmpty()){
-						context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, headSection);
+						
+						//Cannonical rel link
+						
+						String finalLink= context.getSite().getHosts().get(0).getHostName().toString(); 
+						StringBuilder cannonicalLink= new StringBuilder();
+						cannonicalLink.append(finalLink+context.getRequest().getRequestURI().toString());
+						
+						if(cannonicalLink != null){							
+							LOGGER.debug("Cannonical Link Final::: "+cannonicalLink);
+							String cannonicalLinkRel= "<link rel='canonical' href='http://" + cannonicalLink + "'  />";
+							if(cannonicalLinkRel != null && !cannonicalLinkRel.isEmpty()){
+						// ends
+						String headSectionFinal= headSection + cannonicalLinkRel;
+						context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, headSectionFinal);
 						LOGGER.debug("Analytics head section injected");
 					}
+						}
+				}
 				}
 				
 				final Node analyticsBodyStartNode = analyticsDoc.selectSingleNode("//opening_body_tag");
@@ -60,6 +75,7 @@ public class AnalyticsController implements Serializable {
 						LOGGER.debug("Analytics body bottom injected");
 					}
 				}
+				
 			}catch(Exception analex){
 				if(LOGGER.isErrorEnabled()){
 					LOGGER.warn("Exception while injecting analytics "+analex.getMessage());
