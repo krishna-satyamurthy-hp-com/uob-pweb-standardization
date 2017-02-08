@@ -51,7 +51,7 @@ public class AnalyticsController implements Serializable {
 						String headSectionFinal= headSection + cannonicalLinkRel;
 						context.getPageScopeData().put(RuntimePage.PAGESCOPE_HEAD_INJECTION, headSectionFinal);
 						LOGGER.debug("Analytics head section injected");
-					}
+							}
 						}
 				}
 				}
