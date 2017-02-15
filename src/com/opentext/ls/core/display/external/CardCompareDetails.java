@@ -25,14 +25,18 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.interwoven.livesite.runtime.RequestContext;
+import com.interwoven.livesite.runtime.model.page.RuntimePage;
 import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.core.util.ErrorRedirect;
 
 public class CardCompareDetails {
 private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
 	
 	public org.dom4j.Document execute(RequestContext context) throws Exception{
 		LOGGER.error("entering");
-
+		
+		Boolean exception= false;
+		
 		 Map <String, String> featureCreditCard = new HashMap<String, String>();
 		 Map <String, String> featureDebitCard = new HashMap<String, String>();
 		 Map <String, String> travelCreditCard = new HashMap<String, String>();
@@ -153,25 +157,55 @@ private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);
  		} catch (SAXException e1) {
  			// TODO Auto-generated catch block
  			e1.printStackTrace();
+ 			exception= true;
  		} catch (IOException e1) {
  			// TODO Auto-generated catch block
  			e1.printStackTrace();
+ 			exception= true;
  		} catch (ParserConfigurationException e1) {
  			// TODO Auto-generated catch block
  			e1.printStackTrace();
+ 			exception= true;
  		} catch (XPathExpressionException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
+ 			exception= true;
  		} catch (DOMException e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
- 		} 
+ 			exception= true;
+ 		} catch (Exception e){
+ 			e.printStackTrace();
+ 			exception= true;
+ 		}
+        
+        // context.getPageScopeData().put(RuntimePage.PAGESCOPE_PAGE_TRACK, 0 );
+       //  LOGGER.error("Pagescope tracker set as : " + context.getPageScopeData().get(RuntimePage.PAGESCOPE_PAGE_TRACK));
          
- 		DOMReader reader = new DOMReader();
- 		org.dom4j.Document dom4jDoc = reader.read(newDoc);
- 		LOGGER.error("Final Credit Cards Comapre XML : " + dom4jDoc.asXML());
- 			
- 		return dom4jDoc;
+     	DOMReader reader = new DOMReader();
+ 		org.dom4j.Document dom4jDoc= null;
+ 		
+         if (exception){
+  			
+        	LOGGER.error("Error Encountered.");
+  			ErrorRedirect.doRedirect(context);
+  			//context.getPageScopeData().put(RuntimePage.PAGESCOPE_PAGE_TRACK, 1 );
+  			//LOGGER.error("Exception encountered. Pagescope tracker set as : " + context.getPageScopeData().get(RuntimePage.PAGESCOPE_PAGE_TRACK));
+  			//System.exit(0);
+  			LOGGER.error("Post-redirection breaking further execution of code.");
+  			throw new Exception("Exception Encountered. Component will fail to render.");
+  			//return null;
+  			
+  			
+  		}else{
+         
+ 		dom4jDoc = reader.read(newDoc);
+ 		//org.dom4j.Document dom4jDoc  = reader.read(newDoc);
+ 		
+  		}
+         LOGGER.error("Final Credit Cards Comapre XML : " + dom4jDoc.asXML());
+         return dom4jDoc;
+ 		
  	}	
 	
 
