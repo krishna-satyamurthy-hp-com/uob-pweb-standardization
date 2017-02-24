@@ -34,13 +34,17 @@ public class AnalyticsController implements Serializable {
 				
 				//Cannonical rel link
 				LOGGER.debug("Analytics getScheme::: "+ context.getRequest().getScheme());
+				LOGGER.debug("Analytics getServerName::: "+ context.getRequest().getServerName());
+				LOGGER.debug("Analytics getServerPort::: "+ context.getRequest().getServerPort());
 				LOGGER.debug("Analytics getPageName::: "+ context.getPageName());
-				LOGGER.debug("Analytics getPath::: "+ context.getSite().getPath());
+				LOGGER.debug("Analytics getPagePath::: "+ context.getSite().getPath());
+				
 			
 				String var = context.getSite().getPath();
 				var = var.substring(var.indexOf("sites/")+5);
 				
 				URI uri= null;
+				/*
 				uri = new URI(
 						context.getRequest().getScheme().toString() ,
 						null, 
@@ -50,7 +54,17 @@ public class AnalyticsController implements Serializable {
 						null, 
 						null 
 						);
-				
+				*/
+				uri = new URI(
+						context.getRequest().getScheme().toString() ,
+						null,
+						context.getRequest().getServerName().toString(),
+						context.getRequest().getServerPort(),
+						var+ "/" + context.getPageName()+".page", 
+						null,
+						null
+						);
+						
 				LOGGER.debug("URI ::: "+ uri);
 				LOGGER.debug("Canonical Link URL ::: "+ uri.toURL().toString());
 				
