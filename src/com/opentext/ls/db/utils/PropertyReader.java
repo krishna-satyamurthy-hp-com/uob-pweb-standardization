@@ -10,7 +10,13 @@ import org.apache.commons.logging.LogFactory;
 
 public class PropertyReader  {
 	private static Properties properties = new Properties();
-	private static String APP_CONF_PATH = "/prodlib/WSMSGDS2/batch/PWEB/config/env.properties";
+	
+	//Below is a sample properties file added to JAR
+	private static String APP_CONF_PATH = "constants.properties";
+	//
+	//For UOB Environment enable the below line
+	//private static String APP_CONF_PATH = "/prodlib/WSMSGDS2/batch/PWEB/config/env.properties";
+	
 	private static final transient Log LOGGER = LogFactory.getLog(PropertyReader.class);
 
 	static {
@@ -18,18 +24,18 @@ public class PropertyReader  {
 		//	properties.load(new FileInputStream(System		.getProperty("wsm.lforms.report.env")));
 			properties.load(new FileInputStream(APP_CONF_PATH));
 		} catch (IOException e) {
-			LOGGER.error("application.properties loaded failed", e);
+			LOGGER.error("Application Properties loading failed.", e);
 			e.printStackTrace();
 		}
 	}
 
 	public static String getSystemPropertyValue(String key){
-		LOGGER.info("Reading the value for the key : " + key
-				+ " from system properties");
+		LOGGER.info("Reading the value for key : " + key
+				+ " from Application properties");
 		String value = null;
 		value = properties.getProperty(key);
-		LOGGER.info("Return the value for the key : " + key
-				+ " from system properties:" + value);
+		LOGGER.info("Return the value for key : " + key
+				+ " from Application properties:" + value);
 		return value;
 	}
 }

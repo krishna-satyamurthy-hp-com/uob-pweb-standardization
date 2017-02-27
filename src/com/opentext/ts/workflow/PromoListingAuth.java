@@ -23,7 +23,8 @@ import com.interwoven.cssdk.filesys.CSVPath;
 import com.interwoven.cssdk.workflow.CSExternalTask;
 import com.interwoven.cssdk.workflow.CSInactiveTaskException;
 import com.interwoven.cssdk.workflow.CSURLExternalTask;
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 
 
 public class PromoListingAuth implements CSURLExternalTask {
@@ -59,7 +60,8 @@ public class PromoListingAuth implements CSURLExternalTask {
 			String fileVPathStr;
 			for(CSAreaRelativePath fileVPath : waFiles){
 				fileVPathStr = fileVPath.toString();				
-				if(fileVPathStr.contains(UOBBaseConstants.PROMOTION_TEMPLATEDATA_PATH)){
+				//if(fileVPathStr.contains(UOBBaseConstants.PROMOTION_TEMPLATEDATA_PATH)){
+				if(fileVPathStr.contains(PropertyReader.getSystemPropertyValue("PROMOTION_TEMPLATEDATA_PATH"))){
 					this.promotionDCRList.add(fileVPathStr);
 				}				
 			}
@@ -147,10 +149,12 @@ public class PromoListingAuth implements CSURLExternalTask {
 				}						
 				//Authoring logic here						
 			}else if(promoTaskType.equalsIgnoreCase("promoJsonCreator")){
-				final String promoJsonRelativePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(String.valueOf(jobID)).concat(".json");
+				//final String promoJsonRelativePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(String.valueOf(jobID)).concat(".json");
+				final String promoJsonRelativePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(String.valueOf(jobID)).concat(".json");
 				String promoJsonFilePath = this.areaVpath.concat("/").concat(promoJsonRelativePath);
 				promoJsonFilePath = promoJsonFilePath.substring(promoJsonFilePath.indexOf(seperator+seperator)+2,(promoJsonFilePath.length()));	
-				promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+				//promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+				promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 				if(createPromoJson(promoJsonFilePath)){
 					LOGGER.info("Started attaching json to workflow");
 					CSAreaRelativePath promoJsonCSPath = new CSAreaRelativePath(promoJsonRelativePath);

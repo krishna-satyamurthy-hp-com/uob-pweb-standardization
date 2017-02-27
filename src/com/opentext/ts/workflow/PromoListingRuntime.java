@@ -12,7 +12,8 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 import com.opentext.ls.db.utils.DBConnectionManager;
 
 
@@ -43,7 +44,8 @@ public class PromoListingRuntime {
 		LOGGER.debug("Enter updateRuntimePromoListing");
 		System.out.println("Enter updateRuntimePromoListing");
 		//Step 1 : Read the json file and update create and delete ArrayLists
-		String promoJsonRTFilePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(jobIDStr).concat(".json");
+		//String promoJsonRTFilePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(jobIDStr).concat(".json");
+		String promoJsonRTFilePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(jobIDStr).concat(".json");
 		//promoJsonRTFilePath = "/iwmnt/default/main/UOB/WORKAREA/shared/"+promoJsonRTFilePath; //Need to change this later to fetch RT path dynamically
 		promoJsonRTFilePath = lsds_runtime_path.concat("/").concat(promoJsonRTFilePath); //Need to change this later to fetch RT path dynamically
 		LOGGER.debug("promoJsonRTFilePath "+promoJsonRTFilePath);

@@ -35,7 +35,8 @@ import com.interwoven.cssdk.filesys.CSAreaRelativePath;
 import com.interwoven.cssdk.workflow.CSExternalTask;
 import com.interwoven.cssdk.workflow.CSURLExternalTask;
 import com.interwoven.livesite.dom4j.Dom4jUtils;
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class XMLToJSONConverter implements CSURLExternalTask {
 	
@@ -56,9 +57,11 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 		//System.out.println("Files WA path : "+areavpath);
 		LOGGER.error("Files WA path : "+areavpath);
 		
-		String jsonOutputFilePath = areavpath.concat(seperator).concat(UOBBaseConstants.PROMOTION_JSON_FILE_PATH);
+		//String jsonOutputFilePath = areavpath.concat(seperator).concat(UOBBaseConstants.PROMOTION_JSON_FILE_PATH);
+		String jsonOutputFilePath = areavpath.concat(seperator).concat(PropertyReader.getSystemPropertyValue("PROMOTION_JSON_FILE_PATH"));
 		jsonOutputFilePath = jsonOutputFilePath.substring(jsonOutputFilePath.indexOf(seperator+seperator)+2,(jsonOutputFilePath.length()));	
-		jsonOutputFilePath = jsonOutputFilePath.replaceFirst(jsonOutputFilePath.substring(0, jsonOutputFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+		//jsonOutputFilePath = jsonOutputFilePath.replaceFirst(jsonOutputFilePath.substring(0, jsonOutputFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+		jsonOutputFilePath = jsonOutputFilePath.replaceFirst(jsonOutputFilePath.substring(0, jsonOutputFilePath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 		//System.out.println("Output JSON File path : "+jsonOutputFilePath);
 		LOGGER.error("Output JSON File path : "+jsonOutputFilePath);
 		File jsonOutputFile = new File(jsonOutputFilePath);
@@ -71,7 +74,8 @@ public class XMLToJSONConverter implements CSURLExternalTask {
 				 for (CSAreaRelativePath file : files) {
 					String fileFullPath = areavpath.concat(seperator).concat(file.toString());
 					fileFullPath = fileFullPath.substring(fileFullPath.indexOf(seperator+seperator)+2,(fileFullPath.length()));	
-					fileFullPath = fileFullPath.replaceFirst(fileFullPath.substring(0, fileFullPath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+					//fileFullPath = fileFullPath.replaceFirst(fileFullPath.substring(0, fileFullPath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
+					fileFullPath = fileFullPath.replaceFirst(fileFullPath.substring(0, fileFullPath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 					//System.out.println("fileFullPath: "+fileFullPath);
 					LOGGER.error("fileFullPath: "+fileFullPath);
 				       

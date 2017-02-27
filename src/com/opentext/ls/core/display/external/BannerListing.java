@@ -12,8 +12,9 @@ import org.dom4j.Element;
 
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.runtime.RequestContext;
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
 import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 
 
 public class BannerListing {
@@ -89,7 +90,8 @@ public class BannerListing {
 							}
 						}
 					}*/
-					SimpleDateFormat sdf = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					//SimpleDateFormat sdf = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					SimpleDateFormat sdf = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
 					
 					if (elem.getName().equalsIgnoreCase("Activation_Date"))
 					{

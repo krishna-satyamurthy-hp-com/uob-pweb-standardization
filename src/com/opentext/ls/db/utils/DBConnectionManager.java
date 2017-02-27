@@ -10,7 +10,8 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class DBConnectionManager {
 	private static final transient Log LOGGER = LogFactory.getLog(DBConnectionManager.class);
@@ -38,7 +39,8 @@ public class DBConnectionManager {
 	}
 
 	public Connection getAuthDBConnection() {
-		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		//final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		final String livesiteCustomer = PropertyReader.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		// final String databaseProperties = "database.properties";
@@ -113,7 +115,8 @@ public class DBConnectionManager {
 	}
 
 	public Connection getLocalRTDBConnection() {
-		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		//final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		final String livesiteCustomer = PropertyReader.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		// final String databaseProperties = "database.properties";

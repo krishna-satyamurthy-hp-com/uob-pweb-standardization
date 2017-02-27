@@ -11,8 +11,9 @@ import org.dom4j.Node;
 import com.interwoven.livesite.common.web.ForwardAction;
 import com.interwoven.livesite.runtime.RequestContext;
 import com.interwoven.livesite.runtime.model.page.RuntimePage;
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
 import com.opentext.ls.core.util.LSUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class AnalyticsController implements Serializable {
 	private static final long serialVersionUID = -2376353730570815972L;
@@ -28,7 +29,8 @@ public class AnalyticsController implements Serializable {
 				LOGGER.debug("Setting page analytics only for runtime pages");
 			}
 			try{
-				context.setParameterString("analyticsDCRPath", UOBBaseConstants.ANALYTICS_DCR_REL_PATH);
+				//context.setParameterString("analyticsDCRPath", UOBBaseConstants.ANALYTICS_DCR_REL_PATH);
+				context.setParameterString("analyticsDCRPath", PropertyReader.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
 				Document analyticsDoc = LSUtils.loadDCRContent(context,"analyticsDCRPath");
 				LOGGER.debug("analyticsDoc is "+analyticsDoc.asXML());
 				

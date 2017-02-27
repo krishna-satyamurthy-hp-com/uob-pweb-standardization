@@ -12,7 +12,8 @@ import java.util.HashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class PromoListingCommon {
 	private static final transient Log LOGGER = LogFactory.getLog(PromoListingCommon.class);
@@ -33,7 +34,8 @@ public class PromoListingCommon {
 					String promoPage = promoMap.get("promo-page");
 					String promoCountry = promoMap.get("promo-country");
 					
-					SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					//SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
 					
 					Date expiryDate = df.parse(promoExpDate);
 					java.sql.Date expiryDateDB = new java.sql.Date(expiryDate.getTime());
@@ -41,7 +43,8 @@ public class PromoListingCommon {
 					Date activationDate = df.parse(promoActDate);
 					java.sql.Date activationDateDB = new java.sql.Date(activationDate.getTime());
 					
-					String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
+					//String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
+					String updatePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					System.out.println("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
@@ -102,7 +105,8 @@ public class PromoListingCommon {
 			if(con!=null && !con.isClosed()){
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
-					String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
+					//String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
+					String deletePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
 					Statement deleteStatement = con.createStatement();
 					int rowCount = deleteStatement.executeUpdate(deletePromoQuery);
 					LOGGER.debug("Deleted " + rowCount + " rows successfully");

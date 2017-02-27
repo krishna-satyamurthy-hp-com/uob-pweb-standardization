@@ -17,7 +17,8 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.opentext.ls.core.common.UOBBaseConstants;
+//import com.opentext.ls.core.common.UOBBaseConstants;
+import com.opentext.ls.db.utils.PropertyReader;
 import com.opentext.ls.db.utils.DBConnectionManager;
 
 
@@ -123,7 +124,8 @@ public class PromoListingRT {
 					String promoPage = promoMap.get("promopage");
 					String promoCountry = promoMap.get("promocountry");
 					
-					SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					//SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
+					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
 					java.sql.Date expiryDateDB = null;
 					java.sql.Date activationDateDB = null;
 					java.sql.Date promoCreationDateDB = null;
@@ -142,7 +144,8 @@ public class PromoListingRT {
 					String promoModifier = promoMap.get("maintainedby");
 					String promoModifiedDateStr = promoMap.get("maintaineddt");
 					
-					SimpleDateFormat df1 = new SimpleDateFormat(UOBBaseConstants.TIMESTAMP_FORMAT);
+					//SimpleDateFormat df1 = new SimpleDateFormat(UOBBaseConstants.TIMESTAMP_FORMAT);
+					SimpleDateFormat df1 = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("TIMESTAMP_FORMAT"));
 					
 					Date promoCreationDate = df1.parse(promoCreationDateStr);
 					promoCreationDateDB = new java.sql.Date(promoCreationDate.getTime());
@@ -150,7 +153,8 @@ public class PromoListingRT {
 					Date promoModifiedDate = df1.parse(promoModifiedDateStr);
 					promoModifiedDateDB = new java.sql.Date(promoModifiedDate.getTime());
 					
-					String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
+					//String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
+					String updatePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
@@ -215,7 +219,8 @@ public class PromoListingRT {
 			if(con!=null && !con.isClosed()){
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
-					String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
+					//String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
+					String deletePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
 					Statement deleteStatement = con.createStatement();
 					int rowCount = deleteStatement.executeUpdate(deletePromoQuery);
 					LOGGER.debug("Deleted " + rowCount + " rows successfully");
