@@ -172,7 +172,7 @@ public class PromoListing implements CSURLExternalTask {
 					String promoPage = promoMap.get("promo-page");
 					String promoCountry = promoMap.get("promo-country");
 					
-					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT");
+					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
 					
 					Date expiryDate = df.parse(promoExpDate);
 					java.sql.Date expiryDateDB = new java.sql.Date(expiryDate.getTime());
