@@ -269,5 +269,7 @@
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/libs/TS-lib/xml-apis.jar"/>
 	<classpathentry kind="lib" path="C:/MyData/Official/TS8.1/uob-custom-lib/jackson-all-1.9.0.jar/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/tblaziken/Downloads/commons-logging-1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/tblaziken/Downloads/dom4j.jar/dom4j.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
