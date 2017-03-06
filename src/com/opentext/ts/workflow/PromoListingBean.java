@@ -20,7 +20,7 @@ public class PromoListingBean {
 	CSFile dcrCSFile;
 	CSVPath dcrCSVPath;
 	Node promoDCRDetailsNode;
-    String promoID,expiryDate,activationDate,productCategory,promoImage,promoTitle,promoAltText,promoLife,promoPage,promoCountry,promoCreator,promoModifier;
+    String promoID,expiryDate,activationDate,siteName,promoCategoryLabel,promoCategoryName,promoImage,promoTitle,promoAltText,promoLife,promoPage,promoCountry,promoCreator,promoModifier;
     Date promoCreationDate,promoModifiedDate;
     String dcrServerPath = "";
     File dcrFile;    
@@ -53,13 +53,16 @@ public class PromoListingBean {
 			setPromoID(getPromoXPathValue("promoId"));
 			setExpiryDate(getPromoXPathValue("Expiry_Date"));
 			setActivationDate(getPromoXPathValue("Activation_Date"));
-			setProductCategory(getPromoXPathValue("product_category"));
+			setSiteName(getPromoXPathValue("SiteName"));
+			setPromoCategoryLabel(getPromoXPathValue("promotion_category_label"));
+			setPromoCategoryName(getPromoXPathValue("promotion_category_name"));
 			setPromoImage(getPromoXPathValue("promo_image"));
 			setPromoTitle(getPromoXPathValue("promo_title"));
 			setPromoAltText(getPromoXPathValue("promo_alt_text"));
 			setPromoLife(getPromoXPathValue("promo_life"));
 			setPromoPage(getPromoXPathValue("promo_page"));
 			setPromoCountry(getPromoXPathValue("country"));
+			
 			
 			//Added new
 			setPromoCreator(this.dcrCSFile.getCreator().getName());
@@ -139,13 +142,29 @@ public class PromoListingBean {
 	public void setActivationDate(String activationDate) {
 		this.activationDate = activationDate;
 	}
-
-	public String getProductCategory() {
-		return productCategory;
+	
+	public String getSiteName() {
+		return siteName;
 	}
 
-	public void setProductCategory(String productCategory) {
-		this.productCategory = productCategory;
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
+
+	public String getPromoCategoryLabel() {
+		return promoCategoryLabel;
+	}
+
+	public void setPromoCategoryLabel(String promoCategoryLabel) {
+		this.promoCategoryLabel = promoCategoryLabel;
+	}
+	
+	public String getPromoCategoryName() {
+		return promoCategoryName;
+	}
+
+	public void setPromoCategoryName(String promoCategoryName) {
+		this.promoCategoryName = promoCategoryName;
 	}
 
 	public String getPromoImage() {

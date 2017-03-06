@@ -23,59 +23,90 @@ public class PromoListingCommon {
 		try{			
 			if(con!=null && !con.isClosed()){				
 				for(HashMap<String,String> promoMap : createPromoAL){
-					int promoID = Integer.parseInt(promoMap.get("promo-id"));
-					String promoExpDate = promoMap.get("expiry-date");
-					String promoActDate = promoMap.get("activation-date");
-					String productCategory = promoMap.get("product-category");
-					String promoImage = promoMap.get("promo-image");
-					String promoTitle = promoMap.get("promo-title");
-					String promoAltText = promoMap.get("promo-alt-text");
-					String promoLife = promoMap.get("promo-life");	
-					String promoPage = promoMap.get("promo-page");
-					String promoCountry = promoMap.get("promo-country");
+					int promoID = Integer.parseInt(promoMap.get("promoid"));
+					String promoExpDate = promoMap.get("expirydate");
+					String promoActDate = promoMap.get("activationdate");
+					String siteName = promoMap.get("sitename");
+					String promoCategoryLabel = promoMap.get("productcategorylabel");
+					String promoCategoryName = promoMap.get("productcategoryname");
+					String promoImage = promoMap.get("promoimage");
+					String promoTitle = promoMap.get("promotitle");
+					String promoAltText = promoMap.get("promoalttext");
+					String promoLife = promoMap.get("promolife");	
+					String promoPage = promoMap.get("promopage");
+					String promoCountry = promoMap.get("promocountry");
 					
 					//SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
 					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
+					java.sql.Date expiryDateDB = null;
+					java.sql.Date activationDateDB = null;
+					java.sql.Date promoCreationDateDB = null;
+					java.sql.Date promoModifiedDateDB = null;
 					
-					Date expiryDate = df.parse(promoExpDate);
-					java.sql.Date expiryDateDB = new java.sql.Date(expiryDate.getTime());
+					if(promoExpDate != null && !promoExpDate.isEmpty()){
+						Date expiryDate = df.parse(promoExpDate);
+						expiryDateDB = new java.sql.Date(expiryDate.getTime());
+					}
+					if(promoActDate != null && !promoActDate.isEmpty()){
+						Date activationDate = df.parse(promoActDate);
+						activationDateDB = new java.sql.Date(activationDate.getTime());
+					}
+					String promoCreator = promoMap.get("createdby");
+					String promoCreationDateStr = promoMap.get("createddt");
+					String promoModifier = promoMap.get("maintainedby");
+					String promoModifiedDateStr = promoMap.get("maintaineddt");
 					
-					Date activationDate = df.parse(promoActDate);
-					java.sql.Date activationDateDB = new java.sql.Date(activationDate.getTime());
+					//SimpleDateFormat df1 = new SimpleDateFormat(UOBBaseConstants.TIMESTAMP_FORMAT);
+					SimpleDateFormat df1 = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("TIMESTAMP_FORMAT"));
+					
+					Date promoCreationDate = df1.parse(promoCreationDateStr);
+					promoCreationDateDB = new java.sql.Date(promoCreationDate.getTime());
+					
+					Date promoModifiedDate = df1.parse(promoModifiedDateStr);
+					promoModifiedDateDB = new java.sql.Date(promoModifiedDate.getTime());
 					
 					//String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
 					String updatePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
 					LOGGER.info("insert statemnt "+updatePromoQuery);
-					System.out.println("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
-					updatePromoPS.setInt(11, promoID);
+					updatePromoPS.setInt(17, promoID);
 					updatePromoPS.setDate(2, expiryDateDB);					
-					updatePromoPS.setDate(12, expiryDateDB);
+					updatePromoPS.setDate(18, expiryDateDB);
 					updatePromoPS.setDate(3, activationDateDB);
-					updatePromoPS.setDate(13, activationDateDB);
-					updatePromoPS.setString(4, productCategory);
-					updatePromoPS.setString(14, productCategory);
-					updatePromoPS.setString(5, promoImage);
-					updatePromoPS.setString(15, promoImage);
-					updatePromoPS.setString(6, promoTitle);
-					updatePromoPS.setString(16, promoTitle);
-					updatePromoPS.setString(7, promoAltText);
-					updatePromoPS.setString(17, promoAltText);
-					updatePromoPS.setString(8, promoLife);
-					updatePromoPS.setString(18, promoLife);
-					updatePromoPS.setString(9, promoPage);
-					updatePromoPS.setString(19, promoPage);
-					updatePromoPS.setString(10, promoCountry);
-					updatePromoPS.setString(20, promoCountry);
+					updatePromoPS.setDate(19, activationDateDB);
+					updatePromoPS.setString(4, siteName);
+					updatePromoPS.setString(20, siteName);
+					updatePromoPS.setString(5, promoCategoryLabel);
+					updatePromoPS.setString(21, promoCategoryLabel);
+					updatePromoPS.setString(6, promoCategoryName);
+					updatePromoPS.setString(22, promoCategoryName);
+					updatePromoPS.setString(7, promoImage);
+					updatePromoPS.setString(23, promoImage);
+					updatePromoPS.setString(8, promoTitle);
+					updatePromoPS.setString(24, promoTitle);
+					updatePromoPS.setString(9, promoAltText);
+					updatePromoPS.setString(25, promoAltText);
+					updatePromoPS.setString(10, promoLife);
+					updatePromoPS.setString(26, promoLife);
+					updatePromoPS.setString(11, promoPage);
+					updatePromoPS.setString(27, promoPage);
+					updatePromoPS.setString(12, promoCountry);
+					updatePromoPS.setString(28, promoCountry);
+					updatePromoPS.setString(13, promoCreator);
+					updatePromoPS.setString(29, promoCreator);
+					updatePromoPS.setDate(14, promoCreationDateDB);
+					updatePromoPS.setDate(30, promoCreationDateDB);
+					updatePromoPS.setString(15, promoModifier);
+					updatePromoPS.setString(31, promoModifier);
+					updatePromoPS.setDate(16, promoModifiedDateDB);
+					updatePromoPS.setDate(32, promoModifiedDateDB);
 					
 					int rowCount = updatePromoPS.executeUpdate();					
 					LOGGER.debug("Inserted " + rowCount + " rows successfully");
-					System.out.println("Inserted " + rowCount + " rows successfully");
 				}
 			}else{
 				LOGGER.debug("Connection is closed");
-				System.out.println("Connection is closed");
 			}
 		}catch(SQLException sqlex){
 			sqlex.printStackTrace();

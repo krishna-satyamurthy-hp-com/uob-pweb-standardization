@@ -134,7 +134,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 						LOGGER.debug("PromoID "+plb.getPromoID());
 						LOGGER.debug("plb.getExpiryDate( "+plb.getExpiryDate());
 						LOGGER.debug("plb.getActivationDate()) "+plb.getActivationDate());
-						LOGGER.debug("plb.getProductCategory() "+plb.getProductCategory());
+						LOGGER.debug("plb.getSiteName()) "+plb.getSiteName());
+						LOGGER.debug("plb.getPromoCategoryLabel() "+plb.getPromoCategoryLabel());
+						LOGGER.debug("plb.getPromoCategoryName()) "+plb.getPromoCategoryName());
 						LOGGER.debug("plb.getPromoAltText() "+plb.getPromoAltText());
 						LOGGER.debug("plb.getPromoCountry() "+plb.getPromoCountry());
 						LOGGER.debug("plb.getPromoCreator() "+plb.getPromoCreator());
@@ -208,7 +210,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 						addPromoBeanMap.put("promoid", plb.getPromoID());
 						addPromoBeanMap.put("expirydate", plb.getExpiryDate());
 						addPromoBeanMap.put("activationdate", plb.getActivationDate());
-						addPromoBeanMap.put("productcategory", plb.getProductCategory());
+						addPromoBeanMap.put("sitename", plb.getSiteName());
+						addPromoBeanMap.put("productcategorylabel", plb.getPromoCategoryLabel());
+						addPromoBeanMap.put("productcategoryname", plb.getPromoCategoryName());
 						addPromoBeanMap.put("promoimage", plb.getPromoImage());
 						addPromoBeanMap.put("promoalttext", plb.getPromoAltText());
 						addPromoBeanMap.put("promolife", plb.getPromoLife());
