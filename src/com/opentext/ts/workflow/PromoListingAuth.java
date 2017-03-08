@@ -46,6 +46,8 @@ public class PromoListingAuth implements CSURLExternalTask {
 	CSClient paramCSClient;
 	CSExternalTask task;
 	
+	PropertyReader is= new PropertyReader();
+	
 	@SuppressWarnings("rawtypes")	
 	public void execute(CSClient paramCSClient, CSExternalTask task, Hashtable paramHashtable) throws CSException {
 			LOGGER.debug("PromoListing starts");
@@ -62,7 +64,7 @@ public class PromoListingAuth implements CSURLExternalTask {
 			for(CSAreaRelativePath fileVPath : waFiles){
 				fileVPathStr = fileVPath.toString();				
 				//if(fileVPathStr.contains(UOBBaseConstants.PROMOTION_TEMPLATEDATA_PATH)){
-				if(fileVPathStr.contains(PropertyReader.getSystemPropertyValue("PROMOTION_TEMPLATEDATA_PATH"))){
+				if(fileVPathStr.contains(is.getSystemPropertyValue("PROMOTION_TEMPLATEDATA_PATH"))){
 					this.promotionDCRList.add(fileVPathStr);
 				}				
 			}
@@ -128,9 +130,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 		if(promoTaskType != null && !promoTaskType.isEmpty()){					
 			if(promoTaskType.equalsIgnoreCase("preview")){
 				if(this.createPromoBeanAL != null && !this.createPromoBeanAL.isEmpty() && this.createPromoBeanAL.size()>0){
-					LOGGER.debug("Total create promo dcrs in this workflow are "+this.createPromoBeanAL);
+					LOGGER.debug("Total create promo dcrs in this workflow are "+this.createPromoBeanAL.size());
 					for(PromoListingBean plb : this.createPromoBeanAL){
-						LOGGER.debug("Printing promo bean "+plb);
+						LOGGER.debug("Printing promo bean - ");
 						
 						LOGGER.debug("PromoID "+plb.getPromoID());
 						LOGGER.debug("plb.getExpiryDate( "+plb.getExpiryDate());
@@ -153,11 +155,11 @@ public class PromoListingAuth implements CSURLExternalTask {
 				//Authoring logic here						
 			}else if(promoTaskType.equalsIgnoreCase("promoJsonCreator")){
 				//final String promoJsonRelativePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(String.valueOf(jobID)).concat(".json");
-				final String promoJsonRelativePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(String.valueOf(jobID)).concat(".json");
+				final String promoJsonRelativePath = is.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(String.valueOf(jobID)).concat(".json");
 				String promoJsonFilePath = this.areaVpath.concat("/").concat(promoJsonRelativePath);
 				promoJsonFilePath = promoJsonFilePath.substring(promoJsonFilePath.indexOf(seperator+seperator)+2,(promoJsonFilePath.length()));	
 				//promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE) ;
-				promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
+				promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 				if(createPromoJson(promoJsonFilePath)){
 					LOGGER.info("Started attaching json to workflow");
 					CSAreaRelativePath promoJsonCSPath = new CSAreaRelativePath(promoJsonRelativePath);
@@ -205,9 +207,10 @@ public class PromoListingAuth implements CSURLExternalTask {
 				if (this.createPromoBeanAL != null && !this.createPromoBeanAL.isEmpty()
 						&& this.createPromoBeanAL.size() > 0) {
 					LOGGER.debug("createPromoAL size "+this.createPromoBeanAL.size());
-					HashMap<String,Object> addPromoBeanMap = new HashMap<String,Object>();
+					
 					ArrayList<HashMap<String,Object>> addPromoBeanMapAL = new ArrayList<HashMap<String,Object>>();
 					for(PromoListingBean plb : createPromoBeanAL){
+						HashMap<String,Object> addPromoBeanMap = new HashMap<String,Object>();
 						addPromoBeanMap.put("promoid", plb.getPromoID());
 						addPromoBeanMap.put("expirydate", plb.getExpiryDate());
 						addPromoBeanMap.put("activationdate", plb.getActivationDate());
@@ -224,9 +227,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 						addPromoBeanMap.put("createddt", plb.getPromoCreationDate().toString());
 						addPromoBeanMap.put("maintainedby", plb.getPromoModifier());
 						addPromoBeanMap.put("maintaineddt", plb.getPromoModifiedDate().toString());
-						addPromoBeanMapAL.add(addPromoBeanMap);						
+						addPromoBeanMapAL.add(addPromoBeanMap);
 					}
-					createPromoJsonMap.put("create", addPromoBeanMapAL); 
+					createPromoJsonMap.put("create", addPromoBeanMapAL);
 				}if (this.deletePromoBeanAL != null && !this.deletePromoBeanAL.isEmpty()
 						&& this.deletePromoBeanAL.size() > 0) {
 					LOGGER.debug("deletePromoBeanAL size "+this.deletePromoBeanAL.size());

@@ -28,6 +28,8 @@ public class PromoListingRT {
 	ArrayList<HashMap<String,String>> createPromoAL;
 	ArrayList<String> deletePromoAL;
 	
+	PropertyReader is= new PropertyReader();
+	
 	public static void main(String[] args) {
 		
 		//final String promoJsonFilePath = "jobid.json";
@@ -125,7 +127,7 @@ public class PromoListingRT {
 					String promoCountry = promoMap.get("promocountry");
 					
 					//SimpleDateFormat df = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
-					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
+					SimpleDateFormat df = new SimpleDateFormat(is.getSystemPropertyValue("DATE_FORMAT"));
 					java.sql.Date expiryDateDB = null;
 					java.sql.Date activationDateDB = null;
 					java.sql.Date promoCreationDateDB = null;
@@ -145,7 +147,7 @@ public class PromoListingRT {
 					String promoModifiedDateStr = promoMap.get("maintaineddt");
 					
 					//SimpleDateFormat df1 = new SimpleDateFormat(UOBBaseConstants.TIMESTAMP_FORMAT);
-					SimpleDateFormat df1 = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("TIMESTAMP_FORMAT"));
+					SimpleDateFormat df1 = new SimpleDateFormat(is.getSystemPropertyValue("TIMESTAMP_FORMAT"));
 					
 					Date promoCreationDate = df1.parse(promoCreationDateStr);
 					promoCreationDateDB = new java.sql.Date(promoCreationDate.getTime());
@@ -154,7 +156,7 @@ public class PromoListingRT {
 					promoModifiedDateDB = new java.sql.Date(promoModifiedDate.getTime());
 					
 					//String updatePromoQuery = UOBBaseConstants.PROMOTION_INSERT_UPDATE_QUERY;
-					String updatePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
+					String updatePromoQuery = is.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
@@ -220,7 +222,7 @@ public class PromoListingRT {
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
 					//String deletePromoQuery = UOBBaseConstants.PROMOTION_DELETE_QUERY+promoID;
-					String deletePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
+					String deletePromoQuery = is.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
 					Statement deleteStatement = con.createStatement();
 					int rowCount = deleteStatement.executeUpdate(deletePromoQuery);
 					LOGGER.debug("Deleted " + rowCount + " rows successfully");

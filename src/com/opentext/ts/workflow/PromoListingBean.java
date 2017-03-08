@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Node;
 
-
 import com.interwoven.cssdk.common.CSException;
 import com.interwoven.cssdk.filesys.CSFile;
 import com.interwoven.cssdk.filesys.CSVPath;
@@ -25,7 +24,7 @@ public class PromoListingBean {
     Date promoCreationDate,promoModifiedDate;
     String dcrServerPath = "";
     File dcrFile;    
-    
+    PropertyReader is= new PropertyReader();
 
 	public PromoListingBean(CSFile dcrCSFile) throws CSException {
 		LOGGER.debug("Entering  "+this.getClass());
@@ -37,7 +36,7 @@ public class PromoListingBean {
     	setDcrCSVPath(this.dcrCSFile.getVPath());
     	//LOGGER.debug("getDcrCSVPath "+getDcrCSVPath());
     	//String dcrServerPath = UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE.concat(this.dcrCSVPath.getPathNoServer().toString());
-    	String dcrServerPath = PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE").concat(this.dcrCSVPath.getPathNoServer().toString());
+    	String dcrServerPath = is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE").concat(this.dcrCSVPath.getPathNoServer().toString());
     	//LOGGER.debug("dcrServerPath "+dcrServerPath);
     	setDcrServerPath(dcrServerPath);    	
     	setDcrFile(new File(dcrServerPath));
@@ -45,7 +44,7 @@ public class PromoListingBean {
     	
     	final Document promoDCR = Dom4jUtils.newDocument(getDcrFile());
 		//final Node promoDCRDetailsNode = promoDCR.selectSingleNode(UOBBaseConstants.PROMOTION_DCR_ROOT_NODE);
-    	final Node promoDCRDetailsNode = promoDCR.selectSingleNode(PropertyReader.getSystemPropertyValue("PROMOTION_DCR_ROOT_NODE"));
+    	final Node promoDCRDetailsNode = promoDCR.selectSingleNode(is.getSystemPropertyValue("PROMOTION_DCR_ROOT_NODE"));
     	
 		if(promoDCRDetailsNode != null){
 			setPromoDCRDetailsNode(promoDCRDetailsNode);

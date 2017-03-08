@@ -30,7 +30,9 @@ public class AnalyticsController implements Serializable {
 			}
 			try{
 				//context.setParameterString("analyticsDCRPath", UOBBaseConstants.ANALYTICS_DCR_REL_PATH);
-				context.setParameterString("analyticsDCRPath", PropertyReader.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
+				//context.setParameterString("analyticsDCRPath", PropertyReader.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
+				PropertyReader is= new PropertyReader();
+				context.setParameterString("analyticsDCRPath", is.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
 				Document analyticsDoc = LSUtils.loadDCRContent(context,"analyticsDCRPath");
 				LOGGER.debug("analyticsDoc is "+analyticsDoc.asXML());
 				

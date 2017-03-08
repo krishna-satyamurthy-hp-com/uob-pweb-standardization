@@ -91,7 +91,10 @@ public class BannerListing {
 						}
 					}*/
 					//SimpleDateFormat sdf = new SimpleDateFormat(UOBBaseConstants.DATE_FORMAT);
-					SimpleDateFormat sdf = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
+					//SimpleDateFormat sdf = new SimpleDateFormat(is.getProperties("DATE_FORMAT"));
+					PropertyReader is= new PropertyReader();
+			
+					SimpleDateFormat sdf = new SimpleDateFormat(is.getSystemPropertyValue("DATE_FORMAT"));
 					
 					if (elem.getName().equalsIgnoreCase("Activation_Date"))
 					{

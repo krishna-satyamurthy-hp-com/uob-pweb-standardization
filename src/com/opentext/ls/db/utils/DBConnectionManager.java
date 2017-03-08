@@ -25,6 +25,8 @@ public class DBConnectionManager {
 	private static String walletLocation = null;
 	private static String tnsAdmin = null;
 
+	PropertyReader is= new PropertyReader();
+	
 	// Added for Oracle Wallet Implementation
 	public Connection getRTDBConnection() {
 		try {
@@ -40,7 +42,7 @@ public class DBConnectionManager {
 
 	public Connection getAuthDBConnection() {
 		//final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
-		final String livesiteCustomer = PropertyReader.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
+		final String livesiteCustomer = is.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		// final String databaseProperties = "database.properties";
@@ -116,7 +118,7 @@ public class DBConnectionManager {
 
 	public Connection getLocalRTDBConnection() {
 		//final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
-		final String livesiteCustomer = PropertyReader.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
+		final String livesiteCustomer = is.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
 		final String databaseProperties = livesiteCustomer.concat("database.properties");
 		final String keyProperties = livesiteCustomer.concat("key.properties");
 		// final String databaseProperties = "database.properties";
@@ -156,12 +158,13 @@ public class DBConnectionManager {
 	}
 
 	private static void readOracleWalletConfig() {
-		dbdriverclass = PropertyReader.getSystemPropertyValue(BatchConstants.dbDriverClassName);
-		dbURL = PropertyReader.getSystemPropertyValue(BatchConstants.dbURL);
-		dbUsername = PropertyReader.getSystemPropertyValue(BatchConstants.dbUsername);
-		dbPassword = PropertyReader.getSystemPropertyValue(BatchConstants.dbPassword);
-		walletLocation = PropertyReader.getSystemPropertyValue(BatchConstants.walletLocation);
-		tnsAdmin = PropertyReader.getSystemPropertyValue(BatchConstants.tnsAdmin);
+		PropertyReader is= new PropertyReader();
+		dbdriverclass = is.getSystemPropertyValue(BatchConstants.dbDriverClassName);
+		dbURL = is.getSystemPropertyValue(BatchConstants.dbURL);
+		dbUsername = is.getSystemPropertyValue(BatchConstants.dbUsername);
+		dbPassword = is.getSystemPropertyValue(BatchConstants.dbPassword);
+		walletLocation = is.getSystemPropertyValue(BatchConstants.walletLocation);
+		tnsAdmin = is.getSystemPropertyValue(BatchConstants.tnsAdmin);
 		System.setProperty("oracle.net.wallet_location", walletLocation);
 		System.setProperty("oracle.net.tns_admin", tnsAdmin);
 	}

@@ -40,6 +40,9 @@ public class PromotionDetails {
 	String nextURL = "";
 	String currentPromoCategory = "";
 	String env="";
+	
+	PropertyReader is= new PropertyReader();
+	
 	public Document execute(RequestContext context) throws ParseException{
 		LOGGER.debug("entering PromotionDetails external");
 		Document promotionListingDoc = LSUtils.loadDCRContent(context,"dcrPath");
@@ -88,7 +91,7 @@ public class PromotionDetails {
 		int port = context.getRequest().getServerPort();
 		LOGGER.debug("remote port is "+port);
 		//String promoServletPath = UOBBaseConstants.PROMOTION_SERVLET_URL;
-		String promoServletPath = PropertyReader.getSystemPropertyValue("PROMOTION_SERVLET_URL");
+		String promoServletPath = is.getSystemPropertyValue("PROMOTION_SERVLET_URL");
 		promoServletPath = !(env.equalsIgnoreCase("runtime"))?"/iw-cc"+promoServletPath:promoServletPath;
 		
 		final String charset = "UTF-8";
@@ -173,7 +176,8 @@ public class PromotionDetails {
 	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		//String promoServletPath = UOBBaseConstants.PROMOTION_SERVLET_URL;
-		String promoServletPath = PropertyReader.getSystemPropertyValue("PROMOTION_SERVLET_URL");
+		PropertyReader is= new PropertyReader();
+		String promoServletPath = is.getSystemPropertyValue("PROMOTION_SERVLET_URL");
 		String env = "runtime";
 		String currentPromoCategory = "Deposits";
 		promoServletPath = !(env.equalsIgnoreCase("runtime"))?"/iw-cc"+promoServletPath:promoServletPath;

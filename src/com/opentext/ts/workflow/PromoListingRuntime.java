@@ -19,7 +19,8 @@ import com.opentext.ls.db.utils.DBConnectionManager;
 
 public class PromoListingRuntime {
 	private static final transient Log LOGGER = LogFactory.getLog(PromoListingRuntime.class);	
-	
+	PropertyReader is= new PropertyReader();
+
 	public static void main(String[] args) {
 		String jobID = args[0];
 		String lsds_runtime_path = args[1];
@@ -45,9 +46,11 @@ public class PromoListingRuntime {
 		System.out.println("Enter updateRuntimePromoListing");
 		//Step 1 : Read the json file and update create and delete ArrayLists
 		//String promoJsonRTFilePath = UOBBaseConstants.PROMO_JSON_RELATIVE_PATH.concat(jobIDStr).concat(".json");
-		String promoJsonRTFilePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(jobIDStr).concat(".json");
+		String promoJsonRTFilePath = is.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(jobIDStr).concat(".json");
 		//promoJsonRTFilePath = "/iwmnt/default/main/UOB/WORKAREA/shared/"+promoJsonRTFilePath; //Need to change this later to fetch RT path dynamically
+		System.out.println("promoJsonRTFilePath: "+ promoJsonRTFilePath);
 		promoJsonRTFilePath = lsds_runtime_path.concat("/").concat(promoJsonRTFilePath); //Need to change this later to fetch RT path dynamically
+		System.out.println("complete promoJsonRTFilePath: "+ promoJsonRTFilePath);
 		LOGGER.debug("promoJsonRTFilePath "+promoJsonRTFilePath);
 		File promoJsonRTFile = new File(promoJsonRTFilePath);
 		if(promoJsonRTFile.exists() && promoJsonRTFile.canRead()){
@@ -60,31 +63,40 @@ public class PromoListingRuntime {
 				if(promoJsonMap != null && !promoJsonMap.isEmpty()){
 					if(promoJsonMap.get("create") != null){
 						createPromoRTAL = (ArrayList<HashMap<String, String>>) promoJsonMap.get("create");
-						LOGGER.debug("createPromoALRT.size "+createPromoRTAL.size());						
+						System.out.println("createPromoALRT.size "+createPromoRTAL.size());						
 						for(HashMap<String, String> createPromoDetailsMap : createPromoRTAL){
 							createPromoAL.add(createPromoDetailsMap);
 						}
 						LOGGER.info("createPromoAL "+createPromoAL);
 					}if(promoJsonMap.get("delete") != null){
 						deletePromoRTAL = (ArrayList<String>) promoJsonMap.get("delete");
-						LOGGER.debug(deletePromoRTAL.size());
+						System.out.println("deletePromoRTAL.size " +deletePromoRTAL.size());
 						deletePromoAL = new ArrayList<String>();
 						for(String deletePromoDetailsID : deletePromoRTAL){
 							deletePromoAL.add(deletePromoDetailsID);
 						}
 					}
-					DBConnectionManager dbConMan = new DBConnectionManager();
+					/*DBConnectionManager dbConMan = new DBConnectionManager();
 					//Connection con = dbConMan.getRTDBConnection();
-					Connection con = dbConMan.getConnectionUsingOracleWallet();
-					System.out.println("Connection from wallet "+con);
+					
+					//Enable this for UOB deployment
+					//Connection con = dbConMan.getConnectionUsingOracleWallet();
+					Connection con = dbConMan.getLocalRTDBConnection();*/
+					
 					//Step 2 : Process the runtime request accordingly
 					PromoListingCommon plc = new PromoListingCommon();
 					if (createPromoAL != null && !createPromoAL.isEmpty()
-							&& createPromoAL.size() > 0) {					
-							plc.updatePromoList(con, createPromoAL);
+							&& createPromoAL.size() > 0) {	
+						System.out.println("Inside updatePromoList...");
+						DBConnectionManager dbConMan = new DBConnectionManager();
+						Connection con = dbConMan.getLocalRTDBConnection();
+						plc.updatePromoList(con, createPromoAL);
 					}
 					if (deletePromoAL != null && !deletePromoAL.isEmpty()
 							&& deletePromoAL.size() > 0) {
+						System.out.println("Inside deletePromoAL...");
+						DBConnectionManager dbConMan = new DBConnectionManager();
+						Connection con = dbConMan.getLocalRTDBConnection();
 						plc.deletePromoList(con, deletePromoAL);
 					}
 				}else{

@@ -34,6 +34,7 @@ import com.opentext.ls.db.utils.DBConnectionManager;
 public class PromoListing implements CSURLExternalTask {
 	private static final transient Log LOGGER = LogFactory.getLog(PromoListing.class);
 	private static final String seperator = "/";
+	PropertyReader is= new PropertyReader();
 	
 	HashMap<String,String> promoDetailsMap;
 	ArrayList<HashMap<String,String>> createPromoAL = new ArrayList<HashMap<String,String>>();
@@ -53,7 +54,7 @@ public class PromoListing implements CSURLExternalTask {
 			String fileVPathStr;
 			for(CSAreaRelativePath fileVPath : waFiles){
 				fileVPathStr = fileVPath.toString();				
-				if(fileVPathStr.contains(PropertyReader.getSystemPropertyValue("PROMOTION_TEMPLATEDATA_PATH"))){
+				if(fileVPathStr.contains(is.getSystemPropertyValue("PROMOTION_TEMPLATEDATA_PATH"))){
 					promotionDCRList.add(fileVPathStr);
 				}				
 			}
@@ -65,7 +66,7 @@ public class PromoListing implements CSURLExternalTask {
 				for(String promoDCRVpath : promotionDCRList){					
 					promoDCRFullPath = areaVpath.concat(seperator).concat(promoDCRVpath);
 					promoDCRFullPath = promoDCRFullPath.substring(promoDCRFullPath.indexOf(seperator+seperator)+2,(promoDCRFullPath.length()));	
-					promoDCRFullPath = promoDCRFullPath.replaceFirst(promoDCRFullPath.substring(0, promoDCRFullPath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
+					promoDCRFullPath = promoDCRFullPath.replaceFirst(promoDCRFullPath.substring(0, promoDCRFullPath.indexOf(seperator)), is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 					LOGGER.debug("promoDCRFullPath is "+promoDCRFullPath);
 					String promoRequest = "create";
 					File promoDCRFile = new File(promoDCRFullPath);
@@ -75,7 +76,7 @@ public class PromoListing implements CSURLExternalTask {
 						LOGGER.debug("branch vpath "+task.getArea().getBranch().getVPath().toString());
 						promoDCRFullPath = task.getArea().getBranch().getVPath().toString().concat(seperator).concat("STAGING").concat(seperator).concat(promoDCRVpath);
 						promoDCRFullPath = promoDCRFullPath.substring(promoDCRFullPath.indexOf(seperator+seperator)+2,(promoDCRFullPath.length()));
-						promoDCRFullPath = promoDCRFullPath.replaceFirst(promoDCRFullPath.substring(0, promoDCRFullPath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
+						promoDCRFullPath = promoDCRFullPath.replaceFirst(promoDCRFullPath.substring(0, promoDCRFullPath.indexOf(seperator)), is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 						promoRequest = "delete";
 						promoDCRFile = new File(promoDCRFullPath);
 						LOGGER.debug("promoDCRFullPath is "+promoDCRFullPath);
@@ -100,10 +101,10 @@ public class PromoListing implements CSURLExternalTask {
 							deletePromoList(con);
 						}
 					}else if(promoTaskType.equalsIgnoreCase("promoJsonCreator")){
-						final String promoJsonRelativePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(String.valueOf(jobID)).concat(".json");
+						final String promoJsonRelativePath = is.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(String.valueOf(jobID)).concat(".json");
 						String promoJsonFilePath = this.areaVpath.concat("/").concat(promoJsonRelativePath);
 						promoJsonFilePath = promoJsonFilePath.substring(promoJsonFilePath.indexOf(seperator+seperator)+2,(promoJsonFilePath.length()));	
-						promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), PropertyReader.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
+						promoJsonFilePath = promoJsonFilePath.replaceFirst(promoJsonFilePath.substring(0, promoJsonFilePath.indexOf(seperator)), is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE")) ;
 						if(createPromoJson(promoJsonFilePath)){
 							LOGGER.info("Started attaching json to workflow");
 							CSAreaRelativePath promoJsonCSPath = new CSAreaRelativePath(promoJsonRelativePath);
@@ -133,7 +134,7 @@ public class PromoListing implements CSURLExternalTask {
 		LOGGER.debug("DCR Path is "+dcrPath);	
 		
 		final Document promoDCR = Dom4jUtils.newDocument(new File(dcrPath));
-		final Node promoDCRDetailsNode = promoDCR.selectSingleNode(PropertyReader.getSystemPropertyValue("PROMOTION_DCR_ROOT_NODE"));
+		final Node promoDCRDetailsNode = promoDCR.selectSingleNode(is.getSystemPropertyValue("PROMOTION_DCR_ROOT_NODE"));
 		LOGGER.debug("Promo DCR root node is "+promoDCRDetailsNode);	
 		if(promoRequest.equalsIgnoreCase("create")){
 			LOGGER.info("Request type is create or update promotion");
@@ -172,7 +173,7 @@ public class PromoListing implements CSURLExternalTask {
 					String promoPage = promoMap.get("promo-page");
 					String promoCountry = promoMap.get("promo-country");
 					
-					SimpleDateFormat df = new SimpleDateFormat(PropertyReader.getSystemPropertyValue("DATE_FORMAT"));
+					SimpleDateFormat df = new SimpleDateFormat(is.getSystemPropertyValue("DATE_FORMAT"));
 					
 					Date expiryDate = df.parse(promoExpDate);
 					java.sql.Date expiryDateDB = new java.sql.Date(expiryDate.getTime());
@@ -180,7 +181,7 @@ public class PromoListing implements CSURLExternalTask {
 					Date activationDate = df.parse(promoActDate);
 					java.sql.Date activationDateDB = new java.sql.Date(activationDate.getTime());
 					
-					String updatePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
+					String updatePromoQuery = is.getSystemPropertyValue("PROMOTION_INSERT_UPDATE_QUERY");
 					LOGGER.info("insert statemnt "+updatePromoQuery);
 					PreparedStatement updatePromoPS = con.prepareStatement(updatePromoQuery);
 					updatePromoPS.setInt(1, promoID);
@@ -238,7 +239,7 @@ public class PromoListing implements CSURLExternalTask {
 			if(con!=null && !con.isClosed()){
 				for(String promoIDStr : deletePromoAL){
 					int promoID = Integer.parseInt(promoIDStr);
-					String deletePromoQuery = PropertyReader.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
+					String deletePromoQuery = is.getSystemPropertyValue("PROMOTION_DELETE_QUERY")+promoID;
 					Statement deleteStatement = con.createStatement();
 					int rowCount = deleteStatement.executeUpdate(deletePromoQuery);
 					LOGGER.debug("Deleted " + rowCount + " rows successfully");
@@ -303,7 +304,7 @@ public class PromoListing implements CSURLExternalTask {
 		LOGGER.debug("Enter updateRuntimePromoListing");
 		System.out.println("Enter updateRuntimePromoListing");
 		//Step 1 : Read the json file and update create and delete ArrayLists
-		String promoJsonRTFilePath = PropertyReader.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(jobIDStr).concat(".json");
+		String promoJsonRTFilePath = is.getSystemPropertyValue("PROMO_JSON_RELATIVE_PATH").concat(jobIDStr).concat(".json");
 		//promoJsonRTFilePath = "/iwmnt/default/main/UOB/WORKAREA/shared/"+promoJsonRTFilePath; //Need to change this later to fetch RT path dynamically
 		promoJsonRTFilePath = lsds_runtime_path.concat("/").concat(promoJsonRTFilePath); //Need to change this later to fetch RT path dynamically
 		LOGGER.debug("promoJsonRTFilePath "+promoJsonRTFilePath);
