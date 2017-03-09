@@ -215,8 +215,8 @@ public class PromoListingAuth implements CSURLExternalTask {
 						addPromoBeanMap.put("expirydate", plb.getExpiryDate());
 						addPromoBeanMap.put("activationdate", plb.getActivationDate());
 						addPromoBeanMap.put("sitename", plb.getSiteName());
-						addPromoBeanMap.put("productcategorylabel", plb.getPromoCategoryLabel());
-						addPromoBeanMap.put("productcategoryname", plb.getPromoCategoryName());
+						addPromoBeanMap.put("promocategorylabel", plb.getPromoCategoryLabel());
+						addPromoBeanMap.put("promocategoryname", plb.getPromoCategoryName());
 						addPromoBeanMap.put("promoimage", plb.getPromoImage());
 						addPromoBeanMap.put("promoalttext", plb.getPromoAltText());
 						addPromoBeanMap.put("promolife", plb.getPromoLife());

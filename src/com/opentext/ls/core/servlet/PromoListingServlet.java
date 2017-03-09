@@ -68,8 +68,18 @@ public class PromoListingServlet extends HttpServlet {
 		LOGGER.debug("Inside PromoListingServlet : doPost");
 		final String env = request.getParameter("env");
 		LOGGER.debug("Env is "+env);
-		final String promoCategory = request.getParameter("promoCategory");
+		final String promoSiteName = request.getParameter("promoSiteName");
+		String promoCategory = request.getParameter("promoCategory");
+		if (promoCategory == null || promoCategory.trim().isEmpty()){
+			promoCategory = "";
+		}
+		String promoCountry = request.getParameter("promoCountry");
+		if (promoCountry == null || promoCountry.trim().isEmpty()){
+			promoCountry = "";
+		}
 		LOGGER.debug("Promo Category is "+promoCategory);
+		LOGGER.debug("Promo SiteName is "+promoSiteName);
+		LOGGER.debug("Promo Country is "+promoCountry);
 		Connection con = null;
 		JSONArray jArray = new JSONArray();
 		JSONObject promoListJSON = new JSONObject();
@@ -78,7 +88,8 @@ public class PromoListingServlet extends HttpServlet {
 			DBConnectionManager dbConMan = new DBConnectionManager();
 			if(env != null && !env.isEmpty() && env.equalsIgnoreCase("runtime")){
 				LOGGER.debug("Servlet call for runtime ");
-				con = dbConMan.getRTDBConnection();
+				//con = dbConMan.getRTDBConnection();
+				con = dbConMan.getLocalRTDBConnection();
 			}
 			else{
 				LOGGER.debug("Servlet call for authoring");
@@ -91,22 +102,19 @@ public class PromoListingServlet extends HttpServlet {
 			Date today = new Date();
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			String todayStr = df.format(today);
+			LOGGER.debug("Today's date "+ todayStr);
 			PreparedStatement ps;
-			String selectPromoQuery = "SELECT * from WSMSG_PROMOTIONLIST WHERE PRODUCTCATEGORY = '"+promoCategory+"' AND ((ACTIVATIONDATE <= TO_DATE('"
+			/*String selectPromoQuery = "SELECT * from twsm_pweb_promotionlist WHERE promocategoryname = '"+promoCategory+"' AND ((ACTIVATIONDATE <= TO_DATE('"
 								+ todayStr
 								+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
 								+ todayStr
-								+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
-			
-			if(promoCategory == null || promoCategory.isEmpty()){
-				selectPromoQuery = "SELECT * from WSMSG_PROMOTIONLIST WHERE (ACTIVATIONDATE <= TO_DATE('"
-						+ todayStr
-						+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
-						+ todayStr
-						+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen' ORDER BY PROMOTITLE";
+								+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";*/
+			String selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE sitename = '"+promoSiteName+"' AND promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
+			if(promoSiteName == null || promoSiteName.trim().isEmpty()){
+				selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
 			}
+			LOGGER.debug("selectPromoQuery "+ selectPromoQuery);
 			ps = con.prepareStatement(selectPromoQuery);
-			
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();

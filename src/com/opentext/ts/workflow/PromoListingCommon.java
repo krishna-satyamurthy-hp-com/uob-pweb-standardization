@@ -29,8 +29,8 @@ public class PromoListingCommon {
 					String promoExpDate = promoMap.get("expirydate");
 					String promoActDate = promoMap.get("activationdate");
 					String siteName = promoMap.get("sitename");
-					String promoCategoryLabel = promoMap.get("productcategorylabel");
-					String promoCategoryName = promoMap.get("productcategoryname");
+					String promoCategoryLabel = promoMap.get("promocategorylabel");
+					String promoCategoryName = promoMap.get("promocategoryname");
 					String promoImage = promoMap.get("promoimage");
 					String promoTitle = promoMap.get("promotitle");
 					String promoAltText = promoMap.get("promoalttext");
