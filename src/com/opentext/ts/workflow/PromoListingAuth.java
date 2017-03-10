@@ -58,7 +58,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 			this.promoTaskType = task.getVariable("promoTaskType"); //preview | promoJsonCreator | runtime
 			LOGGER.debug("Workflow ID is "+this.jobID);
 			LOGGER.info("Files WA path : "+areaVpath);
-			
+			LOGGER.debug("Branch name ----" + task.getArea().getBranch().getName());
+			LOGGER.debug("Parent Branch Name ----" +task.getArea().getBranch().getParentBranch().getName());
+			LOGGER.debug("Super Parent Branch Name ----" +task.getArea().getBranch().getParentBranch().getParentBranch().getName());
 			CSAreaRelativePath[] waFiles = task.getFiles();
 			String fileVPathStr;
 			for(CSAreaRelativePath fileVPath : waFiles){

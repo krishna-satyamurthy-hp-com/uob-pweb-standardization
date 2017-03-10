@@ -12,9 +12,11 @@ import com.interwoven.livesite.common.util.GeneratorUtils;
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.external.PropertyContext;
 import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class CategoryDatumGenerator {	
 	private static final Log LOGGER = LogFactory.getLog(CategoryDatumGenerator.class);
+	PropertyReader is= new PropertyReader();
 	public Document generateCategoryOptions(PropertyContext context) {
 		
 		Document document = null;
@@ -42,11 +44,12 @@ public class CategoryDatumGenerator {
 		LOGGER.debug("rootlocation: "+ rootLocation);
 		try
 		{
-			Map params = context.getParameters();
-			String filerelativePath = (String) params.get("CategoryFile");
+			//Map params = context.getParameters();
+			//String filerelativePath = (String) params.get("CategoryFile");
+			String filerelativePath =  is.getSystemPropertyValue("PROMOTION_CATEGORY_TEMPLATEDATA_PATH").concat(context.getSite().getName());
 			LOGGER.debug("filepath: "+filerelativePath);
 			document = DCRUtils.loadFile(rootLocation, filerelativePath);
-			LOGGER.debug("Returned document: "+ document);
+			LOGGER.debug("Returned document: "+ document.asXML());
 		}
 		catch (Throwable ex)
 		{
