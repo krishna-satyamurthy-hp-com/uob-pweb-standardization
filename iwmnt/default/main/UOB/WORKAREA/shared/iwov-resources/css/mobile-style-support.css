@@ -1,0 +1,15 @@
+.apply-now-fixed {
+	left: 15px;
+}
+
+[class^="ico-p-"] {
+  background: url("../iwov-resources/images/icon-p-socials.png") 0 0 no-repeat !important;
+}
+
+.apply-now-fixed .arrow-expand {
+  background: #0d2b63 url('../iwov-resources/images/up-arrow.png') center no-repeat !important;
+}
+
+.apply-now-fixed .arrow-expand.open {
+  background: #0d2b63 url('../iwov-resources/images/down-arrow.png') center no-repeat !important;
+}

@@ -1,0 +1,4 @@
+en::English(US)
+sc::Chinese
+id::Bahasa
+tw::Taiwanese

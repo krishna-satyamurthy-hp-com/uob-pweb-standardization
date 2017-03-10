@@ -1,0 +1,620 @@
+* { margin: 0; padding: 0; }
+.liteService { z-index: 1; }
+.km { left: 5px; -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); font-family: 'Open Sans', sans-serif; font-size: 18px; font-weight: bold; color: #6c6c6c; list-style-type: none; text-align: center; }
+.kmMessage { left: 5px; -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); font-family: 'Open Sans', sans-serif; font-size: 1.125em; font-style: italic; color: #6c6c6c; list-style-type: none; // font-weight: 600; text-align: left; padding: 10px 0 10px 10px; background-color: #cdd5e0; border-bottom: 1px solid #9199a4; }
+.menu { width: 100%; height: 60px; background-color: #f3f3f3; padding: 10px 10px 10px 25px; display: inline-block; box-sizing: border-box; }
+.menuArrow { float: left; margin-top: 20px; margin-left: 10px; cursor: pointer; }
+.menuImg { width: 45px; height: 45px; margin-top: 5px; margin-left: 10px; float: left; cursor: pointer; }
+img.sg { display: block; margin: 10px auto auto; }
+.menuText { color: #ffffff; font-size: 11px; font-family: 'Open Sans', sans-serif; margin-top: 10px; float: left; text-align: center; cursor: pointer; }
+.country { width: 70px; height: 45px; float: left; }
+.divider { float: left; height: 45px }
+.branch { display: inline-block; position: relative; }
+.back-branch { display: none; margin-top: 8px; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 500; color: #002265; cursor: pointer; }
+.icon-arrow-left { background: url('../../images/uob-atm/icon-arrow-left.png') 0 0 no-repeat; height: 15px; width: 8px; padding-right: 10px; }
+.icon-arrow-right { background: url('../../images/uob-atm/icon-arrow-right.png') 0 0 no-repeat; height: 15px; width: 8px; padding-right: 10px; }
+.machine { width: 152px; height: 100%; float: left; }
+.others { width: 132px; height: 100%; float: left; }
+.title { font-weight: bold; }
+.distance,
+.address { font-weight: normal; }
+li.store { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004); font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; list-style-type: none; cursor: pointer; padding: 25px 5px 0 25px; position: relative; margin-left: 0; margin-top: 0; margin-bottom: 1px; z-index: 10; background: #f3f3f3 no-repeat 5px 0; }
+li.store .store { margin-left: 20px; }
+li.compDist .store { margin-left: 40px; }
+li.compDist .distance { position: absolute; left: 12px; top: 26px; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; }
+li.store .title { width: 95%; color: #00205b; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 700; }
+li.store:after { content: ''; position: absolute; width: 100%; border-bottom: 1px solid #cccccc; margin-top: 0; left: 0; right: 0; }
+.map_embbed { width: 940px; }
+.map-frame { position: relative; width: 100%; height: 515px; overflow: hidden; }
+li.store:hover { background-color: #dee3e7; z-index: 10; }
+li.store.selected { background-color: #dee3e7; z-index: 10; }
+li.store .type,
+li.store .openhour { padding-bottom: 10px; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; }
+.sidePane { position: absolute; top: 0; right: 0; width: 287px; height: 100%; z-index: 10; background: #f3f3f3; }
+.sidePane p { padding: 10px; z-index: 10; }
+.list-panel,
+.route-panel { width: 268px; position: absolute; overflow-y: scroll; overflow-x: hidden; height: 540px; z-index: 50; background-color: #f3f3f3; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 300; }
+.route-panel { display: none; }
+
+/* .resultPane{width:268px; position:absolute;overflow-y:scroll;overflow-x:hidden;height:540px;z-index:10;background-color:#f3f3f3;font-family:'Open Sans',sans-serif;font-size:12px;font-weight:300;}*/
+.list-panel .storelist { width: 287px; }
+
+/*common style*/
+.float-right { float: right; }
+.no-select { cursor: default; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+.no-select:focus,
+.no-select:hover { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+.not-detect,
+.not-found { display: none; }
+
+/*common style*/
+
+/*.resultPane::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.resultPane::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.resultPane::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.resultPane::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent
+    background-color: rgba(0, 0, 0, .5);
+}*/
+
+/*.gm-style-iw::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 11px;
+}
+.gm-style-iw::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+.gm-style-iw::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, .5);
+}*/
+
+/*.store ul{
+  vertical-align: middle;
+}*/
+
+.map-canvas { height: 100%; width: 654px; min-width: 100px; margin: 0; padding: 0; z-index: 1; }
+.toggle { position: absolute; display: block; width: 33px; height: 104px; top: 50%; left: -25px; margin-top: -52px; background: url(../../images/uob-atm/toggerBtnClose.png) no-repeat; }
+
+/*.store-list{
+  500-74 -16x2 (magrin-top,bot) -46 (control bar) -12
+  overflow: -moz-scrollbars-vertical;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  margin-left: 10px;
+  overflow: auto;
+  padding: 0;
+  width: 334px;
+  width: 100%;
+  height:354px;
+  max-height: 354px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  z-index: 2;
+  display: none;
+  font-weight: bold;
+}*/
+.branchMenuPOI,
+.machineMenuPOI,
+.otherMenuPOI { font-style: normal; font-variant: normal; font-weight: normal; color: #000000;    /*margin-top:0.3em;*/ }
+
+/* .branchMenuPOI,.machineMenuPOI, .otherMenuPOI{
+  margin-top:0.3em;
+ } */
+.MenuPOI.click { color: #ed1b2c; }
+.checkbox { position: absolute; display: inline-block; width: 24px; height: 24px; background-repeat: no-repeat; background-position: center; right: 15px; top: 7px; }
+/*.uobmap-list-item.clicked .checkbox { background-image: url('../img/checkbox.png'); }*/
+.uobmap-list-item.clicked .menuPOItext { color: #dd5356; }
+
+/*MENU CSS*/
+.selectBranchMenu,
+.selectMachineMenu,
+.selectOthersMenu { -webkit-font-smoothing: antialiased; font-style: normal; font-variant: normal; font-weight: bold; font-family: 'Open Sans', sans-serif; font-size: 18px; color: #000000; position: absolute; border: 1px solid #ccc; background: white; overflow: hidden; display: none; z-index: 10; width: 100%; }
+span { display: inline-block; vertical-align: middle }
+.menuPOItext { display: inline-block; vertical-align: middle; top: 25%; position: absolute; padding-left: 15px; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 700; }
+.uobmap-list-item:hover { color: #dd5356; z-index: 10; }
+.uobmap-list-item { height: 40px; display: block; cursor: pointer; white-space: nowrap; color: rgb(40, 40, 40); position: relative; z-index: 10; letter-spacing: 0; -webkit-font-smoothing: antialiased; font-style: normal; font-variant: normal; font-weight: 700; font-family: 'Open Sans', sans-serif; font-size: 13px; border-bottom: 1px solid #cccccc; background-color: #f3f3f3; }
+.selectBranchMenu { background-color: #f3f3f3; }
+.selectBranchMenu .title { background-color: #ccd5df; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: normal; padding: 12px 15px; letter-spacing: 0; text-transform: uppercase; }
+.selectMachineMenu {    /*left:212px;*/ }
+.selectOthersMenu {    /*left:352px;*/ }
+.selectBranchMenu.show,
+.selectMachineMenu.show,
+.selectOthersMenu.show { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: block; }
+.selectBranchMenu.show { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: block; }
+.POI { clear: both; position: absolute; right: 0; }
+.geocodesearch-block { position: relative; display: inline-block; }
+.geocodesearch-block .recent-searches { display: none; width: 268px; left: 0; top: 36px; z-index: 99; }
+
+.geocodesearch { position: absolute; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-left: 1px solid #999999; margin-right: 2px; z-index: 2; top: 1px; right: 0; cursor: pointer; }
+.geocodefilter { margin-right: 2px; cursor: pointer; }
+.geocodefilter-block.active { background-color: #ccd5df; }
+.geocodemenu { margin-right: 2px; cursor: pointer; }
+#geocodeInput {
+  width: 215px;
+  height: 35px;
+  background: white;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #999999;
+  right: 5px;
+  margin-right: 40px;
+  padding: 0 0px 0 15px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5a9aff;
+  border-right: 0;
+  outline: none;
+}
+#geocodeInput.active { border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
+.last-search { display: none; position: absolute; background-color: #fff; width: 270px; z-index: 99; right: 0; top: 37px; margin-right: 1px; border-right: 1px solid #e3e3e3; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; color: #5a9aff; }
+.last-search span { display: block; border-bottom: 1px solid #e3e3e3; padding: 10px 20px; }
+#container { overflow: hidden; }
+.contentTop { position: relative; }
+.menu-select { display: none; position: absolute; top: 46px; width: 332px; left: 25px; z-index: 99; background: #f3f3f3; }
+.custom-select { width: 322px; height: 35px; border: 1px solid #cccccc; border-radius: 5px; background-color: #ffffff; padding-left: 8px; color: #00205b; font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 35px; }
+.custom-select.active { border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-bottom: none; }
+.show-result { z-index: 999; bottom: 14px; text-align: center; line-height: 30px; width: 258px; left: 60px; border-radius: 5px; background-color: #5abe75; color: #ffffff; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; margin: 7px auto; }
+.icon-arrow-down { position: absolute; top: 0; right: 15px;}
+.custom-iw .gm-style-iw { top: 15px !important; left: 0 !important; border-radius: 2px; }
+.custom-iw>div:first-child>div:nth-child(2) { display: none; }
+.custom-iw .gm-style-iw,
+.custom-iw .gm-style-iw>div,
+.custom-iw .gm-style-iw>div>div { width: 100% !important; max-width: 100% !important; }
+
+/** set here the width **/
+.custom-iw,
+.custom-iw>div:first-child>div:last-child { width: 355px !important; }
+.custom-iw>div:first-child>div:last-child { left: 0 !important; top: 0; box-shadow: rgba(0, 0, 0, 0.6) 0 1px 6px; z-index: -1 !important; border-radius: 5px !important; }
+.custom-iw .custom-iw-close { position: absolute !important; top: 10px !important; right: 10px !important; width: 27px !important; height: 27px !important; }
+.custom-iw .custom-iw-close:after,
+.custom-iw-close:before { content: '' !important; position: absolute !important; top: 5px !important; right: 0 !important; width: 15px !important; height: 2px !important; background-color: #00205b !important; }
+.custom-iw-close:after { transform: translateY(0) rotate(-45deg) !important; -webkit-transform: translateY(0) rotate(-45deg) !important; }
+.custom-iw-close:before { transform: translateY(0) rotate(45deg) !important; -webkit-transform: translateY(0) rotate(45deg) !important; }
+
+/** padding of the content **/
+#div-main-infoWindow { padding: 6px; }
+.infowindow { font-family: 'Open Sans', sans-serif; font-size: 12px; padding: 5px 15px 15px 15px; }
+.infowindow .title,
+.infowindow .openhour,
+.infowindow .available-services,
+.infowindow .service-message { font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 700; }
+.infowindow .address,
+.infowindow .tel,
+.infowindow .openhour .openhourDetail,
+.infowindow .available-services .type,
+.infowindow .service-message .descSum { font-weight: 300; }
+.infowindow .openhour,
+.infowindow .available-services,
+.infowindow .service-message { margin-top: 15px; }
+.infowindow .service-message .descSum,
+.infowindow .service-message .desDe { font-weight: 300; color: #a76d71; }
+.infowindow .direction { background-color: #5abe75; text-align: center; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 500; color: #fff; border-radius: 5px; height: 30px; line-height: 30px; margin-top: 15px; }
+.list-panel .route,
+.route-panel .route { padding: 2px; background-color: #f3f3f3; width: 287px; box-sizing: border-box; }
+.route ul { position: relative; left: 1px; }
+.route li { list-style: none; display: inline-block; padding: 12px 38px; height: 18px; vertical-align: top; margin-right: -5px; position: relative; border: 1px solid #e7e9eb; background-color: #fff; box-sizing: content-box; }
+.route li:first-child { border-top-left-radius: 4px; }
+.route li:last-child { border-top-right-radius: 4px; }
+.info .icon-print { float: right; cursor: pointer; }
+.route li.active { background-color: #7d8592; }
+.desc-block { background-color: #0f5fb7; padding: 25px 15px; }
+.desc-block ul { list-style: none; }
+.desc-block span { font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; color: #fff; }
+.desc-block span.text-start,
+.desc-block span.text-end { padding-left: 10px; width: 80%; height: 15px; }
+.desc-block .ellipses ul { padding: 5px 0; margin-left: 4px; }
+.desc-block .ellipses ul li { margin-bottom: -5px; }
+.list-route-block ul { list-style: none; display: block; }
+.list-route-block .no-service { padding: 20px; text-align: center; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 500; color: #0f5fb7; }
+.detail-block { position: relative; list-style-type: none; border-bottom: 2px solid #ccc; background-color: #f3f3f3; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; overflow: hidden; }
+.detail-block:hover,
+.detail-block.active { background-color: #e3e3e3; cursor: pointer; width: 100%; }
+.detail-block .type { position: relative; float: left; padding: 18px 9px 0 15px; }
+.detail-block .info { position: relative; float: left; margin-top: 5px; width: 150px; }
+.detail-block .info p { padding-left: 0; padding-bottom: 0; }
+.detail-block .info span { font-size: 10px; margin-bottom: 20px; }
+.detail-block .info .detail { text-transform: uppercase; color: #0f5fb7; margin-bottom: 10px; padding-top: 0; }
+.detail-block .distance { float: right; margin-top: 5px; margin-right: -5px; width: 90px; }
+.detail-block .distance p { padding-bottom: 0; color: #0f5fb7; }
+.detail-block .distance span { margin-left: 10px; }
+.block-route { background-color: #0f5fb7; color: #fff; padding: 10px 0 20px 35px; }
+.block-route .icon-back { position: absolute; display: block; left: 15px; top: 77px; cursor: pointer; }
+.block-route p { padding-bottom: 0; }
+.route-sum { padding: 15px; }
+.route-sum span { margin-right: 15px; font-size: 14px; font-weight: 500; }
+.route-sum span:first-child { color: #0f5fb7; }
+.route-sum p { padding: 10px 0 0 0; font-size: 10px; font-weight: 500; }
+.route-sum .info span { font-size: 10px; font-weight: 500; color: #666666; }
+.route-sum span.route-duration-traffic { margin-right: 5px; }
+.route-start,
+.route-end { background-color: #849bb4; color: #fff; }
+.route-start p,
+.route-end p { margin-left: 5px; }
+.route-start .route-location,
+.route-end .route-location { padding: 5px 20px 15px 40px; position: relative;}
+.route-end .route-location span { display: block; }
+.route-location .icon-location { position: absolute; left: 15px; }
+.route-detail-step { padding: 10px 5px 10px 20px; }
+.route-detail-step li { list-style-type: none; }
+.route-detail-step .describe { display: inline-block; width: 185px; margin-bottom: 20px; }
+.route-detail-step span { position: relative; float: right; right: 10px; font-weight: 600; }
+#container { width: 100%; position: relative; margin: 0 auto; min-width: 1024px; min-height: 600px; max-width: 1180px;}
+.center-bottom-block { border: 1px solid #cccccc; padding: 10px; }
+.top-expand { height: 8px; width: 100%; background: url("../../images/uob-atm/bottom_bar_bg.png") bottom left repeat-x; position: absolute; cursor: pointer; text-align: center; }
+.ico-expand { height: 50px; width: 111px; background: url("../../images/uob-atm/arrow_up_bar.png") center top no-repeat; margin-top: -50px; }
+.ico-expand.active { background: url("../../images/uob-atm/arrow_down_bar.png") center top no-repeat, url("../../images/uob-atm/bottom_bar_bg.png") bottom left repeat-x; }
+.geocodefilter-block,
+.geocodemenu-block { display: none; }
+.sort-list { display: none; background: #d6dfe9; }
+.sort-list ul { width: 100%; padding: 8px 15px; }
+.sort-list ul li { display: inline-block; width: 25px; font-size: 12px; text-align: center; color: #424955; position: relative; z-index: 1; }
+.sort-list ul li.active { font-weight: 700; }
+.sort-list ul li.active:before { position: absolute; content: ""; height: 33px; width: 22px; top: -8px; left: 0; background: #eaf4ff; z-index: -1; }
+.sort-list .icon-arrow-right { display: none; position: absolute; top: 0; right: 0; height: 32px; z-index: 10; background: #d6dfe9 url('../../images/uob-atm/icon-arrow-right.png') center no-repeat; }
+.sort-list .icon-arrow-left { display: none; position: absolute; top: 0; left: 0; height: 32px; z-index: 10; background: #d6dfe9 url('../../images/uob-atm/icon-arrow-left.png') center no-repeat; }
+.sidePane_bottom { display: none; position: absolute; bottom: 0; height: 8px; width: 100%; z-index: 10; background: #fff; transition: all 0.5s ease; }
+.sidePane_bottom_container { display: block; width: 100%; height: 100%; background: #fff; position: relative; }
+.sidePane_facility_details .distance,
+.sidePane_bottom_container .distance { display: inline-block; vertical-align: top; font-size: 12px; color: #333; width: 36px; }
+.sidePane_facility_details .infowindow,
+.sidePane_bottom_container .infowindow { padding: 15px 45px 25px 10px; position: relative; height: 100%; }
+.sidePane_facility_details .infowindow .direction,
+.sidePane_bottom_container .infowindow .direction { position: absolute; right: 0; top: 0; width: 45px; height: 100%; margin-top: 3px; border-radius: 0; background: url("../../images/uob-atm/ico-direction.png") center no-repeat; border-left: 1px solid #ccc; }
+.sidePane_facility_details .infowindow .direction span,
+.sidePane_bottom_container .infowindow .direction span { display: none; }
+.sidePane_facility_details .infowindow .title,
+.sidePane_bottom_container .infowindow .title { color: #00205b; }
+.sidePane_facility_details { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fff; z-index: 7070; margin-left: 999px; min-width: 414px; }
+.sidePane_facility_details .infowindow .direction { border: none; background-position: center 15px; }
+.sidePane_bottom_container .address,
+.sidePane_bottom_container .tel,
+.sidePane_bottom_container .tit-head,
+.sidePane_bottom_container .descDe,
+.sidePane_bottom_container .descSum1,
+.sidePane_bottom_container .descDe1,
+.sidePane_bottom_container .descSum2,
+.sidePane_bottom_container .descDe2,
+.sidePane_bottom_container .descSum3,
+.sidePane_bottom_container .descDe3 { display: none; }
+.fac_header { }
+.fac_header .icon-arrow-left { }
+.fac_header .navibar { width: 100%; display: block; background: #fff; padding: 16px 10px; font-size: 14px; color: #424955; }
+.fac_header .title { height: 60px; width: 100%; display: block; background: #d9e2eb; padding: 0 10px; }
+.fac_header .title h3 { font-size: 16px; font-family: 'Open Sans', sans-serif; line-height: 60px; }
+
+/*.sidePane_facility_details {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: red;  z-index: 7070;}*/
+.sidePane_direction_form { position: absolute; top: 0; right: 0; width: 670px; height: 60px; background-color: #f3f3f3; z-index: 3; display: none; }
+.sidePane_direction_form .top-nav { display: none; }
+.location-form { float: right; }
+.sidePane_direction_form .icon-arrow-left { background: url('../../images/uob-atm/icon-arrow-left.png') 0 0 no-repeat; height: 15px; width: 8px; padding-right: 10px; }
+.location-form .icon-location-black { display: inline-block; padding-right: 5px; }
+.location-form .location-field { height: 60px; line-height: 60px; display: inline-block; padding-right: 10px; position: relative; }
+.location-form .field-label { color: #424955; font-size: 1.17em; padding-right: 5px; }
+.location-form input { height: 30px; border: 1px solid #959595; border-radius: 5px; background-color: #fff; color: #1f6eda; padding: 0 10px; width: 180px; line-height: 30px; font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 500; }
+.location-form .get-directions-btn { width: 110px; color: #fff; background-color: #5abe75; text-align: center; height: 30px; line-height: 30px; border-radius: 5px; display: inline-block; margin-right: 15px; cursor: pointer; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 100; }
+.recent-searches { display: none; position: absolute; top: 42px; left: 71px; z-index: 4; background-color: #fff; border: 1px solid #959595; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: 0; width: 200px; }
+.recent-searches .recent-title { font-size: 13px; color: #999; padding: 10px; line-height: 13px; }
+.recent-searches .recent-item { font-size: 13px; color: #666; padding: 10px; border-bottom: 1px solid #b2b2b2; width: 100%; line-height: 13px; word-wrap: break-word; box-sizing: border-box; cursor: pointer; }
+.recent-searches .recent-item:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
+.sidePane-top-filter { display: none; }
+.choose-start-point { background-color: #ccd5df; color: #424955; padding: 20px 10px; font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 500; }
+.hide { display: none; }
+.ie .sidePane_direction_form .recent-searches { left: 68px; }
+.ie input::-ms-clear { display: none; }
+.route-back-mobile { display: none; }
+.see-route-list { display: none; box-sizing: border-box; text-align: right; padding: 3px 15px; }
+.see-route-list p { float: left; font-size: 16px; color: #0f5fb7; }
+.see-route-list .summary { padding: 10px 0; }
+.see-route-list a:visited,
+.see-route-list a:link { color: #fff; text-decoration: none; }
+.button-srl { background: #5abe75; display: inline-block; color: #fff; border-radius: 4px; text-decoration: none; font-size: 14px; height: 40px; width: 111px; text-align: center; vertical-align: middle; }
+.button-srl .text { line-height: 40px; }
+.button-srl.inactive { background: none; padding: 0; width: auto; }
+.button-srl.inactive .text { display: none; }
+.button-srl.inactive .icon-x { display: inline-block; vertical-align: middle; }
+.prefix-summary { display: none; }
+.hid-desktop { display: none; }
+.hid-phone { display: block; }
+iframe { border: 0; }
+.store-no-js li { padding: 0; }
+.custom-radio input[type="radio"] { display: none; }
+.custom-radio .store { padding: 10px 20px 20px 0;
+    margin: -15px 0 0;
+}
+input[type="radio"] ~ img { display: none; }
+input[type="radio"]:checked ~ img { display: block; margin: 0 auto; padding-bottom: 20px; }
+noscript ~ .map-frame { display: none; }
+.sidePane-no-js { width: 100%; }
+.iframe-no-js { width: 1024px; height: 768px; }
+noscript ~ .contentTop { text-align: center; }
+noscript ~ .contentTop .menu { width: 1024px; }
+noscript ~ .sidePane_bottom {display: none;}
+.list-panel-no-js li { padding: 1px; }
+.list-panel-no-js div.store { padding-top: 40px; }
+.text-no-js { text-align: center; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 500; padding: 10px 0; color: #ED1B2C;}
+.m-popup { position: absolute; width: 97%; top: 0; left: 0; z-index: 101; background-color: #fff; text-align: center; border-radius: 12px; padding-top: 15px; font-family: 'Open Sans', sans-serif; max-width: 400px; }
+.m-popup .title { color: #000; font-size: 20px; font-weight: 700; }
+.m-popup .content { border-bottom: 1px solid #eee; }
+.m-popup .content p { padding: 10px; color: #000; font-size: 16px; font-weight: 500; }
+.m-popup .m-close { width: 100%; padding: 10px 0; font-size: 1.45em; font-weight: 700; color: #007aff; }
+.overlay { position: fixed; top: 0; right: 0; width: 100%; height: 100%; background-color: #000; opacity: .7; z-index: 100; }
+.pac-container:last-child { z-index: 1011 !important; }
+
+/*icon sprite*/
+.icon {
+  background-image:url('../../images/uob-atm/icons.png');
+  background-repeat:no-repeat;
+  display:inline-block;
+  background-color:transparent;
+}
+.icon-search {
+  background-position: -5px -8px;
+  width: 36px;
+  height: 35px;
+  background-color: #eee;
+  border: 1px solid #999999;
+  top : 0;
+}
+.icon-arrow-down {
+  background-position: -13px -98px;
+  width: 19px;
+  height: 30px;
+}
+.icon-driving {
+  background-position: -65px -619px;
+  width: 21px;
+  height: 17px;
+}
+.icon-transit {
+  background-position: -67px -667px;
+  width: 18px;
+  height: 19px;
+}
+.icon-walk {
+  background-position: -68px -709px;
+  width: 14px;
+  height: 23px;
+}
+li.active .icon-driving {
+  background-position: -19px -619px;
+  width: 21px;
+  height: 17px;
+}
+li.active .icon-transit {
+  background-position: -18px -667px;
+  width: 18px;
+  height: 19px;
+}
+li.active .icon-walk {
+  background-position: -20px -709px;
+  width: 14px;
+  height: 23px;
+}
+.ellipse {
+  display: block;
+  background-position: -65px -534px;
+  width: 15px;
+  height: 15px;
+}
+.icon-location {
+  display: block;
+  background-position: -20px -574px;
+  width: 13px;
+  height: 19px;
+}
+.m-ellipse {
+  display: inline-block;
+  background-position:  -46px -558px;
+  width: 6px;
+  height: 6px;
+}
+.m-icon-driving {
+  display: block;
+  background-position: -65px -619px;
+  width: 21px;
+  height: 17px;
+}
+.m-icon-transit {
+  display: block;
+  background-position: -67px -667px;
+  width: 18px;
+  height: 19px;
+}
+.m-icon-walk {
+  display: block;
+  background-position: -68px -709px;
+  width: 14px;
+  height: 23px;
+}
+.icon-print {
+  background-position: -15px -236px;
+  width: 15px;
+  height: 15px;
+}
+.icon-back {
+  background-position: -64px -569px;
+  width: 16px;
+  height: 13px;
+}
+.icon-location-black {
+  background-position: -19px -531px;
+  width: 13px;
+  height: 19px;
+}
+.icon-arrow-left {
+  background-position: -73px -180px;
+  width: 8px;
+  height: 15px;
+}
+.uobmap-list-item .icon.checkbox {
+  display: none;
+}
+.uobmap-list-item.clicked .checkbox {
+  display: block;
+  background-position: -70px -146px;
+  width: 20px;
+  height: 15px;
+}
+.infowindow-arrow {
+  position: absolute;
+  background-position: -9px -1950px;
+  width: 21px;
+  height: 27px;
+  left: -11px;
+  top: 20px;
+}
+.infowindow-arrow.bottom {
+  top: initial;
+  bottom: -15px; 
+  left: 177px; 
+  -ms-transform: rotate(270deg); 
+  -webkit-transform: rotate(270deg); 
+  transform: rotate(270deg);
+}
+.icon-man { 
+  position: absolute; 
+  background-position: -33px -1169px;
+  width: 32px;
+  height: 32px;
+  left: 12px;
+  top: 110px;
+}
+
+@media only screen and (-moz-min-device-pixel-ratio:1.5), 
+only screen and (-o-min-device-pixel-ratio:3/2), 
+only screen and (-webkit-min-device-pixel-ratio:1.5), 
+only screen and (min-devicepixel-ratio:1.5), 
+only screen and (min-resolution:1.5dppx) {
+  .icon {
+    background-size: 50px 1250px;
+  }
+  .icon-search {
+    background-position: 1px -20px;
+  }
+  .geocodefilter {
+    background-position: -15px -657px;
+    width: 20px;
+    height: 28px;
+  }
+  .listview {
+    background-position: -12px -762px;
+    width: 26px;
+    height: 28px;
+  }
+  .mapview {
+    background-position: -11px -720px;
+    width: 26px;
+    height: 28px;
+  }
+  .icon-location-black {
+    background-position: -18px -817px;
+    width: 13px;
+    height: 19px;
+  }
+  .icon-arrow-left {
+    background-position: -34px -8px;
+    width: 8px;
+    height: 15px;
+  }
+  .m-icon-driving,
+  .icon-driving {
+    background-position: -14px -488px;
+    width: 22px;
+    height: 17px;
+  }
+  .m-icon-transit,
+  .icon-transit {
+    background-position: -15px -519px;
+    width: 19px;
+    height: 19px;
+  }
+  .m-icon-walk,
+  .icon-walk {
+    background-position: -18px -549px;
+    width: 15px;
+    height: 23px;
+  }
+  li.active .icon-driving {
+    background-position: -14px -384px;
+    width: 22px;
+    height: 17px;
+  }
+  li.active .icon-transit {
+    background-position: -16px -419px;
+    width: 19px;
+    height: 19px;
+  }
+  li.active .icon-walk {
+    background-position: -17px -451px;
+    width: 15px;
+    height: 23px;
+  }
+  .uobmap-list-item.clicked .checkbox {
+    display: block;
+    background-position: -30px -50px;
+    width: 21px;
+    height: 15px;
+  }
+  .icon-location {
+    background-position: -18px -844px;
+    width: 13px;
+    height: 19px;
+  }
+  .icon-arrow-down {
+    background-position: -4px -70px;
+    width: 19px;
+    height: 11px;
+    top: 12px;
+  }
+  .ellipse {
+    background-position: -5px -932px;
+    width: 15px;
+    height: 15px;
+  }
+  .m-ellipse {
+    display: inline-block;
+    background-position: -8px -957px;
+    width: 6px;
+    height: 7px;
+  }
+  .icon-print {
+    background-position: -31px -932px;
+    width: 15px;
+    height: 15px;
+  }
+  .icon-back {
+    background-position: -30px -956px;
+    width: 16px;
+    height: 13px;
+  }
+  .infowindow-arrow {
+    background-position: -25px -973px;
+    width: 21px;
+    height: 27px;
+  }
+  .icon-man { 
+    background-position: -8px -611px;
+  }
+  .icon-x {
+    display: none;
+    background-position: -5px -1013px;
+    width: 41px;
+    height: 40px;
+  }
+}
+/* Apply fix for navigation bar */
+.navbar-header span:not(.caret) {
+  display: inline;
+}

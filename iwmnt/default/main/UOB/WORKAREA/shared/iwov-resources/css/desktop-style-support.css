@@ -1,0 +1,36 @@
+.bxslider-type-2 .bx-wrapper a.btn-red {
+	background-color:  #dc1f2d;
+}  
+
+.bxslider-type-2 .bx-wrapper a.btn-red:hover, 
+.bxslider-type-2 .bx-wrapper a.btn-red:active {
+	background-color: #06377b;
+}
+
+.sticky-wrapper section[class*="-block"] .heading2 {
+  padding: 0 30px 0 50px;
+  margin: 0 0 30px;
+  outline: none;
+}
+.sticky-wrapper section[class*="-block"] .heading2.subtitle {
+  margin-bottom: 5px;
+}
+.sticky-wrapper section[class*="-block"] .heading2.subtitle + span {
+  display: block;
+  font-size: 16px;
+  padding: 0 50px 30px;
+}
+.sticky-wrapper section[class*="-block"] .heading2-t-30 {
+  padding: 30px 0;
+  padding-left: 50px;
+  outline: none;
+}
+.sticky-wrapper section[class*="-block"] .heading2-t-30.subtitle {
+  margin-bottom: 5px;
+}
+.sticky-wrapper section[class*="-block"] .heading2-t-30.subtitle + span {
+  display: block;
+  font-size: 16px;
+  padding: 0 50px 30px;
+}
+			 
