@@ -1,0 +1,108 @@
+#container{
+    display: block;
+    height: auto !important;
+    width: auto !important;
+    overflow: visible;
+}
+.print-container {
+    overflow: visible;
+    width: auto;
+}
+.map-frame{
+
+    height: auto !important;
+}
+.print-container {
+    max-width: 100% !important;
+}
+.published-content {
+
+}
+.map-canvas{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.sidePane{
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100% !important;
+    height: auto;
+}
+
+.route-detail-step .describe {
+    display: block !important;
+    width: 75% !important;
+}
+
+.slimScrollDiv{
+    height: auto !important;
+}
+.block-route {
+    background-color: #0f5fb7 !important;
+    color: #fff !important;
+}
+.block-route p {
+    color: #fff !important;
+}
+.route-panel{
+    position: static;
+    height: auto !important;
+    width: 100%;
+    background-color: #f3f3f3 !important;
+}
+
+.route-panel .route{
+    width: auto;
+}
+
+.route li{
+    margin-right: 0px;
+    width: 50px;
+    text-align: center;
+}
+
+.route li.active{
+    border: 2px solid #7d8592;
+    background-color: transparent; !important;
+}
+
+.route li i{
+    display: none !important;
+}
+
+.route li img {
+    display: inline-block !important;
+    height: 19px;
+}
+
+.icon{
+    background-image: none !important;
+    background-color: transparent !important;
+}
+.block-route-detail .route-duration {
+    color: #0f5fb7 !important;
+}
+.route-start, .route-end {
+    background-color: #849bb4 !important;
+    color: #fff !important;
+}
+.gmnoprint, 
+.gm-style-cc,
+header,
+#main-navbar,
+#footer,
+.iemessage,
+.skip-link {
+    display: none !important;
+}

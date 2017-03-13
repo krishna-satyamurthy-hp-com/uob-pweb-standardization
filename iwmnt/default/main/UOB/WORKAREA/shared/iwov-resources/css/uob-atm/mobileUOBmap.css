@@ -1,0 +1,138 @@
+@media screen and (max-width:992px) {
+    #container { width: 100%; min-width: 0; }
+    .menu,
+    .map-frame { width: 100%; }
+    #geocodeInput { left: 0; }
+    .title-content { width: 100%; }
+}
+@media screen and (min-width:768px) {
+    .sidePane_direction_form { width: 510px; }
+    .location-form input { width: 100px; }
+}
+@media screen and (min-width:992px) {
+    .sidePane_direction_form { width: 670px; }
+    .location-form input { width: 180px; }
+}
+@media screen and (max-width:767px) {
+    .hid-phone { display: none; }
+    .hid-desktop { display: block; }
+ 
+    .geocodesearch-block {
+        float: left;
+        padding: 13px 10px;
+        width: calc(100% - 100px); /* 100px: total width 2 icon & padding 10*/
+    }
+    #geocodeInput { width: calc(100% - 36px); /* 36px: width icon search*/}
+    .geocodefilter-block,
+    .geocodemenu-block { display: inline-block; position: relative; padding: 18px 10px 17px; }
+
+    /*.geocodefilter, .geocodemenu {display: none;}*/
+    .pac-container{
+        width: 95%!important;
+    }
+    .float-right { text-align: right; }
+    .branch { display: none; }
+    .menu { padding: 0; }
+    .menu-fixed { position: fixed; top: 0; left: 0; z-index: 20; }
+    .menu-select { top: 60px; left: 0; width: 100%; position: fixed; }
+    .float-right { float: left; width: 100%; }
+    .sidePane { width: 100%; position: fixed; z-index: 11; background-color: #fff; top: 60px; display: block; box-sizing: border-box;}
+    .desc-block { display: none; }
+    .geocodesearch { top: 13px; right: 10px; }
+    /*.sidePane_bottom { display: block; }*/
+    .map-frame { margin-top: -3px; }
+    .map-canvas { width: 100%; }
+    .last-search { top: 50px; width: 270px; left: 10px; }
+    .inner-info { height: 130px; overflow: auto; padding: 0 10px; display: inline-block; width: 80%; vertical-align: middle; }
+    .list-panel,
+    .route-panel { width: 100%; overflow: auto;}
+    .list-panel .route,
+    .route-panel .route { width: 100%; text-align: right; padding: 2px 15px; background-color: #fff; }
+    .route-back-mobile { display: inline-block; font-size: 14px; float: left; margin-top: 13px; z-index: 100; }
+    .route ul { display: inline-block; left: 0; margin-bottom: 0;}
+    .list-route-block ul {margin-bottom: 0;}
+    .see-route-list .summary {padding-bottom: 0;}
+    .see-route-list { display: block; background-color: #d9e2eb; }
+    .block-route { display: none; }
+    .route-sum { display: none; }
+    .sidePane_facility_details { display: block; opacity: 0; width: 100%; min-width: 0; }
+    .route-detail-step { background-color: #fff; }
+    .route-detail-step .describe { width: 85%; }
+    .back-branch { display: none !important; }
+    .sort-list { display: block; overflow: auto; }
+    .detail-block { width: 100%; }
+    .show-route-detail { width: 100%; overflow: auto;}
+    .selectBranchMenu { overflow: auto; }
+    .uobmap-list-item:hover { color: rgb(40, 40, 40); }
+    .center-bottom-block { position: fixed; bottom: 0; width: 100%; background: #67788b; z-index: 11; }
+
+    /*.slimScrollDiv {width: 100% ; top: 60px ; left: 0 ; background-color: #67788b ; }*/
+
+    /*.show-result{font-size: 14px; height: 40px; line-height: 40px; bottom: 10px; width: 280px; left: 50%; margin-left: -140px; }*/
+    .show-result { font-size: 14px; height: 40px; line-height: 40px; bottom: 10px; width: 280px; margin: 2px auto; }
+    .sidePane_direction_form { display: none; position: absolute; width: 100%; min-height: 100%; background-color: #fff; top: 0; left: 0; z-index: 11; color: #424955; opacity: 0; overflow: auto;}
+    .sidePane_direction_form .top-nav { display: block; padding-left: 10px; height: 49px; line-height: 49px; color: #002265; font-size: 14px; font-weight: 500; font-family: 'Open Sans', sans-serif; cursor: pointer; }
+    li.compDist .distance { width: 36px; }
+    li.compDist .store { margin-left: 60px; }
+    .location-form { background-color: #d9e2eb; padding: 15px; float: none; }
+    .location-form .location-field { height: 40px; line-height: 40px; margin-bottom: 10px; padding-right: 0; display: block; }
+    .location-form .field-label { padding-right: 0; width: 50px; }
+    .location-form input { height: 40px; border: none; border-radius: 5px; background-color: #f3f3f3; padding: 0 10px; width: 65%; float: right; }
+    .location-form .get-directions-btn { width: 100%; height: 40px; line-height: 40px; display: block; }
+    .recent-searches { display: block; position: static; width: 100%; border: none; }
+    .geocodesearch-block .recent-searches { position: absolute; top: 50px; text-align: left; left: 10px; border: 1px solid #959595; width: 100%;}
+    .recent-searches .recent-title { font-size: 14px; padding: 30px 15px 10px 15px; }
+    .recent-searches .recent-item { font-size: 14px; padding: 15px; border-bottom: 1px solid #b2b2b2; width: 100%; }
+    .list-panel { width: 100%; }
+    .list-panel .storelist { width: 100%; overflow: auto; }
+    .list-panel .storelist .direction-list-branch { position: absolute; top: 0; right: 0; width: 40px; height: 100%; background: url("../../images/uob-atm/ico-direction.png") center no-repeat; border-left: 1px solid #ccc; cursor: pointer; }
+    li.store { padding-right: 40px; }
+    .list-panel.non-auto-detection li.store { padding: 10px 40px 0 0; }
+    .sidePane-top-filter { display: none; height: 30px; width: 100%; background-color: #d6dfe9; }
+    iframe { width: 100%; height: 100%; }
+    .list-route-block{ width: 100%; }
+    .iframe-no-js { width: 100%; }
+    input[type="radio"]:checked ~ img {
+        width: 100%;
+    }
+    .sidePane-no-js {
+        position: relative;
+        top: 118px;
+    }
+    .sidePane-no-js li.store {
+        padding-right: 0;
+    }
+    noscript {
+        font-size: 0;
+        display: block;
+    }
+    .text-no-js {
+        position: fixed;
+        font-size: 14px;
+        background-color: #fff;
+        width: 100%;
+        height: 50px;
+    }
+    noscript ~ .menu {
+        position: fixed;
+        top: 57px;
+        border-bottom: 1px solid #dee3e7;
+    }
+}
+
+@media screen and (max-width:414px) {
+
+    .last-search { width: 165px; }
+}
+@media screen and (max-width:360px) {
+    .route li { padding: 12px 25px; }
+}
+@media screen and (max-width:350px) {
+    #geocodeInput { width: 130px; }
+    .last-search { width: 130px; }
+    .inner-info { width: 75%; }
+}
+@media screen and (max-height:414px) and (orientation:landscape) {
+    .sidePane_facility_details .infowindow .direction,
+    .sidePane_bottom_container .infowindow .direction { background-position: center 25px; }
+}

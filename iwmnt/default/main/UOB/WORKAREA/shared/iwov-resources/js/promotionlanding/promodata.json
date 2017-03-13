@@ -1,0 +1,100 @@
+    {
+    "promo_details": [
+    	{
+    		"product_category": "Numerical Title",
+    		"promo_title": "090231",
+    		"promo_image": "images/deposits-landing/img-2.jpg",
+    		"promo_alt_text": "images/deposits-landing/img-2.jpg",
+    		"activate_date": "10-01-2016",
+    		"expiry_date": "11-01-2016",
+    		"promo_desc": {
+    			"title_text": "",
+    			"desc": ""
+    		}
+    	},
+    	{
+    		"product_category": "Promotions",
+    		"promo_title": "Receive a limited edition National Day NETS FlashPay Card* (with cash value of S$51).",
+    		"promo_image": "images/deposits-landing/img-2.jpg",
+    		"promo_alt_text": "images/deposits-landing/img-2.jpg",
+    		"activate_date": "10-12-2016",
+    		"expiry_date": "11-01-2016",
+    		"promo_desc": {
+    			"title_text": "",
+    			"desc": ""
+    		}
+    	},
+    	{
+    		"product_category": "CashPlus",
+    		"promo_title": "Enjoy up to 1.35% p.a.* on a 13-month Singapore Dollar Fixed Deposit.",
+    		"promo_image": "images/deposits-landing/img-5.jpg",
+    		"promo_alt_text": "deposits-landing/img-5.jpg",
+    		"activate_date": "10-22-2016",
+    		"expiry_date": "10-30-2016",
+    		"promo_desc": {
+    			"title_text": "",
+    			"desc": ""
+    		}
+    	},
+    	{
+        "product_category": "CashPlus",
+        "promo_title": "Receive a limited edition National Day NETS FlashPay Card* (with cash value of S$51).",
+        "promo_image": "images/deposits-landing/img-1.jpg",
+        "promo_alt_text": "deposits-landing/img-1.jpg",
+        "activate_date": "10-17-2016",
+        "expiry_date": "10-27-2016",
+        "promo_desc": {
+          "title_text": "<ul class=\"list-disc\" style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; padding-left: 0px; font-weight: bold; color: #333333; font-family: 'Open Sans', Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\"><li style=\"box-sizing: border-box; position: relative; padding-left: 15px; list-style-type: none;\">1-for-1 buffet (Mon-Sun)</li><li style=\"box-sizing: border-box; position: relative; padding-left: 15px; list-style-type: none;\">1 dines free with 3 paying adults for buffet lunch (Mon-Sun)</li></ul>",
+          "desc": "<p style=\"box-sizing: border-box; margin: 0px 0px 10px; font-size: 16px; color: #333333; font-family: 'Open Sans', Arial, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\">Valid from 4 September to 31 September.</p><p style=\"box-sizing: border-box; margin: 0px 0px 10px; font-size: 16px; color: #333333; font-family: 'Open Sans', Arial, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;\">This is the paragraph of the description of the promotion. Lorem ipsum dolor sit amet, consectetur adipiscingelit. Fusce ut est venenatis, laoreet ligula in, viverra est. Suspendisse nec congue enim, vitae feugiat urna. Sed sit amet consequat risus. Ut sit amet lectus elit.</p>"
+        }
+      },
+      {
+        "product_category": "Deposits",
+        "promo_title": "Enjoy up to 3.33% p.a. with One Account",
+        "promo_image": "images/deposits-landing/img-3.jpg",
+        "promo_alt_text": "Enjoy up to 3.33% p.a. with One Account",
+        "activate_date": "10-17-2016",
+        "expiry_date": "10-19-2016",
+        "promo_desc": {
+          "title_text": "<p><span style=\"color: #222222; font-family: Consolas, 'Lucida Console', monospace; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; display: inline !important; float: none;\">Enjoy up to 3.33% p.a. with One Account</span></p>",
+          "desc": "<p><span style=\"color: #222222; font-family: Consolas, 'Lucida Console', monospace; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; display: inline !important; float: none;\">Enjoy up to 3.33% p.a. with One Account</span></p>"
+        }
+      },
+      {
+        "product_category": "Loans",
+        "promo_title": "Enjoy up to 3% p.a.* with UOB Global Currency Premium Account",
+        "promo_image": "images/deposits-landing/img-2.jpg",
+        "promo_alt_text": "deposits-landing/img-2.jpg",
+        "activate_date": "10-20-2016",
+        "expiry_date": "10-29-2016",
+        "promo_desc": {
+          "title_text": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>",
+          "desc": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>"
+        }
+      },
+	  {
+        "product_category": "Loans",
+        "promo_title": "Test up to 3% p.a.* with UOB Global Currency Premium Account",
+        "promo_image": "images/deposits-landing/img-2.jpg",
+        "promo_alt_text": "deposits-landing/img-2.jpg",
+        "activate_date": "10-20-2016",
+        "expiry_date": "10-29-2016",
+        "promo_desc": {
+          "title_text": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>",
+          "desc": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>"
+        }
+      },
+	  {
+        "product_category": "Loans",
+        "promo_title": "100 up to 3% p.a.* with UOB Global Currency Premium Account",
+        "promo_image": "images/deposits-landing/img-2.jpg",
+        "promo_alt_text": "deposits-landing/img-2.jpg",
+        "activate_date": "10-20-2016",
+        "expiry_date": "10-29-2016",
+        "promo_desc": {
+          "title_text": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>",
+          "desc": "<p>Enjoy up to 3% p.a.* with UOB Global Currency Premium Account</p>"
+        }
+      }
+    ]
+  }	

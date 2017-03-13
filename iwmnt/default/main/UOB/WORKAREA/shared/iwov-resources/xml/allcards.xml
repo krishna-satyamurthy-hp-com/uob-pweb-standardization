@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contentRoot>
+    <card_highlights>
+        <card_category>FEATURED</card_category>
+        <card_type>CREDIT</card_type>
+        <card_title>UOB YOLO</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+    <card_highlights>
+        <card_category>FEATURED</card_category>
+        <card_type>CREDIT</card_type>
+        <card_title>UOB YOLO Two</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>FEATURED</card_category>
+        <card_type>DEBIT</card_type>
+        <card_title>UOB world Debit</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>FEATURED</card_category>
+        <card_type>DEBIT</card_type>
+        <card_title>UOB Debit YOLO</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>REWARD</card_category>
+        <card_type></card_type>
+        <card_title>UOB Reward One</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>REWARD</card_category>
+        <card_type></card_type>
+        <card_title>UOB Reward Two</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>REWARD</card_category>
+        <card_type></card_type>
+        <card_title>UOB Reward Three</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>REWARD</card_category>
+        <card_type></card_type>
+        <card_title>UOB Reward Four</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>TRAVEL</card_category>
+        <card_type></card_type>
+        <card_title>UOB TRAVEL One</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>TRAVEL</card_category>
+        <card_type></card_type>
+        <card_title>UOB Travel Two</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+	<card_highlights>
+        <card_category>REBATE</card_category>
+        <card_type></card_type>
+        <card_title>UOB YOLO</card_title>
+        <tile_image>/iwov-resources/images/card-compare-landing/card-thumb-1.png</tile_image>
+        <card_image_alt>test</card_image_alt>
+        <tile_image_link>http://www.uob.sg/</tile_image_link>
+        <card_subhead>Eat . Drink . Play . Repeat</card_subhead>
+        <tile_summary>
+    8% rebate on dining
+    1-for-1 deals
+    Priority access
+</tile_summary>
+    </card_highlights>
+</contentRoot>
