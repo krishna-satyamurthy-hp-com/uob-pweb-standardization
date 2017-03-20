@@ -17,6 +17,7 @@ public class PropertyReader  {
 	/*private static Properties properties = new Properties();
 	
 	
+	
 	//Below is a sample properties file for testing purpose
 	private static String APP_CONF_PATH = "/usr/Interwoven/TeamSite/local/config/constants.properties";
 	
