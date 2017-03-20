@@ -16,6 +16,7 @@ public class PropertyReader  {
      private static final transient Log LOGGER = LogFactory.getLog(PropertyReader.class);
 	/*private static Properties properties = new Properties();
 	
+	
 	//Below is a sample properties file for testing purpose
 	private static String APP_CONF_PATH = "/usr/Interwoven/TeamSite/local/config/constants.properties";
 	
