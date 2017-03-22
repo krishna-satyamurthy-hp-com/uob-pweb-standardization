@@ -1,0 +1,57 @@
+#!/app/teamsite/iw-home/TeamSite/iw-perl/bin/iwperl
+
+#
+# Desc: Create HTML from TPL file external script for WF
+
+use TeamSite::WFtask;
+use TeamSite::Config;
+use TeamSite::WFworkflow;
+use TeamSite::Uniscape::uniscape qw(UTF8ToNative_2);
+use File::Find;
+
+my $iwhome = TeamSite::Config::iwgethome();
+my $logger = $iwhome."/local/logs/iwui/workflowtpl.log";
+my $date = localtime();
+
+open(my $LOG, ">>", $logger) or die "cannot open > ".$logger.": $!";
+
+print $LOG "**** START Log ($date)*****\n";
+
+my $task= new TeamSite::WFtask($ARGV[1]);
+my $areapath= $task->GetArea();
+
+my @files = $task->GetFiles();
+my $dcrpath = $files[0];
+
+        print $LOG "\n JOB ID: $ARGV[0]";
+        print $LOG "\n TASK ID: $ARGV[1]";
+        print $LOG "\n areapath : $areapath";
+        print $LOG "\n dcrpath : $dcrpath";
+
+
+        my $tlpname= $task->GetVariable("tpl_name");
+        my $htmlloc= $task->GetVariable("html_loc");
+
+        my $html_loc= "iwmnt".$htmlloc;
+
+        print $LOG "\n tpl_name : $tlpname";
+        print $LOG "\n html_loc : $htmlloc";
+        print $LOG "\n html_complete_loc : $html_loc";
+
+        my $dcrvpath= "iwmnt".$areapath."/".$dcrpath;
+        print $LOG "\n Complete DCR Path : $dcrvpath";
+
+        my $cmd_com = $iwhome."/bin/iwpt_compile.ipl -pt ".$tlpname." -iw_pt-dcr /".$dcrvpath." -iw_include-location -ofile /".$html_loc." -smartwrite -osenc US-ASCII -umask 0113";
+        my $cmd_ = `$iwhome/bin/iwpt_compile.ipl -pt $tlpname -iw_pt-dcr /$dcrvpath -iw_include-location -ofile /$html_loc -smartwrite -osenc US-ASCII -umask 0113 2>&1`;
+        my $cmdresult = $?;
+        print $LOG "\n Command to run : $cmd_com";
+        print $LOG "\n Command Exit Status : $cmdresult";
+
+
+print $LOG "\n**** END LOG *****\n\n\n";
+
+#Close LOG handle
+close($LOG);
+
+#Retun to next Transition
+$task->CallBack(0, "End2");

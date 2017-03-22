@@ -1,0 +1,247 @@
+#!/app/teamsite/iw-home/TeamSite/iw-perl/bin/iwperl
+
+#######################################
+# Retrieve, display and send to WF    #
+# available tpls on specific WORKAREA #
+#######################################
+
+use TeamSite::CGI_lite;
+use TeamSite::Config;
+use IO::File;
+use XML::XPath;
+
+
+$|=1;
+
+my $cgi = TeamSite::CGI_lite->new();
+$cgi->parse_data();
+
+my $element_name          = $cgi->{'form'}{'iw_callback_var'};
+my $item_name             = $cgi->{'form'}{'iw_item_name'};
+my $item_description      = $cgi->{'form'}{'iw_item_description'};
+my $area_path             = $cgi->{'form'}{'area_path'};
+
+
+# Get tpl info from templating.cfg
+$IW_home = TeamSite::Config::iwgethome();
+my $templating_path = $IW_home . "/local/config/templating.cfg";
+
+my $xp = XML::XPath->new( filename => $templating_path );
+
+my @dataType;
+my @template;
+for my $node ( $xp->findnodes('//*') ) {
+      for my $attr ( $node->getAttribute('name')) {
+        if ($attr && ($attr =~ '.tpl$')){
+          push @template, $attr;
+          my $parent = $node->getParentNode;
+          my $dataParent = $parent->getParentNode;
+          my $categoryParent = $dataParent->getParentNode;
+          push @dataType, join('/', $categoryParent->getAttribute('name'), $dataParent->getAttribute('name'));
+        }
+      }
+    }
+
+my @vpaths;
+for($i=0; $i < @template; $i++){
+  push @vpaths, join('/presentation/', $dataType[$i], $template[$i]);
+}
+
+if(!@vpaths){
+  error_message("Coul not get information from templating.cfg");
+  exit 1;
+}
+
+# Arrange the area_path
+$area_path =~ s{\/data.*}{$1};
+$area_path = $area_path . "/";
+
+# Search for all available tpl's on vpath
+my $tpl_full_path;
+push(@tpl_full_path, `/usr/bin/find \"$area_path\" -name "*.tpl" -type f`);
+
+if (!@tpl_full_path){
+  error_message("Could not create/update list. Did not found any tpl's under $area_path");
+  exit 1;
+}
+
+my $options;
+# Compare tpl from templating and vpath
+foreach my $templating_value (@vpaths){
+  foreach my $found_path (@tpl_full_path){
+    if (index($found_path, $templating_value) != -1){
+      chomp($found_path);
+      my %hash = ( 'value' => $found_path, 'label' => $found_path);
+      push(@options, \%hash);
+    }
+  }
+}
+
+if (!@options){
+  error_message("Could not create/update list. tpl's under $area_path are not defined on templating.cfg");
+  exit 1;
+}
+
+print_ui( @options );
+
+exit 0;
+
+sub print_ui {
+    my (@options) = @_;
+
+    print_header();
+
+    print <<"END";
+<FORM NAME="callout_form">
+<TABLE BORDER="0" CELLPADDING="0" ALIGN="CENTER">
+<TR>
+<TD VALIGN="TOP" WIDTH="150">
+<FONT SIZE="-1">$item_name</FONT>
+<BR>
+<FONT SIZE="-1"><EM>$item_description</EM></FONT>
+</TD>
+<TD VALIGN="TOP">
+<SELECT NAME="selection_list">
+END
+
+    foreach my $hash (@options)
+    {
+        my $value = $hash->{'value'};
+        my $label = $hash->{'label'};
+        if ($label eq '')
+        {
+            $label = $value;
+        }
+        print "<OPTION VALUE=\"$value\">$label</OPTION>\n";
+    }
+
+print <<"END";
+</SELECT>
+</TD>
+</TR>
+</TABLE>
+<CENTER>
+<INPUT TYPE="BUTTON" VALUE="OK"     onClick="handle_selection()">
+<INPUT TYPE="BUTTON" VALUE="Cancel" onClick="self.close()">
+</CENTER>
+</FORM>
+END
+
+    print_footer();
+
+    return;
+}
+
+sub error_message {
+    my (@msgs) = @_;
+
+    print_header();
+    foreach my $message (@msgs)
+    {
+        print $message;
+    }
+
+    print <<"END";
+<CENTER>
+<FORM>
+<INPUT TYPE="BUTTON" VALUE="OK" onClick="self.close()">
+</FORM>
+</CENTER>
+END
+
+    print_footer();
+    return;
+}
+
+sub print_header {
+    print<<"END";
+Content-type: text/html
+
+<HTML>
+<HEAD>
+<TITLE>Select TPL</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function set_datacapture_item_value( selectedValue )
+{
+    if ((window.opener == null)   ||
+        (window.opener.closed))
+    {
+        return false;
+    }
+
+    // Changed to work with new CGI env and multi file operations
+    // formsPubAPI is used to look up the item in the current DataCapture Context
+    // this ensure the correct file context is used to look up and set the item value
+    // the look up uses the element name with out any file context prefix "fc_xxx"
+
+    // In multi-file tagging, the assumption is that prior to the invocation of the CGI callout the DataCapture context
+    // has been switched to the specific file. This is ascertained when clicking the callout button.
+
+    var element = '/'+'$element_name';
+    var api = window.opener.getScriptFrame();
+    // set the value to the element in the current file context
+    api.IWDatacapture.getItem(element).setValue(selectedValue);
+
+    return true;
+}
+
+function handle_selection()
+{
+    if (callback())
+    {
+        if(opener.top.datacapture) {
+          opener.top.datacapture.refreshForm();
+        }
+        self.close();
+    }
+    else
+    {
+        alert('Please make a selection.');
+    }
+}
+
+function callback()
+{
+    var optionsArray = document.callout_form.selection_list.options;
+    for ( i = 0 ; i < optionsArray.length ; i++ )
+    {
+        if (optionsArray[i].selected)
+        {
+            if (!set_datacapture_item_value( optionsArray[i].value ))
+            {
+                alert('Fatal callout error.  Did you close the datacapture window?');
+            }
+            return true;
+        }
+    }
+    // did not find a selected option!
+    return false;
+}
+
+
+// -->
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<TABLE BORDER=0 cellpadding=0 cellspacing=0 WIDTH=100%>
+        <TR>
+                <TD ALIGN="LEFT"><B>Select TPL</B><BR><BR>
+                <FONT SIZE="-1"><B>TPL's found under: $area_path</B></FONT><BR></TD>
+                <TD ALIGN="RIGHT" VALIGN="TOP"><IMG SRC="/iw-cc/formspub/images/logo.gif"></TD>
+        </TR>
+</TABLE>
+END
+
+    return;
+}
+
+
+sub print_footer {
+    print <<"END";
+</BODY>
+</HTML>
+END
+    return;
+}

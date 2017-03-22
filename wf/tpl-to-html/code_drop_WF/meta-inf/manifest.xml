@@ -1,0 +1,18 @@
+<spar>
+<name>code_drop_WF</name>
+<version>
+<major>1</major>
+<minor>0</minor>
+</version>
+<author>
+<name>OpenText Team</name>
+<organization>Interwoven, Inc.</organization>
+<email></email>
+</author>
+<category/>
+<depends/>
+<livesite_depends>7.2.1</livesite_depends>
+<copyright>Copyright 2008, Interwoven Inc.</copyright>
+<changelog/>
+<notes/>
+</spar>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProcessModelConfiguration xmlns="http://www.interwoven.com/schema/modelConfig">
+    <Config id="select_tpl">
+        <Label>select_tpl</Label>
+        <Description>TPL Name</Description>
+        <Value></Value>
+        <Hidden>false</Hidden>
+        <Readonly>false</Readonly>
+        <Property name="NodeId">Workflow Properties1</Property>
+        <Property name="Mandatory">false</Property>
+        <Property name="PropertyName">Global Variables</Property>
+        <Property name="NodeType">ModelProperties</Property>
+        <Property name="UIWidget">text</Property>
+        <Property name="IsGlobal">true</Property>
+    </Config>
+    <Config id="save_html">
+        <Label>save_html</Label>
+        <Description>HTML Location</Description>
+        <Value></Value>
+        <Hidden>false</Hidden>
+        <Readonly>false</Readonly>
+        <Property name="NodeId">Workflow Properties1</Property>
+        <Property name="Mandatory">false</Property>
+        <Property name="PropertyName">Global Variables</Property>
+        <Property name="NodeType">ModelProperties</Property>
+        <Property name="UIWidget">text</Property>
+        <Property name="IsGlobal">true</Property>
+    </Config>
+</ProcessModelConfiguration>
