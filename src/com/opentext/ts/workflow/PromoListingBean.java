@@ -20,15 +20,16 @@ public class PromoListingBean {
 	CSFile dcrCSFile;
 	CSVPath dcrCSVPath;
 	Node promoDCRDetailsNode;
-    String promoID,expiryDate,activationDate,siteName,promoCategoryLabel,promoCategoryName,promoImage,promoTitle,promoAltText,promoLife,promoPage,promoCountry,promoCreator,promoModifier;
+    String promoID,expiryDate,activationDate,countryCode,siteName,promoCategoryLabel,promoCategoryName,promoImage,promoTitle,promoAltText,promoLife,promoPage,promoCountry,promoCreator,promoModifier;
     Date promoCreationDate,promoModifiedDate;
     String dcrServerPath = "";
     File dcrFile;    
     PropertyReader is= new PropertyReader();
 
-	public PromoListingBean(CSFile dcrCSFile) throws CSException {
+	public PromoListingBean(CSFile dcrCSFile, String countryCode) throws CSException {
 		LOGGER.debug("Entering  "+this.getClass());
 		this.dcrCSFile = dcrCSFile;
+		this.countryCode = countryCode;
 		setPromoBeanValues();
 	}
     
@@ -53,6 +54,7 @@ public class PromoListingBean {
 			setPromoID(getPromoXPathValue("promoId"));
 			setExpiryDate(getPromoXPathValue("Expiry_Date"));
 			setActivationDate(getPromoXPathValue("Activation_Date"));
+			setCountryCode(this.countryCode);
 			setSiteName(getPromoXPathValue("SiteName"));
 			setPromoCategoryLabel(getPromoXPathValue("promotion_category_label"));
 			setPromoCategoryName(getPromoXPathValue("promotion_category_name"));
@@ -141,6 +143,14 @@ public class PromoListingBean {
 
 	public void setActivationDate(String activationDate) {
 		this.activationDate = activationDate;
+	}
+	
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 	
 	public String getSiteName() {

@@ -43,6 +43,7 @@ public class PromoListingAuth implements CSURLExternalTask {
 	String areaVpath;
 	int jobID;
 	String promoTaskType;
+	String countryCode;
 	CSClient paramCSClient;
 	CSExternalTask task;
 	
@@ -56,9 +57,14 @@ public class PromoListingAuth implements CSURLExternalTask {
 			this.areaVpath = task.getArea().getVPath().toString();
 			this.jobID = task.getWorkflowId();
 			this.promoTaskType = task.getVariable("promoTaskType"); //preview | promoJsonCreator | runtime
+			
+			LOGGER.debug("Branch name : " + task.getArea().getBranch().getName());
+			LOGGER.debug("Parent Branch Name : " +task.getArea().getBranch().getParentBranch().getName());
+			//this.countryCode = task.getArea().getBranch().getParentBranch().getParentBranch().getName();
+			this.countryCode = "SG";
+			LOGGER.debug("countryCode : " +this.countryCode);
 			LOGGER.debug("Workflow ID is "+this.jobID);
 			LOGGER.info("Files WA path : "+areaVpath);
-			
 			CSAreaRelativePath[] waFiles = task.getFiles();
 			String fileVPathStr;
 			for(CSAreaRelativePath fileVPath : waFiles){
@@ -116,7 +122,7 @@ public class PromoListingAuth implements CSURLExternalTask {
 	        }
 	        
 	       try{
-				readPromoDCR(promoRequest,dcrCSFile);
+				readPromoDCR(promoRequest,dcrCSFile,this.countryCode);
 			}catch(CSException cse){
 				LOGGER.error("CSException while reading promo dcr "+cse.getMessage());
 			}
@@ -137,6 +143,7 @@ public class PromoListingAuth implements CSURLExternalTask {
 						LOGGER.debug("PromoID "+plb.getPromoID());
 						LOGGER.debug("plb.getExpiryDate( "+plb.getExpiryDate());
 						LOGGER.debug("plb.getActivationDate()) "+plb.getActivationDate());
+						LOGGER.debug("plb.getCountryCode()) "+plb.getCountryCode());
 						LOGGER.debug("plb.getSiteName()) "+plb.getSiteName());
 						LOGGER.debug("plb.getPromoCategoryLabel() "+plb.getPromoCategoryLabel());
 						LOGGER.debug("plb.getPromoCategoryName()) "+plb.getPromoCategoryName());
@@ -181,9 +188,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 	 * @param dcrPath
 	 * @param promoRequest
 	 */
-	public void readPromoDCR(String promoRequest, CSFile dcrCSFile) throws CSException{
+	public void readPromoDCR(String promoRequest, CSFile dcrCSFile, String countryCode) throws CSException{
 		LOGGER.debug("Inside readPromoDCR");
-		PromoListingBean plb = new PromoListingBean(dcrCSFile);
+		PromoListingBean plb = new PromoListingBean(dcrCSFile,countryCode);
 		if(promoRequest.equalsIgnoreCase("create")){
 			LOGGER.info("Request type is create or update promotion");			
 			this.createPromoBeanAL.add(plb);
@@ -214,6 +221,7 @@ public class PromoListingAuth implements CSURLExternalTask {
 						addPromoBeanMap.put("promoid", plb.getPromoID());
 						addPromoBeanMap.put("expirydate", plb.getExpiryDate());
 						addPromoBeanMap.put("activationdate", plb.getActivationDate());
+						addPromoBeanMap.put("countrycode", plb.getCountryCode());
 						addPromoBeanMap.put("sitename", plb.getSiteName());
 						addPromoBeanMap.put("promocategorylabel", plb.getPromoCategoryLabel());
 						addPromoBeanMap.put("promocategoryname", plb.getPromoCategoryName());

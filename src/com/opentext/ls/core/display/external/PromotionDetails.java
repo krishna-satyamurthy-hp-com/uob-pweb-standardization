@@ -40,7 +40,7 @@ public class PromotionDetails {
 	String nextURL = "";
 	String currentPromoCategory = "";
 	String env="";
-	
+	String promoSiteName = "";
 	PropertyReader is= new PropertyReader();
 	
 	public Document execute(RequestContext context) throws ParseException{
@@ -50,6 +50,9 @@ public class PromotionDetails {
 		this.currentPromoCategory = ((Element)promotionListingDoc.selectSingleNode("//product_category" )).getText();		
 		LOGGER.debug("currentPromoCategory is "+currentPromoCategory);
 		this.env = context.isRuntime()?"runtime":"authoring";
+		LOGGER.debug("env is "+env);
+		this.promoSiteName = context.getSite().getName();
+		LOGGER.debug("promoSiteName is "+promoSiteName);
 		fetchPromoPrevNextURLs(context);
 		
 		promotionListingDoc.getRootElement().addElement("PrevPromo").setText(prevURL);
@@ -95,8 +98,9 @@ public class PromotionDetails {
 		promoServletPath = !(env.equalsIgnoreCase("runtime"))?"/iw-cc"+promoServletPath:promoServletPath;
 		
 		final String charset = "UTF-8";
-		String query = String.format("env=%s&promoCategory=%s", 
+		String query = String.format("env=%s&promoSiteName=%s&promoCategory=%s", 
 			     URLEncoder.encode(this.env, charset), 
+			     URLEncoder.encode(this.promoSiteName, charset), 
 			     URLEncoder.encode(this.currentPromoCategory, charset));
 		URI uri = null;
 		uri = new URI(scheme, null, hostname, port, promoServletPath, null, null);

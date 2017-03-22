@@ -68,6 +68,7 @@ public class PromoListingServlet extends HttpServlet {
 		LOGGER.debug("Inside PromoListingServlet : doPost");
 		final String env = request.getParameter("env");
 		LOGGER.debug("Env is "+env);
+		final String countryCode = request.getParameter("countryCode");
 		final String promoSiteName = request.getParameter("promoSiteName");
 		String promoCategory = request.getParameter("promoCategory");
 		if (promoCategory == null || promoCategory.trim().isEmpty()){
@@ -109,10 +110,17 @@ public class PromoListingServlet extends HttpServlet {
 								+ "','YYYY-MM-DD') AND EXPIRYDATE > TO_DATE('"
 								+ todayStr
 								+ "','YYYY-MM-DD')) OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";*/
-			String selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE sitename = '"+promoSiteName+"' AND promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
-			if(promoSiteName == null || promoSiteName.trim().isEmpty()){
+			String selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE countrycode = '"+countryCode+"' AND sitename = '"+promoSiteName+"' AND promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
+			if(countryCode != null || !countryCode.trim().isEmpty() && promoSiteName == null || promoSiteName.trim().isEmpty()){
+				selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE countrycode = '"+countryCode+"' AND promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
+			}
+			if(countryCode == null || countryCode.trim().isEmpty() && promoSiteName != null || !promoSiteName.trim().isEmpty()){
+				selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE sitename = '"+promoSiteName+"' AND promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
+			}
+			if(countryCode == null || countryCode.trim().isEmpty() && promoSiteName == null || promoSiteName.trim().isEmpty()){
 				selectPromoQuery ="SELECT * from twsm_pweb_promotionlist WHERE promocountry like '%"+promoCountry+"%' AND promocategoryname like'%"+promoCategory+"%' AND ((ACTIVATIONDATE <= '"+ todayStr +"' AND EXPIRYDATE > '"+ todayStr +"') OR PROMOLIFE='Evergreen') ORDER BY PROMOTITLE";
 			}
+			
 			LOGGER.debug("selectPromoQuery "+ selectPromoQuery);
 			ps = con.prepareStatement(selectPromoQuery);
 			ResultSet rs = ps.executeQuery();
