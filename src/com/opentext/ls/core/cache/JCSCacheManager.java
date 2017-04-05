@@ -56,7 +56,7 @@ public final class JCSCacheManager {
         try {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Creating JCS Cache Object: " + jcsKey);
-                LOGGER.debug("Document Cached: " + jcsDoc.asXML().toString());
+                LOGGER.debug("Cached document content: " + jcsDoc.asXML().toString());
             }
             cache = JCS.getInstance(JCSCacheConstants.CACHE_REGION_NAME);
             cache.put(jcsKey, jcsDoc);
@@ -71,7 +71,7 @@ public final class JCSCacheManager {
         try {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Creating JCS Cache Object: " + jcsKey);
-                LOGGER.debug("Document Cached: " + jcsValue);
+                LOGGER.debug("Cached document content: " + jcsValue);
             }
             cache = JCS.getInstance(JCSCacheConstants.CACHE_REGION_NAME);
             cache.put(jcsKey, jcsValue);
@@ -101,7 +101,8 @@ public final class JCSCacheManager {
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("JCS Key: " + jcsKey);
-                LOGGER.debug("Cached Document: " + cachedData.asXML().toString());
+                String str = cachedData != null ? cachedData.asXML() : " ::Empty:: ";
+                LOGGER.debug("Retrieved Cached Document: " + str);
             }
 
         } catch (CacheException e) {

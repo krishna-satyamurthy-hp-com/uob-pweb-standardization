@@ -14,16 +14,12 @@ public class JCSCacheUtils {
     private static final Logger LOGGER = Logger.getLogger(JCSCacheUtils.class);
 
     public static String generateJCSKey(RequestContext context, String configname) {
-
         String adminserver = context.getSite().getAdminServer();
-
         String branchPath = context.getSite().getBranch();
-        branchPath.replace("//" + adminserver.lastIndexOf(":"), "");
-        branchPath.replace("/", "-");
-
+        branchPath = branchPath.replace("//" + adminserver.substring(0, adminserver.lastIndexOf(":")), "");
+        branchPath = branchPath.replace("/", "-");
         String siteName = context.getSite().getName();
-
-        return branchPath + "-" + siteName + "-" + configname;
+        return (branchPath + "-" + siteName + "-" + configname).toLowerCase();
     }
 
     public static Document loadDocumentFromCache(RequestContext context, String dcrPathParamName) {
