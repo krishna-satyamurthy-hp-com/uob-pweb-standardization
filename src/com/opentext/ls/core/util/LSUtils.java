@@ -1,11 +1,9 @@
 package com.opentext.ls.core.util;
 
+import com.interwoven.livesite.runtime.RequestContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
-
-import com.interwoven.livesite.runtime.RequestContext;
-import com.interwoven.livesite.runtime.model.page.RuntimePage;
 
 public class LSUtils {
 	
@@ -13,7 +11,6 @@ public class LSUtils {
 	
 	/**
 	 * injectMetaIntoPageHead will inject metaname and metavalue into the page header
-	 * @param context
 	 * @param metaName
 	 * @param metaValue
 	 */

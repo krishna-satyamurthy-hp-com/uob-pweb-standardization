@@ -1,29 +1,27 @@
 package com.opentext.ls.core.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.dom4j.Document;
-
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.external.PropertyContext;
 import com.interwoven.livesite.file.FileDal;
 import com.interwoven.livesite.runtime.RequestContext;
-
 import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.dom4j.Document;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 public class DCRUtils {
 
 	private static final Log LOGGER = LogFactory.getLog(DCRUtils.class);
 
-	static PropertyReader is= new PropertyReader();
-	
-	/**
-	 * loadFile method is to open the DCR for parsing.
-	 * 
+    static PropertyReader is = new PropertyReader();
+
+    /**
+     * loadFile method is to open the DCR for parsing.
+     *
 	 */
 	public static Document loadFile(String rootLocation, String filerelativePath) {
 		LOGGER.debug("entering");

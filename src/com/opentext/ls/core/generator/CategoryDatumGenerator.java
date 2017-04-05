@@ -1,18 +1,17 @@
 package com.opentext.ls.core.generator;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Node;
 import com.interwoven.livesite.common.util.GeneratorUtils;
 import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.external.PropertyContext;
 import com.opentext.ls.core.util.DCRUtils;
 import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
+
+import java.util.List;
 
 public class CategoryDatumGenerator {	
 	private static final Log LOGGER = LogFactory.getLog(CategoryDatumGenerator.class);

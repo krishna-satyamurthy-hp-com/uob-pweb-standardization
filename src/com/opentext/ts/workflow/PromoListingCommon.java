@@ -1,5 +1,9 @@
 package com.opentext.ts.workflow;
 
+import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,11 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
 
 public class PromoListingCommon {
 	private static final transient Log LOGGER = LogFactory.getLog(PromoListingCommon.class);

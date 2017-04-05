@@ -1,14 +1,18 @@
 package com.opentext.ts.workflow;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
+import com.interwoven.cssdk.common.CSClient;
+import com.interwoven.cssdk.common.CSException;
+import com.interwoven.cssdk.filesys.CSAreaRelativePath;
+import com.interwoven.cssdk.workflow.CSExternalTask;
+import com.interwoven.cssdk.workflow.CSURLExternalTask;
+import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,27 +20,12 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import com.interwoven.cssdk.common.CSClient;
-import com.interwoven.cssdk.common.CSException;
-import com.interwoven.cssdk.filesys.CSAreaRelativePath;
-import com.interwoven.cssdk.workflow.CSExternalTask;
-import com.interwoven.cssdk.workflow.CSURLExternalTask;
-import com.interwoven.livesite.dom4j.Dom4jUtils;
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
 
 public class XMLToJSONConverter implements CSURLExternalTask {
 	

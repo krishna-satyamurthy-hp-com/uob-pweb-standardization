@@ -1,12 +1,11 @@
 package com.opentext.ls.core.controller;
 
-import java.net.URI;
-
+import com.interwoven.livesite.common.web.ForwardAction;
+import com.interwoven.livesite.runtime.RequestContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.interwoven.livesite.common.web.ForwardAction;
-import com.interwoven.livesite.runtime.RequestContext;
+import java.net.URI;
 
 
 public class ErrorRedirect {

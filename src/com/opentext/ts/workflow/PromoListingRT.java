@@ -1,5 +1,13 @@
 package com.opentext.ts.workflow;
 
+import com.opentext.ls.db.utils.DBConnectionManager;
+import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,15 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
-import com.opentext.ls.db.utils.DBConnectionManager;
 
 
 public class PromoListingRT {

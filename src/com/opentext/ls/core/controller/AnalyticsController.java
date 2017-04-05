@@ -1,24 +1,25 @@
 package com.opentext.ls.core.controller;
 
-import java.io.Serializable;
-import java.net.URI;
-
+import com.interwoven.livesite.common.web.ForwardAction;
+import com.interwoven.livesite.runtime.RequestContext;
+import com.interwoven.livesite.runtime.model.page.RuntimePage;
+import com.opentext.ls.core.cache.JCSCacheUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Node;
 
-import com.interwoven.livesite.common.web.ForwardAction;
-import com.interwoven.livesite.runtime.RequestContext;
-import com.interwoven.livesite.runtime.model.page.RuntimePage;
-
-import com.opentext.ls.core.util.LSUtils;
-import com.opentext.ls.db.utils.PropertyReader;
+import java.io.Serializable;
+import java.net.URI;
 
 public class AnalyticsController implements Serializable {
+
 	private static final long serialVersionUID = -2376353730570815972L;
 	private static final Log LOGGER = LogFactory.getLog(AnalyticsController.class);
-	ForwardAction fa = null;
+    private Document analyticsDoc = null;
+    ForwardAction fa = null;
+
 	
 	public ForwardAction injectAnalyticsScriptOnPage(RequestContext context){
 		if (LOGGER.isDebugEnabled()) {
@@ -29,13 +30,15 @@ public class AnalyticsController implements Serializable {
 				LOGGER.debug("Setting page analytics only for runtime pages");
 			}
 			try{
-				
-				
-				PropertyReader is= new PropertyReader();
-				context.setParameterString("analyticsDCRPath", is.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
-				Document analyticsDoc = LSUtils.loadDCRContent(context,"analyticsDCRPath");
-				LOGGER.debug("analyticsDoc is "+analyticsDoc.asXML());
-				
+
+                PropertyReader is = new PropertyReader();
+                context.setParameterString("analyticsDCRPath", is.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
+                analyticsDoc = JCSCacheUtils.loadDocumentFromCache(context, "analyticsDCRPath");
+
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("analyticsDoc is " + analyticsDoc.asXML());
+                }
+
 				//Cannonical rel link
 				LOGGER.debug("Analytics getScheme::: "+ context.getRequest().getScheme());
 				LOGGER.debug("Analytics getServerName::: "+ context.getRequest().getServerName());
@@ -126,6 +129,5 @@ public class AnalyticsController implements Serializable {
 		}
 		return fa;
 	}
-	
-	
+
 }

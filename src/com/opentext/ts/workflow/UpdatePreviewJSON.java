@@ -1,27 +1,23 @@
 package com.opentext.ts.workflow;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import com.opentext.ls.db.utils.PropertyReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import com.opentext.ls.db.utils.PropertyReader;
+
+import java.io.*;
 
 
 //Update the Preview JSON file
 public class UpdatePreviewJSON {
-	
-	private static final transient Log LOGGER = LogFactory.getLog(PromoListingRuntime.class);	
-	PropertyReader is= new PropertyReader();
-	
-// Read the WorkFlow Json file
+
+    private static final transient Log LOGGER = LogFactory.getLog(PromoListingRuntime.class);
+    private static PropertyReader is = new PropertyReader();
+
+    // Read the WorkFlow Json file
 public static void readWorkFlowJSON(String filePath){
 	
 	JSONParser parser = new JSONParser();

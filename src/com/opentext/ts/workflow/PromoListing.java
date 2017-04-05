@@ -1,5 +1,21 @@
 package com.opentext.ts.workflow;
 
+import com.interwoven.cssdk.common.CSClient;
+import com.interwoven.cssdk.common.CSException;
+import com.interwoven.cssdk.filesys.CSAreaRelativePath;
+import com.interwoven.cssdk.workflow.CSExternalTask;
+import com.interwoven.cssdk.workflow.CSURLExternalTask;
+import com.interwoven.livesite.dom4j.Dom4jUtils;
+import com.opentext.ls.db.utils.DBConnectionManager;
+import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.dom4j.Document;
+import org.dom4j.Node;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,23 +28,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.dom4j.Document;
-import org.dom4j.Node;
-
-import com.interwoven.cssdk.common.CSClient;
-import com.interwoven.cssdk.common.CSException;
-import com.interwoven.cssdk.filesys.CSAreaRelativePath;
-import com.interwoven.cssdk.workflow.CSExternalTask;
-import com.interwoven.cssdk.workflow.CSURLExternalTask;
-import com.interwoven.livesite.dom4j.Dom4jUtils;
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
-import com.opentext.ls.db.utils.DBConnectionManager;
 
 
 public class PromoListing implements CSURLExternalTask {

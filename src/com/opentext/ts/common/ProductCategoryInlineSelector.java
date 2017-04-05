@@ -1,14 +1,14 @@
 package com.opentext.ts.common;
 
-import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 
 public class ProductCategoryInlineSelector {
 	private static final Log LOGGER = LogFactory

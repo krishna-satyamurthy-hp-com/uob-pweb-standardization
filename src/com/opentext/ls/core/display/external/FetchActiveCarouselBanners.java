@@ -1,21 +1,20 @@
 package com.opentext.ls.core.display.external;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.interwoven.livesite.dom4j.Dom4jUtils;
+import com.interwoven.livesite.runtime.RequestContext;
+import com.opentext.ls.core.util.DCRUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 
-import com.interwoven.livesite.dom4j.Dom4jUtils;
-import com.interwoven.livesite.runtime.RequestContext;
-import com.opentext.ls.core.util.DCRUtils;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FetchActiveCarouselBanners {
 	private static final Log LOGGER = LogFactory.getLog(FetchActiveCarouselBanners.class);

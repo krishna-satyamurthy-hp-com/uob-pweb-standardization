@@ -1,16 +1,5 @@
 package com.opentext.ts.workflow;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.map.ObjectMapper;
-
-
 import com.interwoven.cssdk.access.CSAuthorizationException;
 import com.interwoven.cssdk.access.CSExpiredSessionException;
 import com.interwoven.cssdk.common.CSClient;
@@ -24,8 +13,18 @@ import com.interwoven.cssdk.filesys.CSVPath;
 import com.interwoven.cssdk.workflow.CSExternalTask;
 import com.interwoven.cssdk.workflow.CSInactiveTaskException;
 import com.interwoven.cssdk.workflow.CSURLExternalTask;
-//import com.opentext.ls.core.common.UOBBaseConstants;
 import com.opentext.ls.db.utils.PropertyReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+
+//import com.opentext.ls.core.common.UOBBaseConstants;
 
 
 public class PromoListingAuth implements CSURLExternalTask {
@@ -185,8 +184,9 @@ public class PromoListingAuth implements CSURLExternalTask {
 	
 	/**
 	 * Reads promotion details DCR to fetch the values and add to either createPromoAL or deletePromoAL
-	 * @param dcrPath
 	 * @param promoRequest
+	 * @param dcrCSFile
+	 * @param countryCode
 	 */
 	public void readPromoDCR(String promoRequest, CSFile dcrCSFile, String countryCode) throws CSException{
 		LOGGER.debug("Inside readPromoDCR");

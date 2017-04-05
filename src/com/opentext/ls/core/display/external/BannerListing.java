@@ -1,20 +1,20 @@
 package com.opentext.ls.core.display.external;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-
+import com.interwoven.livesite.dom4j.Dom4jUtils;
+import com.interwoven.livesite.runtime.RequestContext;
+import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import com.interwoven.livesite.dom4j.Dom4jUtils;
-import com.interwoven.livesite.runtime.RequestContext;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.core.util.DCRUtils;
-import com.opentext.ls.db.utils.PropertyReader;
 
 
 public class BannerListing {

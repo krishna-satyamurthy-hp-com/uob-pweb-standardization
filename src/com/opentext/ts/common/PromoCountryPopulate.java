@@ -1,12 +1,12 @@
 package com.opentext.ts.common;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class PromoCountryPopulate {
 private static final Log LOGGER = LogFactory.getLog(PromoCountryPopulate.class);

@@ -1,5 +1,8 @@
 package com.opentext.ls.db.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -7,11 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
 
 public class DBConnectionManager {
 	private static final transient Log LOGGER = LogFactory.getLog(DBConnectionManager.class);

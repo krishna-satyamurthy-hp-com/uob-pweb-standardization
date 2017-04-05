@@ -1,16 +1,15 @@
 package com.opentext.ts.common;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.List;
-
+import com.interwoven.livesite.dom4j.Dom4jUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 
-import com.interwoven.livesite.dom4j.Dom4jUtils;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.List;
 
 public class LanguageSelector {
 

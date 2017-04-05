@@ -1,12 +1,11 @@
 package com.opentext.ls.db.utils;
 
+import com.interwoven.livesite.common.io.FileUtil;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
-
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-
-import com.interwoven.livesite.common.io.FileUtil;
 
 public class DecryptDBPwdUtil {
   private File mKeyPropsFile = null;

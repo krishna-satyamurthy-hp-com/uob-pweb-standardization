@@ -1,14 +1,13 @@
 package com.opentext.ls.core.display.external;
 
-import java.text.ParseException;
-
+import com.interwoven.livesite.runtime.RequestContext;
+import com.interwoven.livesite.runtime.model.page.RuntimePage;
+import com.opentext.ls.core.util.LSUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 
-import com.interwoven.livesite.runtime.RequestContext;
-import com.interwoven.livesite.runtime.model.page.RuntimePage;
-import com.opentext.ls.core.util.LSUtils;
+import java.text.ParseException;
 
 public class ProductDetails {
 	private static final transient Log LOGGER = LogFactory.getLog(ProductDetails.class);

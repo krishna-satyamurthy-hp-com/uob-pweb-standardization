@@ -1,10 +1,13 @@
 package com.opentext.ls.core.display.external;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import com.interwoven.livesite.runtime.RequestContext;
+import com.opentext.ls.core.util.DCRUtils;
+import com.opentext.ls.core.util.ErrorRedirect;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.dom4j.io.DOMReader;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,21 +16,11 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.dom4j.io.DOMReader;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import com.interwoven.livesite.runtime.RequestContext;
-import com.interwoven.livesite.runtime.model.page.RuntimePage;
-import com.opentext.ls.core.util.DCRUtils;
-import com.opentext.ls.core.util.ErrorRedirect;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class CardCompareDetails {
 private static final Log LOGGER = LogFactory.getLog(CardCompareDetails.class);

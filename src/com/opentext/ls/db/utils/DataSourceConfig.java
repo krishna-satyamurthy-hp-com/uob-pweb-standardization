@@ -1,5 +1,7 @@
 package com.opentext.ls.db.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,9 +9,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;

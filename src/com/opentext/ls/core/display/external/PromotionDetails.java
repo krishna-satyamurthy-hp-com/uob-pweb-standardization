@@ -1,30 +1,22 @@
 package com.opentext.ls.core.display.external;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
+import com.interwoven.livesite.runtime.RequestContext;
+import com.opentext.ls.core.util.LSUtils;
+import com.opentext.ls.db.utils.PropertyReader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import com.interwoven.livesite.runtime.RequestContext;
+import java.io.*;
+import java.net.*;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 //import com.opentext.ls.core.common.UOBBaseConstants;
-import com.opentext.ls.db.utils.PropertyReader;
-import com.opentext.ls.core.util.LSUtils;
 
 /**
  * This class is for fetching Promo Details DCR and its offer listing items : prev and next promotion links
