@@ -12,13 +12,14 @@ import com.interwoven.livesite.dom4j.Dom4jUtils;
 import com.interwoven.livesite.external.PropertyContext;
 import com.interwoven.livesite.file.FileDal;
 import com.interwoven.livesite.runtime.RequestContext;
-import com.opentext.ls.core.common.UOBBaseConstants;
+
+import com.opentext.ls.db.utils.PropertyReader;
 
 public class DCRUtils {
 
 	private static final Log LOGGER = LogFactory.getLog(DCRUtils.class);
 
-	
+	static PropertyReader is= new PropertyReader();
 	
 	/**
 	 * loadFile method is to open the DCR for parsing.
@@ -79,6 +80,7 @@ public class DCRUtils {
 			 * If File is in Teamsite Environment, Sever Name will be replaced
 			 * by teamsite mount drive e.g. 'Y:'
 			 */
+			final String teamSiteMntDrive = is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE");
 			if (!context.isRuntime()) {
 				rootLocation = rootLocation.substring(
 						rootLocation.indexOf(seperator + seperator) + 2,
@@ -86,7 +88,7 @@ public class DCRUtils {
 				rootLocation = rootLocation.replaceFirst(
 						rootLocation.substring(0,
 								rootLocation.indexOf(seperator)),
-						UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE);
+						teamSiteMntDrive);
 
 				LOGGER.debug("rootLocation now is: " + rootLocation);
 
@@ -103,6 +105,7 @@ public class DCRUtils {
 
 		String rootLocation = null;
 		String seperator;
+		final String teamSiteMntDrive = is.getSystemPropertyValue("TEAMSITE_SERVER_MOUNT_DRIVE");
 
 		/* To get the root location of the Application */
 		FileDal dal = context.getFileDAL();
@@ -114,7 +117,7 @@ public class DCRUtils {
 				(rootLocation.length()));
 		rootLocation = rootLocation.replaceFirst(
 				rootLocation.substring(0, rootLocation.indexOf(seperator)),
-				UOBBaseConstants.TEAMSITE_SERVER_MOUNT_DRIVE);
+				teamSiteMntDrive);
 
 		return rootLocation;
 	}
@@ -122,7 +125,7 @@ public class DCRUtils {
 	// Get Runtime web location
 
 	public static String getRuntimeHome() {
-		final String livesiteCustomer = UOBBaseConstants.LIVESITE_CUSTOMER_AUTH;
+		final String livesiteCustomer = is.getSystemPropertyValue("LIVESITE_CUSTOMER_AUTH");
 		final String odProperties = livesiteCustomer
 				.concat("opendeploy.properties");
 		String location = "";
