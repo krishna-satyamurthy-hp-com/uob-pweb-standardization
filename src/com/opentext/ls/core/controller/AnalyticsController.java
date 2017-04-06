@@ -33,9 +33,16 @@ public class AnalyticsController implements Serializable {
 
                 PropertyReader is = new PropertyReader();
                 context.setParameterString("analyticsDCRPath", is.getSystemPropertyValue("ANALYTICS_DCR_REL_PATH"));
-                analyticsDoc = JCSCacheUtils.loadDocumentFromCache(context, "analyticsDCRPath");
+                context.setParameterString("branchAnalyticsDCRPath", getBranchAnalyticsDCRPath(context.getParameterString("analyticsDCRPath")));
+                String analyticsPath = context.getParameterString("branchAnalyticsDCRPath");
+                analyticsDoc = JCSCacheUtils.loadDocumentFromCache(context, "branchAnalyticsDCRPath");
+                if (analyticsDoc == null) {
+                	analyticsDoc = JCSCacheUtils.loadDocumentFromCache(context, "analyticsDCRPath");
+                	analyticsPath = context.getParameterString("analyticsDCRPath");
+                }
 
                 if (LOGGER.isDebugEnabled()) {
+                	LOGGER.debug("analytics file path: " + analyticsPath);
                     LOGGER.debug("analyticsDoc is " + analyticsDoc.asXML());
                 }
 
@@ -128,6 +135,15 @@ public class AnalyticsController implements Serializable {
 			}
 		}
 		return fa;
+	}
+
+	private String getBranchAnalyticsDCRPath(String commonAnalyticsDCRPath) {
+		String branchPath = context.getSite().getBranch();
+		branchPath = branchPath.substring(branchPath.indexOf("default/main/") + 13);
+		branchPath = branchPath.replace("/", "-");
+		branchPath = branchPath.toLowerCase();
+		return  commonAnalyticsDCRPath.substring(0, commonAnalyticsDCRPath.lastIndexOf("/") + 1) + 
+				branchPath + "-" + commonAnalyticsDCRPath.substring(commonAnalyticsDCRPath.lastIndexOf("/") + 1);
 	}
 
 }
